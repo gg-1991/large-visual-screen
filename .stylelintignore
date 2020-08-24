@@ -1,0 +1,5 @@
+// .stylelintignore
+      *.png
+      *.eot
+      *.ttf
+      *.woff

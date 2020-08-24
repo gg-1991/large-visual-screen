@@ -1,0 +1,33 @@
+
+@mixin scollbar {
+  /* 滚动条样式 */
+  &::-webkit-scrollbar {
+    /* 滚动条整体样式 */
+    width: 15px;
+  }
+  //&::-webkit-scrollbar-button {
+  //  width: 20px;
+  //  height: 10px;
+  //  background-position: center;
+  //  background-color: #2C2C54;
+  //  background-size: 100% 100%;
+  //  background-repeat: no-repeat;
+  //}
+  &::-webkit-scrollbar-button:start {
+    //background-image: url("~@/views/nursing_department/assets/scrollbar-pointer-up.png");
+  }
+  &::-webkit-scrollbar-button:end {
+    //background-image: url("~@/views/nursing_department/assets/scrollbar-pointer-down.png");
+  }
+  &::-webkit-scrollbar-thumb {
+    /* 滚动条里面小方块 */
+    width: 10px;
+    background: #7878D9;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    /* 滚动条里面轨道 */
+    background: #2C2C54;
+  }
+}
