@@ -6,9 +6,9 @@
           <span  :key='index' :class="[index==0?'btn1':'btn2',activeClass==index?'active':'']"  v-for="(item,index) in btnText" @click="changeTime(index)">{{item.text}}</span>
         </div>
         <div class="list2">
-          <span class="list2_tj" @click="chengPage">整体图形统计</span>
+          <span class="list2_tj" @click="chengPage(1)">整体图形统计</span>
           <span class="list2_yw">自助业务数据</span>
-          <span class="list2_sj">运维数据</span>
+          <span class="list2_sj" @click="chengPage(3)">运维数据</span>
         </div>
         <div class="list3">
           <img :src="titleRightImg" alt="">
@@ -171,8 +171,12 @@ export default {
   methods: {
     drawPie () {
     },
-    chengPage () {
-      this.$router.replace('/graphicStatistics')
+    chengPage (index) {
+      if (index==1){
+        this.$router.replace('/graphicStatistics')
+      }else{
+        this.$router.replace('/maintennaceData')
+      }
     },
     changeTime(index){
       this.activeClass = index;

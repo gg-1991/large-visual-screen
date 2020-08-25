@@ -1,12 +1,12 @@
 <template>
   <div class="barChart">
-    <div ref="main" style="width: 100%;height: 620px"></div>
+    <div ref="main" style="width: 100%;height: 550px"></div>
   </div>
 </template>
 <script>
   export default {
     props: {
-        chartData: Array,
+        chartData: Array
     },
     data () {
       return {
@@ -42,7 +42,7 @@
         // 指定图表的配置项和数据
         let option = {
           legend: {
-            data: ['总交易量', '总交易额'],
+            data: ['交易量占比', '交易额占比'],
             itemGap:30,
             itemWidth: 55,
             itemHeight:20,
@@ -64,13 +64,13 @@
                   //x轴刻度标签字体颜色大小
                   textStyle:{
                     fontSize: 24,
-                    color:'#67849F'
+                    color:'#E5E5E5'
                   },
                 },
                 // X轴主线
                 axisLine:{
                   lineStyle:{
-                      color:'#67849F',
+                      color:'#314A61',
                       width:1,
                   }
               },
@@ -79,32 +79,31 @@
               },
               data: this.chartXdata
           },
-          yAxis:[
-            {
+          yAxis:{
               type: 'value',
-              name : '单位：人次',
+              name : '单位：%',
               axisLabel:{
                   //y轴刻度标签字体颜色大小
                   textStyle:{
                     fontSize: 24,
-                    color:'#4492FF'
+                    color:'#67849F'
                   },
 
                 },
                 // Y轴单位和样式
                 nameTextStyle: {
-                  color: ['#4492FF'],
+                  color: ['#67849F'],
                   fontSize:24
                 },
                 axisLine:{
                   lineStyle:{
-                      color:'#4492FF',
+                      color:'#314A61',
                       width:1,//这里是为了突出显示加上的
                   }
                 },
                splitLine: {
                   lineStyle: {
-                    color:['#4492FF'],
+                    color:['#314A61'],
                     lineStyle:'dashed',
                     opacity: 0.2
                   }
@@ -114,40 +113,9 @@
                 },
 
            },
-           {
-              type: 'value',
-              name : '单位：元',
-               axisLabel:{
-                  //y轴刻度标签字体颜色大小
-                  textStyle:{
-                    fontSize: 24,
-                    color:'#2CDFFF'
-                  },
-
-                },
-                splitLine: {
-                  show:false
-                },
-                // Y轴单位和样式
-                nameTextStyle: {
-                  color: ['#2CDFFF'],
-                  fontSize:24
-                },
-                axisLine:{
-                  lineStyle:{
-                      color:'#2CDFFF',
-                      width:1,//这里是为了突出显示加上的
-                  }
-                },
-                axisTick: {
-                  inside:true
-                },
-
-           }
-          ],
           series: [
               {
-                  name: '总交易量',
+                  name: '交易量占比',
                   type: 'bar',
                   color:'#4492FF',
                   barWidth : 30,
@@ -155,14 +123,14 @@
                   label : {
                     normal : {
                       show : true,
-                      position: 'top'
+                      position: 'top',
+                      formatter: '{c}%'
                     }
                   },
-                  yAxisIndex: 0,
                   data: this.chartYdata.liang
               },
               {
-                  name: '总交易额',
+                  name: '交易额占比',
                   type: 'bar',
                   color:'#2CDFFF',
                   barWidth : 30,
@@ -170,10 +138,10 @@
                   label : {
                     normal : {
                       show : true,
-                      position: 'top'
+                      position: 'top',
+                      formatter: '{c}%'
                     }
                   },
-                  yAxisIndex: 1,
                   data: this.chartYdata.jine
               }
           ]
