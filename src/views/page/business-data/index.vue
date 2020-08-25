@@ -172,7 +172,7 @@ export default {
     drawPie () {
     },
     chengPage () {
-      this.$router.replace('/404')
+      this.$router.replace('/graphicStatistics')
     },
     changeTime(index){
       this.activeClass = index;
@@ -232,9 +232,9 @@ export default {
   .container{
     div.title{
       height: 100px;
+      display:flex;
+      justify-content:space-between;
       .list1{
-        float: left;
-        width: 1240px;
         position: relative;
         img{
           height: 80px;
@@ -255,8 +255,7 @@ export default {
         }
       }
       .list2{
-        float: left;
-        width: 1280px;
+        flex:1;
         margin-left: 40px;
         margin-right: 40px;
         padding-top: 16px;
@@ -292,8 +291,6 @@ export default {
         }
       }
       .list3{
-        float: left;
-        width: 1240px;
         img{
           height: 80px;
           width: 1240px;
@@ -303,38 +300,34 @@ export default {
     .box{
       margin:17px 37px 17px 37px;
       .oneBox{
-        overflow: hidden;
+        display:flex;
+        justify-content:flex-start;
         .one_left{
-          padding:40px;
-         float: left;
-         width: 1160px;
-         height: 870px;
+         flex: 1;
+         padding:40px;
          border:1px solid #387ADA;
          margin-right:20px;
          position: relative;
         }
         .one_center{
-          padding:40px;
-         float: left;
-         width: 1160px;
-         height: 870px;
+         flex: 1;
+         padding:40px;
          border:1px solid #387ADA;
          margin-right:20px;
          position: relative;
         }
         .one_right{
+         flex: 1;
          padding:40px;
-         float: left;
-         width: 1160px;
-         height: 870px;
          border:1px solid #387ADA;
          position: relative;
         }
       }
       .twoBox{
         padding:40px;
-        width: 100%-80px;
-        height: 870px;
+        display:flex;
+        flex-direction:column;
+        /* justify-content:space-between; */
         margin-top: 20px;
         position: relative;
         border:1px solid #387ADA;

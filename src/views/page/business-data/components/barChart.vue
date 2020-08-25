@@ -1,6 +1,6 @@
 <template>
   <div class="barChart">
-    <div ref="main" style="width: 1800px;height: 580px"></div>
+    <div ref="main" style="width: 100%;height: 620px"></div>
   </div>
 </template>
 <script>
