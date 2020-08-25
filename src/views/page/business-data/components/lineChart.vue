@@ -59,10 +59,11 @@
                 type: 'category',
                 boundaryGap: false,
                 axisLabel:{
+                  margin:10,
                   //x轴刻度标签字体颜色大小
                   textStyle:{
                     fontSize: 24,
-                    color:'#aeaebc'
+                    color:'#E5E5E5'
                   },
                 },
                 // X轴分割线
@@ -77,7 +78,7 @@
                 // X轴主线
                 axisLine:{
                   lineStyle:{
-                      color:'#aeaebc',
+                      color:'#314A61',
                       width:1,
                   }
                 },
@@ -104,12 +105,12 @@
                 },
                 // Y轴单位和样式
                 nameTextStyle: {
-                  color: ['#67849F'],
+                  color: ['#314A61'],
                   fontSize:24
                 },
                 axisLine:{
                   lineStyle:{
-                      color:'#67849F',
+                      color:'#314A61',
                       width:1,//这里是为了突出显示加上的
                   }
                 },
@@ -122,11 +123,13 @@
               type: 'line',
               // 是否平滑显示
               smooth: true,
+              symbolSize: 10,   //设定实心点的大小
               // 点标注
               label : {
                 normal : {
                   show : !this.isMouth,
-                  position: 'top'
+                  position: 'top',
+                  fontSize:20
                 }
               },
               // 填充面积样式

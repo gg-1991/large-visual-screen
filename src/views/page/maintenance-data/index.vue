@@ -34,7 +34,7 @@
             <chart-title title="自助登录情况"></chart-title>
             <totle-see unit="次" :title="title2" :text="text2" :imgType=2 :type=1></totle-see>
             <div class="pieBox">
-              <pie-chart :chartData="pieDataOne" :colors="['#697EFF', '#9218DC', '#8559FF', '#697EFF']" :redius='redius1' name="挂号类型占比"/>
+              <pie-chart :chartData="pieDataOne" :colors="['#697EFF', '#9218DC', '#8559FF', '#697EFF']" :redius='redius1' name="挂号类型占比" />
               <pie-chart :chartData="pieDataTwo" :colors="['#67EBFF', '#52BBF9']" :redius='redius1' name="参保人挂号占比"/>
             </div>
          </div>

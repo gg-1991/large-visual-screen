@@ -77,27 +77,28 @@
               boundaryGap: false,
               type: 'category',
               axisLabel:{
+                  margin:10,
                   //x轴刻度标签字体颜色大小
                   textStyle:{
                     fontSize: 24,
-                    color:'#67849F'
+                    color:'#e5e5e5'
                   },
                 },
-                // X轴分割线
-                splitLine: {
-                  show:true,
-                  lineStyle: {
-                    color:['#67849F'],
-                    lineStyle:'dashed',
-                    opacity: 0.2
-                  }
-                },
-                // X轴主线
-                axisLine:{
-                  lineStyle:{
-                      color:'#67849F',
-                      width:1,
-                  }
+              // X轴分割线
+              splitLine: {
+                show:true,
+                lineStyle: {
+                  color:['#314A61'],
+                  lineStyle:'dashed',
+                  opacity: 0.2
+                }
+              },
+              // X轴主线
+              axisLine:{
+                lineStyle:{
+                    color:'#314A61',
+                    width:1,
+                }
               },
               axisTick: {
                   show:false
@@ -112,24 +113,24 @@
                   //y轴刻度标签字体颜色大小
                   textStyle:{
                     fontSize: 24,
-                    color:'#4492FF'
+                    color:'#67849F'
                   },
 
                 },
                 // Y轴单位和样式
                 nameTextStyle: {
-                  color: ['#4492FF'],
+                  color: ['#314A61'],
                   fontSize:24
                 },
                 axisLine:{
                   lineStyle:{
-                      color:'#4492FF',
+                      color:'#314A61',
                       width:1,//这里是为了突出显示加上的
                   }
                 },
                splitLine: {
                   lineStyle: {
-                    color:['#4492FF'],
+                    color:['#314A61'],
                     lineStyle:'dashed',
                     opacity: 0.2
                   }
@@ -146,7 +147,7 @@
                   //y轴刻度标签字体颜色大小
                   textStyle:{
                     fontSize: 24,
-                    color:'#B945FF'
+                    color:'#67849F'
                   },
 
                 },
@@ -155,12 +156,12 @@
                 },
                 // Y轴单位和样式
                 nameTextStyle: {
-                  color: ['#B945FF'],
+                  color: ['#314A61'],
                   fontSize:24
                 },
                 axisLine:{
                   lineStyle:{
-                      color:'#B945FF',
+                      color:'#314A61',
                       width:1,//这里是为了突出显示加上的
                   }
                 },
@@ -175,11 +176,15 @@
                   name: '交易量',
                   type: 'line',
                   color:'#4492FF',
+                   // 是否平滑显示
+                  smooth: false,
+                  symbolSize: 10,   //设定实心点的大小
                    // 点标注
                   label : {
                     normal : {
                       show : !this.isMouth,
-                      position: 'top'
+                      position: 'top',
+                      fontSize:20
                     }
                   },
                   yAxisIndex: 0,
@@ -189,11 +194,14 @@
                   name: '交易额',
                   type: 'line',
                   color:'#B945FF',
+                  smooth: false,
+                  symbolSize: 10,   //设定实心点的大小
                   // 点标注
                   label : {
                     normal : {
                       show : true,
-                      position: 'top'
+                      position: 'top',
+                      fontSize:20
                     }
                   },
                   yAxisIndex: 1,

@@ -41,8 +41,8 @@
               center: ['50%', '50%'],
               roseType: 'radius',
               data:this.chartData,
-              label: {
-                normal: {
+              label:{
+                normal:{
                   formatter: '{b}\n {d}%',//\n实现换行
                   textStyle: {
                     color: '#fff',

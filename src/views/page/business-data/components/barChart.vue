@@ -61,16 +61,17 @@
               boundaryGap: true,
               type: 'category',
               axisLabel:{
+                margin:10,
                   //x轴刻度标签字体颜色大小
-                  textStyle:{
-                    fontSize: 24,
-                    color:'#67849F'
-                  },
+                textStyle:{
+                  fontSize: 24,
+                  color:'#e5e5e5'
                 },
+              },
                 // X轴主线
                 axisLine:{
                   lineStyle:{
-                      color:'#67849F',
+                      color:'#314A61',
                       width:1,
                   }
               },
@@ -87,24 +88,24 @@
                   //y轴刻度标签字体颜色大小
                   textStyle:{
                     fontSize: 24,
-                    color:'#4492FF'
+                    color:'#67849F'
                   },
 
                 },
                 // Y轴单位和样式
                 nameTextStyle: {
-                  color: ['#4492FF'],
+                  color: ['#67849F'],
                   fontSize:24
                 },
                 axisLine:{
                   lineStyle:{
-                      color:'#4492FF',
+                      color:'#314A61',
                       width:1,//这里是为了突出显示加上的
                   }
                 },
                splitLine: {
                   lineStyle: {
-                    color:['#4492FF'],
+                    color:['#67849F'],
                     lineStyle:'dashed',
                     opacity: 0.2
                   }
@@ -121,7 +122,7 @@
                   //y轴刻度标签字体颜色大小
                   textStyle:{
                     fontSize: 24,
-                    color:'#2CDFFF'
+                    color:'#67849F'
                   },
 
                 },
@@ -130,12 +131,12 @@
                 },
                 // Y轴单位和样式
                 nameTextStyle: {
-                  color: ['#2CDFFF'],
+                  color: ['#67849F'],
                   fontSize:24
                 },
                 axisLine:{
                   lineStyle:{
-                      color:'#2CDFFF',
+                      color:'#314A61',
                       width:1,//这里是为了突出显示加上的
                   }
                 },
@@ -155,7 +156,8 @@
                   label : {
                     normal : {
                       show : true,
-                      position: 'top'
+                      position: 'top',
+                      fontSize:20
                     }
                   },
                   yAxisIndex: 0,
@@ -170,7 +172,8 @@
                   label : {
                     normal : {
                       show : true,
-                      position: 'top'
+                      position: 'top',
+                      fontSize:20
                     }
                   },
                   yAxisIndex: 1,
