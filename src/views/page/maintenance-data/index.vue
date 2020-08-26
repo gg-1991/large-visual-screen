@@ -55,16 +55,7 @@
            <img :src="rightDown" class="rightDown" alt="">
            <chart-title title="自助缴费情况"></chart-title>
            <div>
-             <div class="left">
-              <div style="text-align: left;margin-bottom: 10px;">
-                <totle-see unit="人次" :title="title4" :text="text4" :imgType=4 :type=2 style="width: 50%;display: inline-block;"></totle-see>
-                <totle-see unit="元" :title="title5" :text="text5" :imgType=5 :type=2 style="width: 50%;display: inline-block;"></totle-see>
-              </div>
-               <div>{{title6}}统计</div>
-             </div>
-             <div class="right">
-              <div style="margin-top: 60px;margin-bottom: 100px;">{{title7}}统计</div>
-             </div>
+            <map-chart></map-chart>
            </div>
        </div>
      </div>
@@ -83,13 +74,15 @@ import TotleSee from './components/totleSee.vue'
 import AddRess from '@/components/address/address'
 import BarChart from '../graphic-statistics/components/barChart'
 import PieChart from '../graphic-statistics/components/PieChart'
+import MapChart from './components/mapChart'
 export default {
   name: "MaintenanceData",
   components: {
     TotleSee,
     BarChart,
     AddRess,
-    PieChart
+    PieChart,
+    MapChart
   },
   data() {
     return {
@@ -323,15 +316,7 @@ export default {
         margin-top: 20px;
         position: relative;
         border:1px solid #387ADA;
-        .left{
-          float: left;
-          width: 50%;
-        }
-        .right{
-          float: left;
-          width: 50%;
-        }
-       }
+      }
     }
     .more{
       padding-right: 15px;

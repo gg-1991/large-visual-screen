@@ -37,23 +37,23 @@ export default {
   },
   methods: {
     setAddressList () {
-       if (this.item == '-1') {
+      if (this.item == '-1') {
          this.allSelect =true
          this.activeClass = -1
-       } else {
+      } else {
         this.allSelect =false
         this.activeClass = this.item
-       }
-       for(let i = 0 ; i < this.List.length; i++) {
+      }
+      for(let i = 0 ; i < this.List.length; i++) {
         let item ={}
         item.name = this.List[i];
         if (i%7 == 0) {
           item.isOne = true
-        } else{
+        } else {
          item.isOne = false
         }
         this.addressList.push(item)
-       }
+      }
     },
     select (index) {
       this.allSelect = false

@@ -85,6 +85,7 @@ import LineChart from './components/lineChart'
 import LineChartnew from './components/lineNew'
 import BarChart from './components/barChart'
 import AddRess from '@/components/address/address'
+import {register} from '@/api/business.js'
 export default {
   name: "BusinessData",
   components: {
@@ -164,11 +165,29 @@ export default {
     }
   },
   created() {
+    this.getData()
   },
   mounted () {
     this.drawPie();
   },
   methods: {
+    getData () {
+      register({
+        officeCode: "441900003000",
+        day: 1,
+        officeNumber: 3
+      }).then( data => {
+        console.log(data)
+        this.$message({
+          message: '请求成功',
+          type: 'success'
+        })
+      })
+      this.$message({
+        message: '请求失败',
+        type: 'error'
+      })
+    },
     drawPie () {
     },
     chengPage (index) {

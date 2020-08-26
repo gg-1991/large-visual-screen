@@ -1,11 +1,11 @@
 module.exports = {
-    BASE_API: '/api',
+    BASE_API: '/office',
     // 端口号
     SERVER_PORT: 8080,
     // API请求地 址
-    // PROXY_TARGET: 'http://10.52.72.103:9999/',
+    PROXY_TARGET: 'http://192.168.161.31:4000/',
     // PROXY_TARGET: 'https://192.168.35.112:4085/',
-    PROXY_TARGET: 'http://139.9.236.16:9011/ward/',
+    // PROXY_TARGET: 'http://139.9.236.16:9011/ward/',
 
     // 基线版本号(手动更改)
     VERSION_NUMBER: '1.1.1.1',
