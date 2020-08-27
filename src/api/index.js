@@ -3,10 +3,11 @@ import store from '@/store'
 const config = require('../../config')
 import router from '@/router'
 import { Message } from 'element-ui'
+const { mockXHR } = process.env.NODE_ENV === 'development' ? require('../mock') : { mockXHR: null }
 const request = axios.create({
   // url = base url + request url
   baseURL: config['BASE_API'],
-  // baseURL: '/api',
+  // baseURL: '',
   withCredentials: true, // send cookies when cross-domain requests
   timeout: 50000 // request timeout
 })
@@ -18,6 +19,10 @@ const MAX_PARAMS_LEN = 128
 request.interceptors.request.use((config) => {
   // config.headers['reqTm'] = moment().format('YYYYMMDD')
   // config.cancelToken
+  //  判断是否是MOCK模式
+  if(process.env.NODE_ENV === 'development' && mockXHR){
+    mockXHR(config)
+  }
   return config
 }, err => Promise.reject(err))
 // 响应拦截
