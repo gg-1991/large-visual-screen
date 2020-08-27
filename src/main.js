@@ -2,13 +2,14 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import ElementUI from 'element-ui';
+/*import ElementUI from 'element-ui';*/
+import '@/utils/element-components-plugin'
 import echarts from 'echarts'
 import ChartTile from './utils/chartTitle'
  //将echarts引入到vue的原型中
  Vue.prototype.$echarts = echarts
 
-Vue.use(ElementUI);
+/*Vue.use(ElementUI);*/
 Vue.use(ChartTile);
 
 Vue.config.productionTip = false;
