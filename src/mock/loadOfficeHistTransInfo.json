@@ -1,0 +1,34 @@
+{
+  "code": 200,
+  "message": "查询成功",
+  "data": {
+    "transInfos": [
+      {
+        "transAmt": 1000.00,
+      "transCount":1000,
+      "dateDay":"2020-08-20"
+
+      },
+      {
+       "transAmt": 2000.00,
+      "transCount":500,
+      "dateDay":"2020-08-21"
+
+      },
+      {
+       "transAmt": 1500.00,
+      "transCount":800,
+      "dateDay":"2020-08-22"
+
+      },
+       {
+      "transAmt": 3000.00,
+      "transCount":2000,
+      "dateDay":"2020-08-23"
+
+      }
+    ],
+    "totalTransAmt":10000,
+    "totalTransCount": 40000
+  }
+}

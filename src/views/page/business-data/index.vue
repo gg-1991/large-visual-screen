@@ -34,7 +34,7 @@
             <chart-title title="自助登录情况"></chart-title>
             <totle-see unit="次" :title="title2" :text="text2" :imgType=2 :type=1></totle-see>
              <div>{{title2}}统计</div>
-             <line-chart unit="次" :isMouth="isMouth" title="登录次数"  :chartData="chartRightThereData" :valueColor="['#2CDFFF']" :colors="['#2CDFFF','#0D0A39']"/>
+             <line-chart unit="次" :isMouth="isMouth" title="登录次数"  :chartData="chartRightTwoData" :valueColor="['#2CDFFF']" :colors="['#2CDFFF','#0D0A39']"/>
          </div>
          <div class="one_right">
             <img :src="leftUp" class="leftUp" alt="">
@@ -44,7 +44,7 @@
             <chart-title title="自助签到情况"></chart-title>
             <totle-see unit="次" :title="title3" :text="text3" :imgType=3 :type=1></totle-see>
              <div>{{title3}}统计</div>
-             <line-chart unit="次" :isMouth="isMouth" title="签到次数" :chartData="chartRightTwoData" :valueColor="['#BA46FF']" :colors="['#BA46FF','#0D0A39']"/>
+             <line-chart unit="次" :isMouth="isMouth" title="签到次数" :chartData="chartRightThereData" :valueColor="['#BA46FF']" :colors="['#BA46FF','#0D0A39']"/>
          </div>
        </div>
        <div class="twoBox">
@@ -85,7 +85,7 @@ import LineChart from './components/lineChart'
 import LineChartnew from './components/lineNew'
 import BarChart from './components/barChart'
 import AddRess from '@/components/address/address'
-import {register} from '@/api/business.js'
+import {Register,PaymentAmount,PaymentPay} from '@/api/business.js'
 export default {
   name: "BusinessData",
   components: {
@@ -102,9 +102,11 @@ export default {
        {'text':'近7天',"isSure":true},
        {'text': '近30天'}
       ],
+      day: 7,
+      officeCode: '',
       isMouth: false,
       selectAddress:'展开',
-      selectAddressNum:'0',
+      selectAddressNum:'-1',
       isShow: false,
       title1:'近7天总挂号量',
       title2:'近7天总登录数',
@@ -113,82 +115,90 @@ export default {
       title5:'近7天缴费总交易额',
       title6:'近7天每日缴费交易量、交易额',
       title7:'近7天各个缴费方式总交易量、总交易额',
-      text1:'5530',
-      text2:'5530',
-      text3:'5530',
-      text4:'5530',
-      text5:'5530',
+      text1:0,
+      text2:0,
+      text3:0,
+      text4:0,
+      text5:0,
       leftUp:leftUp,
       leftDown:leftDown,
       rightDown:rightDown,
       rightUp:rightUp,
       titleLeftImg: titleLeft,
       titleRightImg: titleRight,
-      chartRightOneData: [
-        {'name': '一月', 'value':10},
-        {'name': '二月', 'value':5},
-        {'name': '三月', 'value':30},
-        {'name': '四月', 'value':70},
-        {'name': '五月', 'value':60},
-        {'name': '六月', 'value':20}
-      ],
-      chartRightTwoData: [
-        {'name': '一月', 'value':10},
-        {'name': '二月', 'value':5},
-        {'name': '三月', 'value':30},
-        {'name': '四月', 'value':70},
-        {'name': '五月', 'value':60},
-        {'name': '六月', 'value':20}
-      ],
-      chartRightThereData: [
-        {'name': '一月', 'value':10},
-        {'name': '二月', 'value':5},
-        {'name': '三月', 'value':30},
-        {'name': '四月', 'value':70},
-        {'name': '五月', 'value':60},
-        {'name': '六月', 'value':20}
-      ],
-      patientLineData:[
-        {'time': '4月7日','valueL': '11', 'valueE': '23'},
-        {'time': '4月8日','valueL': '8', 'valueE': '53'},
-        {'time': '4月10日','valueL': '9', 'valueE': '83'},
-        {'time': '4月11日','valueL': '52', 'valueE': '123'},
-      ],
+      chartRightOneData: [],
+      chartRightTwoData: [],
+      chartRightThereData: [],
+      patientLineData:[],
       patientbarData:[
-        {'name': '社保卡','valueL': [11,22,33,44,66,77],'valueE': [55,63,85,4,96,86]},
+      /*  {'name': '社保卡','valueL': [11,22,33,44,66,77],'valueE': [55,63,85,4,96,86]},
         {'name': '电子社保卡','valueL': [11,22,33,44,66,77],'valueE': [55,63,85,4,96,86]},
         {'name': '刷脸支付','valueL': [11,22,33,44,66,77],'valueE': [55,63,85,4,96,86]},
         {'name': '莞银通','valueL': [11,22,33,44,66,77],'valueE': [55,63,85,4,96,86]},
         {'name': '银联卡','valueL': [11,22,33,44,66,77],'valueE': [55,63,85,4,96,86]},
-        {'name': '其他','valueL': [11,22,33,44,66,77],'valueE': [55,63,85,4,96,86]}
+        {'name': '其他','valueL': [11,22,33,44,66,77],'valueE': [55,63,85,4,96,86]}*/
       ]
     }
   },
   created() {
-    this.getData()
+    this.getData(this.day,this.officeCode)
   },
   mounted () {
-    this.drawPie();
   },
   methods: {
-    getData () {
-      register({
-        officeCode: "441900003000",
-        day: 1,
-        officeNumber: 3
+    getData (day,officeCode) {
+      for(let i = 1;i < 4; i++) {
+        Register({
+          officeCode: officeCode,
+          day: day,
+          buzyCode: i
+        }).then( data => {
+            data.data.buzyInfos.forEach((item,index) =>{
+              let list = {}
+              list.name = item.dateDay
+              list.value = item.count
+              if (i==1){
+                this.chartRightOneData.push(list)
+                this.text1 = data.data.totalCount
+              } else if(i==2) {
+               this.chartRightTwoData.push(list)
+               this.text2 = data.data.totalCount
+              } else {
+                this.chartRightThereData.push(list)
+                this.text3 = data.data.totalCount
+              }
+            })
+        })
+      }
+      PaymentAmount({
+        officeCode: officeCode,
+        day: day
       }).then( data => {
-        console.log(data)
-        this.$message({
-          message: '请求成功',
-          type: 'success'
+        data.data.transInfos.forEach((item,index) =>{
+          let list = {}
+          list.time = item.dateDay
+          list.valueL = item.transCount
+          list.valueE = item.transAmt
+          this.patientLineData.push(list)
+        })
+        this.text4 = data.data.totalTransCount
+        this.text5 = data.data.totalTransAmt
+      })
+      PaymentPay({
+        officeCode: officeCode,
+        day: day,
+        transTypeNumber: 6
+      }).then( data => {
+        data.data.transTypeRatioList.forEach((item,index) =>{
+          let list = {}
+          list.name = item.transName
+          list.valueL = item.transCount
+          list.valueE = item.transAmt
+          this.patientbarData.push(list)
         })
       })
-      this.$message({
-        message: '请求失败',
-        type: 'error'
-      })
-    },
-    drawPie () {
+     /* this.$message.success('请求成功')
+      this.$message.error('请求失败')*/
     },
     chengPage (index) {
       if (index==1){
@@ -200,6 +210,7 @@ export default {
     changeTime(index){
       this.activeClass = index;
       if (index === 1) {
+        this.day = 30
         this.isMouth = true
         this.title1 = '近30天总挂号量'
         this.title2 = '近30天总登录数'
@@ -209,6 +220,7 @@ export default {
         this.title6 = '近30天每日缴费交易量、交易额'
         this.title7 = '近30天各个缴费方式总交易量、总交易额'
       } else {
+        this.day = 7
         this.isMouth = false
         this.title1 = '近7天总挂号量'
         this.title2 = '近7天总登录数'
@@ -218,6 +230,15 @@ export default {
         this.title6 = '近7天每日缴费交易量、交易额'
         this.title7 = '近7天各个缴费方式总交易量、总交易额'
       }
+      this.clear()
+      this.getData(this.day, this.officeCode)
+    },
+    clear () {
+      this.chartRightTwoData = []
+      this.chartRightThereData = []
+      this.chartRightOneData = []
+      this.patientLineData = []
+      this.patientbarData = []
     },
     changeAddress () {
       this.isShow ? this.selectAddress = '展开' : this.selectAddress = '收起';
@@ -226,7 +247,10 @@ export default {
     upDateNew (val) {
       this.isShow = !this.isShow
       this.selectAddress = '展开'
-      this.selectAddressNum = val
+      this.selectAddressNum = val.index
+      this.officeCode = val.officeCode
+      this.clear()
+      this.getData(this.day, this.officeCode)
     }
   }
 };

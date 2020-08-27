@@ -7,7 +7,7 @@
   export default {
     props: {
       unit:String,
-      chartData: Object,
+      chartData: Array,
       isMouth:Boolean
     },
     data () {
@@ -199,7 +199,7 @@
                   // 点标注
                   label : {
                     normal : {
-                      show : true,
+                      show : !this.isMouth,
                       position: 'top',
                       fontSize:20
                     }

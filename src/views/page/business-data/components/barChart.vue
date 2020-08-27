@@ -29,8 +29,8 @@
         }
         this.chartData.forEach(item=> {
           this.chartXdata.push(item.name)
-          this.chartYdata.liang = item.valueL
-          this.chartYdata.jine = item.valueE
+          this.chartYdata.liang.push(item.valueL)
+          this.chartYdata.jine.push(item.valueE)
         })
         this.$nextTick(function () {
           this.drawLine()

@@ -8,32 +8,18 @@ import request from '@/api'
  * url: loadOfficeTotalTransInfo
  * @param {}
  */
-export const Register = params => request.post('loadOfficeTotalTransInfo', params)
-
-/****
- *自助登录情况
- * url: loadOfficeTotalTransInfo
- * @param {}
- */
-export const SelfLogin = params => request.post('loadOfficeTotalTransInfo', params)
-
-/****
- *自助签到情况
- * url: loadOfficeTotalTransInfo
- * @param {}
- */
-export const CheckIn = params => request.post('loadOfficeTotalTransInfo', params)
+export const Register = params => request.post('deviceBusiness/loadOfficeHistBuzyInfo', params)
 
 /****
  *缴费金额统计
  * url: loadOfficeTotalTransInfo
  * @param {}
  */
-export const PaymentAmount = params => request.post('loadOfficeTotalTransInfo', params)
+export const PaymentAmount = params => request.post('deviceBusiness/loadOfficeHistTransInfo', params)
 
 /****
  *缴费方式占比
  * url: loadOfficeTotalTransInfo
  * @param {}
  */
-export const PaymentPay = params => request.post('loadOfficeTotalTransInfo', params)
+export const PaymentPay = params => request.post('office/loadOfficeTransTypeRatio', params)

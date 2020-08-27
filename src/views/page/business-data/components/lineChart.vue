@@ -7,7 +7,7 @@
   export default {
     props: {
         title: String,
-        chartData: Array,
+        chartData:Array,
         colors: Array,
         valueColor:Array,
         unit:String,

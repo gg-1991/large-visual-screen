@@ -40,9 +40,9 @@ export default {
       }
     },
     text:{
-      type: String,
+      type: Number,
       default () {
-        return  ''
+        return  0
       }
     },
     type:{
@@ -96,6 +96,18 @@ export default {
       } else {
         return num
       }
+    }
+  },
+  watch:{
+    text:{
+      handler:function(newValue,oldValue){
+        this.setData()
+      /*  this.$nextTick(() => {
+          this.drawLine();
+        })*/
+      },
+      immediate:true,
+      deep:true
     }
   }
 }

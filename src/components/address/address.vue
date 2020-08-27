@@ -24,7 +24,42 @@ export default {
       allSelect: true,
       itemSelect: 0,
       activeClass: -1,
-      List:['东城社区','莞城社区','万江社区','南城社区','石碣镇','石龙镇','企石镇','东城社区','莞城社区','万江社区','南城社区','石碣镇','石龙镇','企石镇','东城社区','莞城社区','万江社区','南城社区','石碣镇','石龙镇','企石镇','东城社区','莞城社区','万江社区','石碣镇','石龙镇','企石镇','东城社区','莞城社区','万江社区','南城社区','石碣镇'],
+      List:[
+        {name:'社保局',officeCode:'441900000000'},
+        {name:'东城街道',officeCode:'441900003000'},
+        {name:'南城街道',officeCode:'441900004000'},
+        {name:'万江街道',officeCode:'441900005000'},
+        {name:'莞城街道',officeCode:'441900006000'},
+        {name:'石碣镇',officeCode:'441900101000'},
+        {name:'石龙镇',officeCode:'441900102000'},
+        {name:'茶山镇',officeCode:'441900103000'},
+        {name:'石排镇',officeCode:'441900104000'},
+        {name:'企石镇',officeCode:'441900105000'},
+        {name:'横沥镇',officeCode:'441900106000'},
+        {name:'桥头镇',officeCode:'441900107000'},
+        {name:'谢岗镇',officeCode:'441900108000'},
+        {name:'东坑镇',officeCode:'441900109000'},
+        {name:'常平镇',officeCode:'441900110000'},
+        {name:'寮步镇',officeCode:'441900111000'},
+        {name:'樟木头镇',officeCode:'441900112000'},
+        {name:'大朗镇',officeCode:'441900113000'},
+        {name:'黄江镇',officeCode:'441900114000'},
+        {name:'清溪镇',officeCode:'441900115000'},
+        {name:'塘厦镇',officeCode:'441900116000'},
+        {name:'凤岗镇',officeCode:'441900117000'},
+        {name:'大岭山镇',officeCode:'441900118000'},
+        {name:'长安镇',officeCode:'441900119000'},
+        {name:'虎门镇',officeCode:'441900121000'},
+        {name:'厚街镇',officeCode:'441900122000'},
+        {name:'沙田镇',officeCode:'441900123000'},
+        {name:'道滘镇',officeCode:'441900124000'},
+        {name:'洪梅镇',officeCode:'441900125000'},
+        {name:'麻涌镇',officeCode:'441900126000'},
+        {name:'望牛墩镇',officeCode:'441900127000'},
+        {name:'中堂镇',officeCode:'441900128000'},
+        {name:'高埗镇',officeCode:'441900129000'},
+        {name:'松山湖',officeCode:'441900401000'}
+      ],
       addressList: [],
     }
   },
@@ -46,7 +81,8 @@ export default {
       }
       for(let i = 0 ; i < this.List.length; i++) {
         let item ={}
-        item.name = this.List[i];
+        item.name = this.List[i].name;
+        item.officeCode = this.List[i].officeCode;
         if (i%7 == 0) {
           item.isOne = true
         } else {
@@ -58,12 +94,20 @@ export default {
     select (index) {
       this.allSelect = false
       this.activeClass = index
-      this.$emit('update', index)
+      let msg = {
+        index: index,
+        officeCode:this.List[index].officeCode
+      }
+      this.$emit('update', msg)
     },
     selectAll () {
       this.allSelect = true
       this.activeClass = -1
-      this.$emit('update', -1)
+       let msg = {
+        index: -1,
+        officeCode:''
+      }
+      this.$emit('update', msg)
     }
   }
 };
