@@ -1,0 +1,33 @@
+{
+  "code": 200,
+  "message": "查询成功",
+  "data": {
+    "signInTypeRatioList": [
+      {
+        "signInType": "1",
+        "signInName": "诊疗卡",
+        "signInRatio": 40.0
+      },
+       {
+        "signInType": "2",
+        "signInName": "市民卡",
+        "signInRatio": 40.8
+      },
+      {
+        "signInType": "3",
+        "signInName": "身份证",
+        "signInRatio": 32.1
+      },
+       {
+        "signInType": "4",
+        "signInName": "一卡通",
+        "signInRatio": 15
+      },
+      {
+        "signInType": "5",
+        "signInName": "其他",
+        "signInRatio": 20.0
+      }
+    ]
+  }
+}

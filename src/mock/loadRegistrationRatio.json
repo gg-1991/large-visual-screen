@@ -1,0 +1,42 @@
+{
+  "code": 200,
+  "message": "查询成功",
+  "data": {
+    "registrationTypeRatios": [
+      {
+        "registrationType": "10004",
+        "registrationName": "社区转诊",
+        "registrationRatio": 10.0
+      },
+      {
+        "registrationType": "10006",
+        "registrationName": "重流门诊",
+        "registrationRatio": 23.0
+      },
+      {
+        "registrationType": "10003",
+        "registrationName": "社区门诊",
+        "registrationRatio": 20.0
+      },
+      {
+        "registrationType": "10002",
+        "registrationName": "急诊号",
+        "registrationRatio": 31.0
+      },
+      {
+        "registrationType": "10005",
+        "registrationName": "抢救",
+        "registrationRatio": 14.0
+      },
+      {
+        "registrationType": "10001",
+        "registrationName": "普通号",
+        "registrationRatio": 10.0
+      }
+    ],
+    "insuredRatio": {
+      "insuredRatio": 51.0,
+      "nonInsuredRatio": 49.0
+    }
+  }
+}

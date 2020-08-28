@@ -1,7 +1,7 @@
 <template>
   <div style="width: 100%">
-    <div>{{title}}</div>
-    <div ref="main" style="height: 550px"></div>
+    <div class="pie-title">{{title}}</div>
+    <div ref="main" :style="{ height: height }"></div>
   </div>
 </template>
 <script>
@@ -10,7 +10,11 @@
         chartData: Array,
         colors: Array,
         redius:Array,
-        name: String
+        name: String,
+        height: {
+          type: String,
+          default: '550px'
+        }
     },
     data () {
       return {
@@ -18,8 +22,8 @@
         title:this.name
       }
     },
-    created () {
-      this.getChartData()
+    mounted() {
+      this.drawLine();
     },
     methods:{
       getChartData () {
@@ -31,28 +35,33 @@
            // 基于准备好的dom，初始化echarts实例
         let myChart = this.$echarts.init(this.$refs.main);
         const colors = this.$props.colors ? param => this.$props.colors[param.dataIndex] : '自适应'
+        console.log(colors)
         // 指定图表的配置项和数据
         let option = {
           series: [
             {
               name: this.name,
               type: 'pie',
-              radius: this.redius,
+              radius: this.redius || [50,150],
               center: ['50%', '50%'],
               roseType: 'radius',
+              top: 20,
               data:this.chartData,
-              label:{
+              label:{
                 normal:{
                   formatter: '{b}\n {d}%',//\n实现换行
                   textStyle: {
                     color: '#fff',
-                    fontSize: 24  // 改变标示文字的颜色
+                    fontSize: 24,  // 改变标示文字的颜色
+                    fontFamily: 'Alibaba PuHuiTi',
+                    fontWeight: 400
                   }
                 }
               },
               labelLine:{
-                normal:{
-                    length:5
+                lineStyle: {
+                  color: '#314A61',
+                  width: 2
                 }
             },
             itemStyle: {
@@ -75,8 +84,15 @@
         deep:true
       }
     },
-    mounted() {
-      // this.drawLine();
-    }
+    
   }
 </script>
+<style lang="scss" scoped>
+.pie-title{
+  color: #B1D2E9;
+  font-size: 36px;
+  font-family: Alibaba PuHuiTi;
+  font-weight: 400;
+  padding-top: 30px;
+}
+</style>

@@ -8,21 +8,70 @@
         "officeName": "堑头社区卫生服务站",
         "parentOfficeName": "东城社区",
         "parentOfficeCode": "441900003000",
-        "totalCount": 1
+        "totalCount": 1999
       },
       {
         "officeCode": "100000005",
         "officeName": "东城社区卫生服务中心",
         "parentOfficeName": "东城社区",
         "parentOfficeCode": "441900003000",
-        "totalCount": 1
+        "totalCount": 1987
       },
       {
         "officeCode": "100000005001",
         "officeName": "东城街道梨川社区卫生服务站",
         "parentOfficeName": "东城社区",
         "parentOfficeCode": "441900003000",
-        "totalCount": 1
+        "totalCount": 1200
+      },
+      {
+        "officeCode": "100000001",
+        "officeName": "堑头社区卫生服务站",
+        "parentOfficeName": "东城社区",
+        "parentOfficeCode": "441900003000",
+        "totalCount": 1000
+      },
+      {
+        "officeCode": "100000005",
+        "officeName": "东城社区卫生服务中心",
+        "parentOfficeName": "东城社区",
+        "parentOfficeCode": "441900003000",
+        "totalCount": 1862
+      },
+      {
+        "officeCode": "100000005001",
+        "officeName": "东城街道梨川社区卫生服务站",
+        "parentOfficeName": "东城社区",
+        "parentOfficeCode": "441900003000",
+        "totalCount": 1720
+      },
+      {
+        "officeCode": "100000001",
+        "officeName": "堑头社区卫生服务站",
+        "parentOfficeName": "东城社区",
+        "parentOfficeCode": "441900003000",
+        "totalCount": 1550
+      },
+      {
+        "officeCode": "100000005",
+        "officeName": "东城社区卫生服务中心",
+        "parentOfficeName": "东城社区",
+        "parentOfficeCode": "441900003000",
+        "totalCount": 888
+      },
+      {
+        "officeCode": "100000005001",
+        "officeName": "东城街道梨川社区卫生服务站",
+        "parentOfficeName": "东城社区",
+        "parentOfficeCode": "441900003000",
+        "totalCount": 666
+      },
+      {
+        "officeCode": "100000005001",
+        "officeName": "东城街道梨川社区卫生服务站",
+        "parentOfficeName": "东城社区",
+        "parentOfficeCode": "441900003000",
+        "totalCount": 121
       }
     ]
   }

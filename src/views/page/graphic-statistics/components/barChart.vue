@@ -1,53 +1,61 @@
 <template>
   <div class="barChart">
-    <div ref="main" style="width: 100%;height: 550px"></div>
+    <div ref="main" :id="chartId" :style="{ width: '100%', height: height}"></div>
   </div>
 </template>
 <script>
   export default {
     props: {
-        chartData: Array
+      chartId: String,
+      height: {
+        type: String,
+        default: '550px'
+      },
+      chartData: Array,
+      transTypeChartXData: Array
     },
-    data () {
-      return {
-        chartXdata: [],
-        chartYdata: {
-          'liang': [],
-          'jine': []
-        }
-      }
-    },
-    created () {
-      this.getChartData()
+    mounted () {
+      this.drawLine()
     },
     methods:{
-      getChartData () {
-        this.chartXdata = []
-        this.chartYdata = {
-          'liang': [],
-          'jine': []
-        }
-        this.chartData.forEach(item=> {
-          this.chartXdata.push(item.name)
-          this.chartYdata.liang = item.valueL
-          this.chartYdata.jine = item.valueE
-        })
-        this.$nextTick(function () {
-          this.drawLine()
-        });
-      },
       drawLine () {
+        if(this.chartData.length === 0) return
+        const legendData = []
+        const seriesData = []
+        this.chartData.forEach(item => {
+          legendData.push(item.name)
+          let obj = {
+              name: item.name,
+              type: 'bar',
+              color: item.color,
+              barWidth : 30,
+              barGap: '90%',
+                // 点标注
+              label : {
+                normal : {
+                  show : true,
+                  position: 'top',
+                  formatter: '{c}%',
+                  distance: 10,
+                  color: '#E5E5E5',
+                  fontSize: 28
+                }
+              },
+              data: item.data
+          }
+          seriesData.push(obj)
+        })
            // 基于准备好的dom，初始化echarts实例
-        let myChart = this.$echarts.init(this.$refs.main);
+        let myChart = this.$echarts.init(document.getElementById(this.chartId));
         // 指定图表的配置项和数据
         let option = {
           legend: {
-            data: ['交易量占比', '交易额占比'],
+            data: legendData || [],
             itemGap:30,
             itemWidth: 55,
             itemHeight:20,
             textStyle:{
-              color:'#B1D2E9',
+              color:'#B2D2EA',
               fontSize:24
             }
           },
@@ -67,17 +75,18 @@
                     color:'#E5E5E5'
                   },
                 },
-                // X轴主线
-                axisLine:{
-                  lineStyle:{
-                      color:'#314A61',
-                      width:1,
-                  }
+              // X轴主线
+              axisLine:{
+                show: true,
+                lineStyle:{
+                    color:'#324A61',
+                    width:1,
+                }
               },
               axisTick: {
                   show:false
               },
-              data: this.chartXdata
+              data: this.transTypeChartXData
           },
           yAxis:{
               type: 'value',
@@ -87,64 +96,32 @@
                   textStyle:{
                     fontSize: 24,
                     color:'#67849F'
-                  },
-
+                  }
                 },
                 // Y轴单位和样式
                 nameTextStyle: {
-                  color: ['#67849F'],
-                  fontSize:24
+                  color: '#6884A0',
+                  fontSize:24,
+                  padding: [0,0,15,0]
                 },
                 axisLine:{
                   lineStyle:{
                       color:'#314A61',
-                      width:1,//这里是为了突出显示加上的
+                      width: 1//这里是为了突出显示加上的
                   }
                 },
                splitLine: {
                   lineStyle: {
-                    color:['#314A61'],
-                    lineStyle:'dashed',
-                    opacity: 0.2
+                    color: '#324A61'
                   }
                 },
+                
                 axisTick: {
-                  inside:true
+                  show: false
                 },
 
            },
-          series: [
-              {
-                  name: '交易量占比',
-                  type: 'bar',
-                  color:'#4492FF',
-                  barWidth : 30,
-                   // 点标注
-                  label : {
-                    normal : {
-                      show : true,
-                      position: 'top',
-                      formatter: '{c}%'
-                    }
-                  },
-                  data: this.chartYdata.liang
-              },
-              {
-                  name: '交易额占比',
-                  type: 'bar',
-                  color:'#2CDFFF',
-                  barWidth : 30,
-                  // 点标注
-                  label : {
-                    normal : {
-                      show : true,
-                      position: 'top',
-                      formatter: '{c}%'
-                    }
-                  },
-                  data: this.chartYdata.jine
-              }
-          ]
+          series: seriesData
         };
 
         // 使用刚指定的配置项和数据显示图表。
@@ -153,15 +130,11 @@
     },
     watch:{
       chartData:{
-        handler:function(oldValue,newValue){
-          this.getChartData()
+        handler:() => {
+          this.drawLine()
         },
-        immediate:true,
         deep:true
       }
-    },
-    mounted() {
-      // this.drawLine();
     }
   }
 </script>
