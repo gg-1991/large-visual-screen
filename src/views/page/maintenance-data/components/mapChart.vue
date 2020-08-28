@@ -22,94 +22,83 @@
         });
       },
       drawLine() {
-     let myChart = this.$echarts.init(this.$refs.main);
+     
      //引入市区json文件
-     var uploadedDataURL = "/asset/get/s/data-1597452450339-dQm5JP9rx.json";
+     var uploadedDataURL = require('../../../../mock/dongguan.json');
 
-
-     myChart.showLoading();
-     $.getJSON(uploadedDataURL, function(geoJson) {
-         echarts.registerMap('china', geoJson);
-         myChart.hideLoading();
+    //  $.getJSON(uploadedDataURL, function(geoJson) {
+         this.$echarts.registerMap('dongguan', uploadedDataURL);
+         let myChart = this.$echarts.init(this.$refs.main);
+        //  myChart.hideLoading();
          //地理位置信息
          var geoCoordMap = {
-             '遂平县': [114.015819, 33.150944],
-             '上蔡县': [114.276256, 33.267906],
-             '西平县': [114.022143, 33.394355],
-             "驿城区": [114.006045, 32.978599],
-             '确山县': [114.033641, 32.810768],
-             "泌阳县": [113.335694, 32.731107],
-             "汝南县": [114.375141, 33.016389],
-             "正阳县": [114.398138, 32.615372],
-             "平舆县": [114.629254, 32.969876],
-             "新蔡县": [114.979952, 32.752487]
+            '石龙镇': [113.880838, 23.112166],
+            '石排镇': [113.946909, 23.09603],
+            '茶山镇': [113.876358, 23.083319],
+            '企石镇': [114.028973, 23.079075],
+            '桥头镇': [114.083354, 23.03425],
+            '东坑镇': [113.940211, 23.001534],
+            '横沥镇': [113.972248, 23.024481],
+            '常平镇':[113.998921, 22.981577],
+            '虎门镇': [113.678872, 22.820851],
+            '长安镇': [113.808855, 22.821128]
          };
          //数据信息
          var data = [{
-                 name: "遂平县",
+                 name: "石龙镇",
                  value: 199,
-                 value2: 222,
                  color: '#aaa'
              },
              {
-                 name: "上蔡县",
+                 name: "石排镇",
                  value: 42,
-                 value2: 222,
                  color: '#00f'
              },
              {
-                 name: "西平县",
+                 name: "茶山镇",
                  value: 102,
-                 value2: 222,
                  color: '#ff0'
              },
              {
-                 name: "驿城区",
+                 name: "企石镇",
                  value: 81,
-                 value2: 222,
                  color: '#f0f'
              },
              {
-                 name: "确山县",
+                 name: "桥头镇",
                  value: 47,
-                 value2: 222,
                  color: '#000'
              },
              {
-                 name: "泌阳县",
+                 name: "东坑镇",
                  value: 67,
-                 value2: 222,
                  color: '#ffo'
              },
              {
-                 name: "汝南县",
+                 name: "横沥镇",
                  value: 82,
-                 value2: 222,
                  color: '#00f'
              },
              {
-                 name: "正阳县",
+                 name: "常平镇",
                  value: 123,
-                 value2: 222,
                  color: '#f0f'
              },
              {
-                 name: "平舆县",
+                 name: "虎门镇",
                  value: 24,
-                 value2: 222,
                  color: '#ddd'
              },
              {
-                 name: "新蔡县",
+                 name: "长安镇",
                  value: 92,
-                 value2: 222,
                  color: '#fff'
              }
          ];
-         var max = 480,
-             min = 9; // todo 
-         var maxSize4Pin = 100,
-             minSize4Pin = 20;
+        //  var max = 480,
+        //      min = 9; // todo 
+        //  var maxSize4Pin = 100,
+        //      minSize4Pin = 20;
          var convertData = function(data) {
              var res = [];
              for (var i = 0; i < data.length; i++) {
@@ -117,7 +106,7 @@
                  if (geoCoord) {
                      res.push({
                          name: data[i].name,
-                         value: geoCoord.concat(data[i].value).concat(data[i].value2),
+                         value: geoCoord.concat(data[i].value),
                          color: data[i].color
                      });
                  }
@@ -128,20 +117,19 @@
              backgroundColor: '#12034B',
              tooltip: {
                  trigger: 'item',
-                 formatter: function(params) {
-                     console.log(params)
-                     if (typeof(params.value)[2] == "undefined") {
-                         return params.name + '<br>挂号量 : ' + params.value + '<br>缴费量：' + params.data.value2
-                     } else {
-                         return params.name + '<br>挂号量 : ' + params.value[2] + '<br>缴费量：' + params.value[2]
-                     }
-                 }
+                //  formatter: function(params) {
+                //      if (typeof(params.value)[2] == "undefined") {
+                //          return params.name + '<br>挂号量 : ' + params.value + '<br>缴费量：' + params.data.value2
+                //      } else {
+                //          return params.name + '<br>挂号量 : ' + params.value[2] + '<br>缴费量：' + params.value[2]
+                //      }
+                //  }
              },
              geo: {
-                 map: 'china',
+                 map: 'dongguan',
                  show: true,
                  roam: true,
-                 center: [114.006045, 32.978599],
+                 center: [113.746262, 23.046237],
                  zoom: 10, //当前视角缩放比例
                  label: {
                      normal: {
@@ -166,7 +154,7 @@
              },
              series: [{
                      type: 'map',
-                     map: 'china',
+                     map: 'dongguan',
                      geoIndex: 0,
                      aspectScale: 0.75, //长宽比
                      showLegendSymbol: false, // 存在legend时显示
@@ -231,7 +219,7 @@
              ]
          };
          myChart.setOption(option);
-     });
+    //  });
  }
     },
     watch:{

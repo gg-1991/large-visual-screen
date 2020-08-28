@@ -35,7 +35,6 @@
            // 基于准备好的dom，初始化echarts实例
         let myChart = this.$echarts.init(this.$refs.main);
         const colors = this.$props.colors ? param => this.$props.colors[param.dataIndex] : '自适应'
-        console.log(colors)
         // 指定图表的配置项和数据
         let option = {
           series: [

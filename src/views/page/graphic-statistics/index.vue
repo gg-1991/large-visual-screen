@@ -37,6 +37,7 @@
               <div class="title">
                 <p>各乡镇/街道缴费量分布情况</p>
               </div>
+              <map-chart></map-chart>
               <!-- <pictorial-line v-if="categoryData.length> 0" :categoryData="categoryData" :height="'900px'" :chartId="'chartMap'"></pictorial-line> -->
             </div>
           </box-area>
@@ -106,6 +107,7 @@ import pictorialLine from './components/pictorialLine'
 import progressBar from './components/progressBar'
 import pieChart from './components/PieChart'
 import barChart from './components/barChart'
+import mapChart from '../maintenance-data/components/mapChart'
 import { loadOfficeRegistrationTop, loadSignInTypeList, loadOfficeTransList, loadOfficeRegistrationRatio, loadOfficeTransTypeRatio } from '@/api/graphic.js'
 
 export default {
@@ -116,7 +118,8 @@ export default {
     pictorialLine,
     progressBar,
     pieChart,
-    barChart
+    barChart,
+    mapChart
   },
   data() {
     return {
