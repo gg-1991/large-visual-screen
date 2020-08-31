@@ -285,7 +285,6 @@ export default {
         position: relative;
         img{
           height: 80px;
-          width: 1240px;
         }
         .btn1{
           position: absolute;
@@ -340,7 +339,6 @@ export default {
       .list3{
         img{
           height: 80px;
-          width: 1240px;
         }
       }
     }

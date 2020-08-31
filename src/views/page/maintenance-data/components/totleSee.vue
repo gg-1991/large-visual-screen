@@ -101,7 +101,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
  .oneLine{
   text-align: left;
   height: 120px;

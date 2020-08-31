@@ -66,6 +66,8 @@ import {
   Loading,
   MessageBox,*/
   Message,
+  Carousel,
+  CarouselItem,
 /*  Notification,
   Timeline,
   TimelineItem,
@@ -170,4 +172,6 @@ Vue.prototype.$alert = MessageBox.alert
 Vue.prototype.$confirm = MessageBox.confirm
 Vue.prototype.$prompt = MessageBox.prompt
 Vue.prototype.$notify = Notification*/
+Vue.use(Carousel)
+Vue.use(CarouselItem)
 Vue.prototype.$message = Message

@@ -3,7 +3,6 @@
      <div class="title">
         <div class="list1">
           <img :src="titleLeftImg" alt="">
-          <span  :key='index' :class="[index==0?'btn1':'btn2',activeClass==index?'active':'']"  v-for="(item,index) in btnText" @click="changeTime(index)">{{item.text}}</span>
         </div>
         <div class="list2">
           <span class="list2_tj" @click="chengPage(1)">整体图形统计</span>
@@ -15,52 +14,117 @@
         </div>
      </div>
      <div class="box">
-       <div class="oneBox">
-         <div class="one_left">
-           <img :src="leftUp" class="leftUp" alt="">
-           <img :src="leftDown" class="leftDown" alt="">
-           <img :src="rightUp" class="rightUp" alt="">
-           <img :src="rightDown" class="rightDown" alt="">
-           <chart-title title="自助挂号情况"></chart-title>
-           <totle-see unit="人次数" :title="title1" :text="text1" :imgType=1 :type=1></totle-see>
-            <div>挂号类型占比统计</div>
-           <bar-chart :chartData="patientbarData"/>
-         </div>
-         <div class="one_center">
+       <div class="left_box">
+          <div class="left_one">
             <img :src="leftUp" class="leftUp" alt="">
             <img :src="leftDown" class="leftDown" alt="">
             <img :src="rightUp" class="rightUp" alt="">
             <img :src="rightDown" class="rightDown" alt="">
-            <chart-title title="自助登录情况"></chart-title>
-            <totle-see unit="次" :title="title2" :text="text2" :imgType=2 :type=1></totle-see>
-            <div class="pieBox">
-              <pie-chart :chartData="pieDataOne" :colors="['#697EFF', '#9218DC', '#8559FF', '#697EFF']" :redius='redius1' name="挂号类型占比" />
-              <pie-chart :chartData="pieDataTwo" :colors="['#67EBFF', '#52BBF9']" :redius='redius1' name="参保人挂号占比"/>
+            <chart-title title="当前所有终端运行情况"></chart-title>
+            <div style="margin-top: 20px;margin-bottom: 20px;">当前所有终端运行状态</div>
+            <div class="state">
+               <div class="totle1">
+                  <div class="img">
+                     <img :src="zongliangImg" class="zongliang" alt="">
+                  </div>
+                  <div class="text">
+                    <p>当前正在运行终端总量</p>
+                    <p style="text-align: left;">
+                      <span class="span1">{{zonglangV}}</span>
+                      <span class="span2">台</span>
+                    </p>
+                  </div>
+
+               </div>
+               <div class="totle2">
+                 <div class="img">
+                     <img :src="kaijiImg" class="zongliang" alt="">
+                  </div>
+                  <div class="text">
+                    <p>当前所有终端开机率</p>
+                    <p style="text-align: left;">
+                      <span class="span1">{{kaijiV}}</span>
+                      <span class="span2">%</span>
+                    </p>
+                  </div>
+               </div>
+            </div>
+            <div style="margin-top: 30px;margin-bottom: 20px;position: relative;">{{text1}}
+            <span class="back">返回全市情况</span>
+            </div>
+            <all-city :listData="allCity" ></all-city>
+            <some-city :listData="allCity" v-if="false"></some-city>
+          </div>
+          <div class="left_two">
+            <img :src="leftUp" class="leftUp" alt="">
+            <img :src="leftDown" class="leftDown" alt="">
+            <img :src="rightUp" class="rightUp" alt="">
+            <img :src="rightDown" class="rightDown" alt="">
+            <chart-title title="报修单近7天处理情况"></chart-title>
+            <div class="set_table">
+              <div class="table1">
+                <div class="img">
+                  <img :src="fenpeiImg"  alt="">
+                </div>
+                <div class="title1">
+                  平均分配耗时
+                </div>
+                <div class="time">
+                  <span>{{time1}}</span>
+                  小时/单
+                </div>
+              </div>
+              <div class="table2">
+                 <div class="img">
+                  <img :src="weixiuImg"  alt="">
+                </div>
+                <div class="title1">
+                  平均维修耗时
+                </div>
+                <div class="time">
+                 <span>{{time2}}</span>小时/单
+                </div>
+              </div>
+              <div class="table3">
+                 <div class="img">
+                  <img :src="wanchengImg"  alt="">
+                </div>
+                <div class="title1">
+                  平均整体完成耗时
+                </div>
+                <div class="time">
+                  <span>{{time2}}</span>小时/单
+                </div>
+              </div>
+            </div>
+          </div>
+       </div>
+       <div class="right_box">
+         <div class="right_top">
+           <div class="right_top_left">
+              <img :src="leftUp" class="leftUp" alt="">
+              <img :src="leftDown" class="leftDown" alt="">
+              <img :src="rightUp" class="rightUp" alt="">
+              <img :src="rightDown" class="rightDown" alt="">
+              <chart-title title="当前各乡镇/街道终端运行情况"></chart-title>
+           </div>
+            <div class="right_top_right">
+              <img :src="leftUp" class="leftUp" alt="">
+              <img :src="leftDown" class="leftDown" alt="">
+              <img :src="rightUp" class="rightUp" alt="">
+              <img :src="rightDown" class="rightDown" alt="">
+              <chart-title title="近7天乡镇/街道故障率TOP10"></chart-title>
             </div>
          </div>
-         <div class="one_right">
+         <div class="right_bottom">
             <img :src="leftUp" class="leftUp" alt="">
             <img :src="leftDown" class="leftDown" alt="">
             <img :src="rightUp" class="rightUp" alt="">
             <img :src="rightDown" class="rightDown" alt="">
-            <chart-title title="自助签到情况"></chart-title>
-            <totle-see unit="次" :title="title3" :text="text3" :imgType=3 :type=1></totle-see>
-            <pie-chart :chartData="pieDataThere" :colors="['#8559FF', '#4C97F7']" :redius='redius2' name="缴费账户类型占比"/>
+            <chart-title title="近7天报修单情况"></chart-title>
          </div>
        </div>
-       <div class="twoBox">
-           <img :src="leftUp" class="leftUp" alt="">
-           <img :src="leftDown" class="leftDown" alt="">
-           <img :src="rightUp" class="rightUp" alt="">
-           <img :src="rightDown" class="rightDown" alt="">
-           <chart-title title="自助缴费情况"></chart-title>
-           <div>
-            <map-chart></map-chart>
-           </div>
-       </div>
      </div>
-     <div class="more" @click="changeAddress">{{selectAddress}}</div>
-     <add-ress v-show="isShow" :item="selectAddressNum" @update="upDateNew"></add-ress>
   </div>
 </template>
 <script>
@@ -70,83 +134,69 @@ import leftUp from '@/assets/images/border_lift_up.png'
 import leftDown from '@/assets/images/border_lift_down.png'
 import rightUp from '@/assets/images/border_right_up.png'
 import rightDown from '@/assets/images/border_right_down.png'
-import TotleSee from './components/totleSee.vue'
-import AddRess from '@/components/address/address'
-import BarChart from '../graphic-statistics/components/barChart'
-import PieChart from '../graphic-statistics/components/PieChart'
-import MapChart from './components/mapChart'
+import zongliang from '@/assets/images/icon5_zongliang.png'
+import kaiji from '@/assets/images/icon6_kaijilv.png'
+import fenpei from '@/assets/images/icon7_fenpei.png'
+import weixiu from '@/assets/images/icon8_weixxiu.png'
+import wancheng from '@/assets/images/icon9_wancheng.png'
+import AllCity from './components/allCity'
+import SomeCity from './components/someCity'
 export default {
   name: "MaintenanceData",
   components: {
-    TotleSee,
-    BarChart,
-    AddRess,
-    PieChart,
-    MapChart
+    AllCity,
+    SomeCity
   },
   data() {
     return {
-      activeClass: 0,
-      btnText:[
-       {'text':'近7天',"isSure":true},
-       {'text': '近30天'}
-      ],
-      isMouth: false,
-      selectAddress:'展开',
-      selectAddressNum:'0',
-      isShow: false,
-      title1:'近7天总挂号量',
-      title2:'近7天总登录数',
-      title3:'近7天总签到数',
-      title4:'近7天缴费总交易量',
-      title5:'近7天缴费总交易额',
-      title6:'近7天每日缴费交易量、交易额',
-      title7:'近7天各个缴费方式总交易量、总交易额',
-      text1:'5530',
-      text2:'5530',
-      text3:'5530',
-      text4:'5530',
-      text5:'5530',
       leftUp:leftUp,
       leftDown:leftDown,
       rightDown:rightDown,
       rightUp:rightUp,
       titleLeftImg: titleLeft,
       titleRightImg: titleRight,
-      pieDataOne: [
-        {value: 15, name: '转诊'},
-        {value: 35,  name: '自费'},
-        {value: 30, name: '急诊'},
-        {value: 20, name: '社区'}
-      ],
-      redius1: [50,200],
-      pieDataTwo: [
-        {value: 55, name: '参保人'},
-        {value: 45,  name: '非参保人'}
-      ],
-      redius2: [100,250],
-      pieDataThere: [
-        {value: 55, name: '个账'},
-        {value: 45,  name: '金融'}
-      ],
-      patientbarData:[
-        {'name': '社保卡','valueL': [10,22,33,44,66,77],'valueE': [55,63,85,4,96,86]},
-        {'name': '电子社保卡','valueL': [30,22,33,44,66,77],'valueE': [55,63,85,4,96,86]},
-        {'name': '刷脸支付','valueL': [20,22,33,44,66,77],'valueE': [55,63,85,4,96,86]},
-        {'name': '莞银通','valueL': [40,22,33,44,66,77],'valueE': [55,63,85,4,96,86]},
-        {'name': '银联卡','valueL': [10,22,33,44,66,77],'valueE': [55,63,85,4,96,86]},
-        {'name': '其他','valueL': [10,22,33,44,66,77],'valueE': [55,63,85,4,96,86]}
+      zongliangImg:zongliang,
+      kaijiImg: kaiji,
+      fenpeiImg:fenpei,
+      weixiuImg:weixiu,
+      wanchengImg:wancheng,
+      text1:'当前全市所有终端运行异常社区',
+      zonglangV: 3000,
+      kaijiV:98,
+      time1:2,
+      time2:'1天2',
+      time3:'2天1',
+      allCity: [
+        {name:'东城街道社区卫生服务中心',value:'2',code:'HHH3333'},
+        {name:'东城街道社区卫生服务中心',value:'2',code:'HHH3333'},
+        {name:'东城街道社区卫生服务中心',value:'2',code:'HHH3333'},
+        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
+        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
+        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
+        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
+        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
+        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
+        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
+        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
+        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
+        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
+        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
+        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
+        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
+        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
+        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
+        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
+        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
+        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
+        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'}
       ]
     }
   },
   created() {
   },
   mounted () {
-    this.drawPie();
   },
   methods: {
-    drawPie () {
-    },
     chengPage (index) {
      if (index==1){
         this.$router.replace('/graphicStatistics')
@@ -154,41 +204,15 @@ export default {
         this.$router.replace('/businessData')
       }
     },
-    changeTime(index){
-      this.activeClass = index;
-      if (index === 1) {
-        this.isMouth = true
-        this.title1 = '近30天总挂号量'
-        this.title2 = '近30天总登录数'
-        this.title3 = '近30天总签到数'
-        this.title4 = '近30天缴费总交易量'
-        this.title5 = '近30天缴费总交易额'
-        this.title6 = '近30天每日缴费交易量、交易额'
-        this.title7 = '近30天各个缴费方式总交易量、总交易额'
-      } else {
-        this.isMouth = false
-        this.title1 = '近7天总挂号量'
-        this.title2 = '近7天总登录数'
-        this.title3 = '近7天总签到数'
-        this.title4 = '近7天缴费总交易量'
-        this.title5 = '近7天缴费总交易额'
-        this.title6 = '近7天每日缴费交易量、交易额'
-        this.title7 = '近7天各个缴费方式总交易量、总交易额'
-      }
-    },
-    changeAddress () {
-      this.isShow ? this.selectAddress = '展开' : this.selectAddress = '收起';
-      this.isShow = !this.isShow
-    },
-    upDateNew (val) {
-      this.isShow = !this.isShow
-      this.selectAddress = '展开'
-      this.selectAddressNum = val
-    }
   }
 };
 </script>
 <style scoped >
+  /deep/ .el-carousel__button{
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+  }
   .leftUp{
     position: absolute;
     left:0;
@@ -218,20 +242,6 @@ export default {
         position: relative;
         img{
           height: 80px;
-          width: 1240px;
-        }
-        .btn1{
-          position: absolute;
-          left: 38px;
-          bottom: -10px;
-        }
-        .active{
-          color: #6BA7FF;
-        }
-        .btn2{
-          position: absolute;
-          left: 200px;
-          bottom: -10px;
         }
       }
       .list2{
@@ -273,61 +283,199 @@ export default {
       .list3{
         img{
           height: 80px;
-          width: 1240px;
         }
       }
     }
     .box{
       margin:17px 37px 17px 37px;
-      .oneBox{
-        display:flex;
-        justify-content:flex-start;
-        .one_left{
-         flex: 1;
-         padding:40px;
-         border:1px solid #387ADA;
-         margin-right:20px;
-         position: relative;
-        }
-        .one_center{
-         flex: 1;
-         padding:40px;
-         border:1px solid #387ADA;
-         margin-right:20px;
-         position: relative;
-         .pieBox{
-           display:flex;
-           flex-direction:row;
-           justify-content:flex-start;
-         }
-        }
-        .one_right{
-         flex: 1;
-         padding:40px;
-         border:1px solid #387ADA;
-         position: relative;
-        }
-      }
-      .twoBox{
-        padding:40px;
+      display:flex;
+      .left_box{
         display:flex;
         flex-direction:column;
-        /* justify-content:space-between; */
-        margin-top: 20px;
-        position: relative;
-        border:1px solid #387ADA;
+        width: 33%;
+        margin-right:20px;
+        .left_one{
+          flex: 1;
+          padding:40px;
+          border:1px solid #387ADA;
+          margin-bottom:20px;
+          position: relative;
+          .state{
+            height: 200px;
+            display:flex;
+            justify-content:space-between;
+            .totle1{
+              flex: 1;
+              background-color: #141949;
+              margin-right:40px;
+              padding:50px 20px;
+              display:flex;
+              .img{
+                margin-right: 10px;
+                position: relative;
+                top: 5px;
+              }
+              .text{
+                .span1{
+                  font-size: 56px;
+                  color: #2CDFFF;
+                  margin-right: 20px;
+                }
+                .span2{
+                  font-size: 20px;
+                  color: #64819D;
+                }
+              }
+            }
+            .totle2{
+              flex: 1;
+              background-color: #141949;
+              padding:50px 30px;
+              display:flex;
+               .img{
+                margin-right: 20px;
+                position: relative;
+                top: 5px;
+              }
+              .text{
+                .span1{
+                  font-size: 56px;
+                  color: #4492FF;
+                  margin-right: 20px;
+                }
+                .span2{
+                  font-size: 20px;
+                  color: #64819D;
+                }
+              }
+            }
+          }
+          .back{
+            display: inline-block;
+            height: 68px;
+            width: 240px;
+            line-height: 72px;
+            font-size: 30px;
+            color: #fff;
+            background-image: url('../../../assets/images/button5.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100%;
+            position: absolute;
+            top:0px;
+            right:0px;
+          }
+        }
+        .left_two{
+          height: 540px;
+          padding:40px;
+          border:1px solid #387ADA;
+          position: relative;
+          .set_table{
+            cursor: pointer;
+            display:flex;
+            justify-content:space-between;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            img{
+              height: 190px
+            }
+            .table1{
+              flex:1;
+              margin-right: 20px;
+              border:1px solid #1E3B6F;
+              width: 340px;
+              height: 420px;
+              padding-bottom: 20px;
+              .img{
+                margin-bottom: 20px;
+                margin-top: 40px;
+              }
+              .title1{
+                margin-bottom: 10px
+              }
+              .time{
+                span{
+                  color: #4492FF;
+                  font-size: 58px;
+                }
+            }
+          }
+            .table2{
+              flex: 1;
+              margin-right: 20px;
+              border:1px solid #1E3B6F;
+              width: 340px;
+              height: 420px;
+              padding-bottom: 20px;
+               .img{
+                margin-bottom: 20px;
+                margin-top: 40px;
+              }
+              .title1{
+                margin-bottom: 10px
+              }
+              .time{
+                span{
+                  color: #2CDFFF;
+                  font-size: 58px;
+                }
+              }
+            }
+            .table3{
+              flex: 1;
+              border:1px solid #1E3B6F;
+              width: 340px;
+              height: 420px;
+              padding-bottom: 20px;
+               .img{
+                margin-bottom: 20px;
+                margin-top: 40px;
+              }
+              .title1{
+                margin-bottom: 10px
+              }
+              .time{
+                span{
+                  color: #B945FF;
+                  font-size: 58px;
+                }
+            }
+          }
+        }
       }
     }
-    .more{
-      padding-right: 15px;
-      width: 125px;
-      height: 80px;
-      line-height: 80px;
-      background-image: url('../../../assets/images/button2.png');
-      position: absolute;
-      background-size: 100% 100%;
-      top:45%;
-      left:0px;
+    .right_box{
+        flex: 1;
+        display:flex;
+        flex-direction:column;
+        .right_top{
+          flex: 1;
+          display:flex;
+          justify-content:flex-start;
+          margin-bottom: 20px;
+          .right_top_left{
+             flex: 1;
+             padding:40px;
+             border:1px solid #387ADA;
+             margin-right:20px;
+             position: relative;
+          }
+          .right_top_right{
+             flex: 1;
+             padding:40px;
+             border:1px solid #387ADA;
+             position: relative;
+          }
+        }
+        .right_bottom{
+          height: 820px;
+          padding:40px;
+          border:1px solid #387ADA;
+          position: relative;
+        }
+
+      }
     }
   }
 </style>
