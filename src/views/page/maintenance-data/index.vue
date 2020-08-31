@@ -62,7 +62,7 @@
             <img :src="rightDown" class="rightDown" alt="">
             <chart-title title="报修单近7天处理情况"></chart-title>
             <div class="set_table">
-              <div class="table1">
+              <div class="table1" @click="seeTable(6)">
                 <div class="img">
                   <img :src="fenpeiImg"  alt="">
                 </div>
@@ -74,7 +74,7 @@
                   小时/单
                 </div>
               </div>
-              <div class="table2">
+              <div class="table2"  @click="seeTable(9)">
                  <div class="img">
                   <img :src="weixiuImg"  alt="">
                 </div>
@@ -82,10 +82,10 @@
                   平均维修耗时
                 </div>
                 <div class="time">
-                 <span>{{time2}}</span>小时/单
+                 <span>{{time2}}</span>天<span>{{time2}}</span>小时/单
                 </div>
               </div>
-              <div class="table3">
+              <div class="table3"  @click="seeTable(10)">
                  <div class="img">
                   <img :src="wanchengImg"  alt="">
                 </div>
@@ -93,7 +93,7 @@
                   平均整体完成耗时
                 </div>
                 <div class="time">
-                  <span>{{time2}}</span>小时/单
+                  <span>{{time2}}</span>天<span>1</span>小时/单
                 </div>
               </div>
             </div>
@@ -107,6 +107,7 @@
               <img :src="rightUp" class="rightUp" alt="">
               <img :src="rightDown" class="rightDown" alt="">
               <chart-title title="当前各乡镇/街道终端运行情况"></chart-title>
+              <map-chart></map-chart>
            </div>
             <div class="right_top_right">
               <img :src="leftUp" class="leftUp" alt="">
@@ -122,9 +123,20 @@
             <img :src="rightUp" class="rightUp" alt="">
             <img :src="rightDown" class="rightDown" alt="">
             <chart-title title="近7天报修单情况"></chart-title>
+            <div class="right_bottom_box">
+              <div class="pre_box">
+                <div style="margin-bottom: 40px;">近7天报修单类型占比</div>
+                <pie-chart v-if="repairTypeData.length > 0" :chartData="repairTypeData" :colors="['#9218DC', '#8559FF', '#697EFF', '#4C97F7', '#50D4FF', '#67EBFF']" :redius='redius' name="" @up="seeTable"/>
+              </div>
+              <div class="line_box">
+                <div style="margin-bottom: 40px;">近7天报修单提交数量统计</div>
+                <line-chart unit="单位：个"  :isMouth="false"  :chartData="chartLineData" :valueColor="['#4492FF']" :colors="['#154871','#0B093C']"/>
+              </div>
+            </div>
          </div>
        </div>
      </div>
+    <table-pop :gridData="gridData" v-if="dialogTableVisible" v-model="dialogTableVisible" :type="type"></table-pop>
   </div>
 </template>
 <script>
@@ -141,11 +153,20 @@ import weixiu from '@/assets/images/icon8_weixxiu.png'
 import wancheng from '@/assets/images/icon9_wancheng.png'
 import AllCity from './components/allCity'
 import SomeCity from './components/someCity'
+import MapChart from './components/mapChart'
+import pieChart from '../graphic-statistics/components/PieChart'
+import LineChart from '../business-data/components/lineChart'
+import TablePop from './components/tablePop'
+import {Register,PaymentAmount,PaymentPay} from '@/api/business.js'
 export default {
   name: "MaintenanceData",
   components: {
     AllCity,
-    SomeCity
+    SomeCity,
+    MapChart,
+    pieChart,
+    LineChart,
+    TablePop
   },
   data() {
     return {
@@ -163,9 +184,11 @@ export default {
       text1:'当前全市所有终端运行异常社区',
       zonglangV: 3000,
       kaijiV:98,
-      time1:2,
-      time2:'1天2',
-      time3:'2天1',
+      time1:'2',
+      time2:'1',
+      time3:'2',
+      dialogTableVisible: false,
+      type: 5,
       allCity: [
         {name:'东城街道社区卫生服务中心',value:'2',code:'HHH3333'},
         {name:'东城街道社区卫生服务中心',value:'2',code:'HHH3333'},
@@ -189,14 +212,57 @@ export default {
         {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
         {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
         {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'}
-      ]
+      ],
+      repairTypeData: [
+        {name:'硬件故障',value:'2'},
+        {name:'自助软件异常',value:'4'},
+        {name:'耗材异常',value:'3'},
+        {name:'HIS异常',value:'1'},
+        {name:'社保平台异常',value:'5'},
+        {name:'其他',value:'4'}
+      ],
+      chartLineData: [],
+      redius: [80,250],
+      gridData: [{
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }],
     }
   },
   created() {
+    this.getData(7,1111100011)
   },
   mounted () {
   },
   methods: {
+    getData (day,officeCode) {
+      Register({
+          officeCode: officeCode,
+          day: day,
+          buzyCode: 1
+        }).then( data => {
+            console.log(data)
+            data.data.buzyInfos.forEach((item,index) =>{
+              let list = {}
+              list.name = item.dateDay
+              list.value = item.count
+              this.chartLineData.push(list)
+            })
+        })
+    },
     chengPage (index) {
      if (index==1){
         this.$router.replace('/graphicStatistics')
@@ -204,6 +270,10 @@ export default {
         this.$router.replace('/businessData')
       }
     },
+    seeTable (index) {
+      this.dialogTableVisible = true
+      this.type = index
+    }
   }
 };
 </script>
@@ -473,6 +543,18 @@ export default {
           padding:40px;
           border:1px solid #387ADA;
           position: relative;
+          .right_bottom_box{
+            display:flex;
+            justify-content:space-between;
+            .pre_box{
+              flex: 1;
+              margin-top: 40px;
+            }
+            .line_box{
+              flex: 1;
+              margin-top: 40px;
+            }
+          }
         }
 
       }

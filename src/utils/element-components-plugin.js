@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import {
-/*  Pagination,
   Dialog,
-  Autocomplete,
+  Table,
+  TableColumn,
+  /* Autocomplete,
+  Pagination,
   Dropdown,
   DropdownMenu,
   DropdownItem,
@@ -24,8 +26,6 @@ import {
   OptionGroup,
   Button,
   ButtonGroup,
-  Table,
-  TableColumn,
   DatePicker,
   TimeSelect,
   TimePicker,
@@ -93,7 +93,7 @@ Vue.use(MetaInfo)
 Vue.use(VueClipboard)
 
 Vue.use(Pagination)
-Vue.use(Dialog)
+
 Vue.use(Autocomplete)
 Vue.use(Dropdown)
 Vue.use(DropdownMenu)
@@ -116,8 +116,6 @@ Vue.use(Option)
 Vue.use(OptionGroup)
 Vue.use(Button)
 Vue.use(ButtonGroup)
-Vue.use(Table)
-Vue.use(TableColumn)
 Vue.use(DatePicker)
 Vue.use(TimeSelect)
 Vue.use(TimePicker)
@@ -172,6 +170,9 @@ Vue.prototype.$alert = MessageBox.alert
 Vue.prototype.$confirm = MessageBox.confirm
 Vue.prototype.$prompt = MessageBox.prompt
 Vue.prototype.$notify = Notification*/
+Vue.use(Dialog)
 Vue.use(Carousel)
 Vue.use(CarouselItem)
+Vue.use(Table)
+Vue.use(TableColumn)
 Vue.prototype.$message = Message

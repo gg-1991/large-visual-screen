@@ -51,7 +51,7 @@
             // 距离边框距离
             grid: {
               left: '3%',
-              right: '4%',
+              right: '6%',
               bottom: '1%',
               containLabel: true
            },

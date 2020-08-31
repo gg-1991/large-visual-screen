@@ -35,6 +35,7 @@
            // 基于准备好的dom，初始化echarts实例
         let myChart = this.$echarts.init(this.$refs.main);
         const colors = this.$props.colors ? param => this.$props.colors[param.dataIndex] : '自适应'
+        myChart.off('click')
         // 指定图表的配置项和数据
         let option = {
           series: [
@@ -72,6 +73,12 @@
 
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
+        //图上添加点击事件
+        let that = this
+        function pieConsole(param) {
+           that.$emit('up', 4)
+        }
+        myChart.on("click", pieConsole);
       }
     },
     watch:{
@@ -83,7 +90,6 @@
         deep:true
       }
     },
-    
   }
 </script>
 <style lang="scss" scoped>
