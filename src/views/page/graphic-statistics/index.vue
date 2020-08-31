@@ -6,7 +6,6 @@
           <ul>
             <li v-for="(item,index) in btnText" :key="index" @click="changeTime(item.value, index)" :class="{active: index === activeIndex }">{{item.label}}</li>
           </ul>
-          <!-- <span  :key='index' :class="[index==0?'btn1':'btn2',activeClass==index?'active':'']"  v-for="(item,index) in btnText" @click="changeTime(index)">{{item.text}}</span> -->
         </div>
         <div class="list2">
           <span class="list2_tj">整体图形统计</span>
@@ -33,12 +32,29 @@
         </div>
         <div class="content-top-area area-center">
           <box-area :height="'1000px'">
-            <div>
+            <div class="map-content">
               <div class="title">
                 <p>各乡镇/街道缴费量分布情况</p>
               </div>
-              <map-chart></map-chart>
-              <!-- <pictorial-line v-if="categoryData.length> 0" :categoryData="categoryData" :height="'900px'" :chartId="'chartMap'"></pictorial-line> -->
+              <map-chart :chartData="officeInfos"></map-chart>
+              <ul class="map-content-tip">
+                <li>
+                  <img src="../../../assets/images/legend1.png" alt="">
+                  <p>缴费量1~10万</p>
+                </li>
+                <li>
+                  <img src="../../../assets/images/legend2.png" alt="">
+                  <p>缴费量10~50万</p>
+                </li>
+                <li>
+                  <img src="../../../assets/images/legend3.png" alt="">
+                  <p>缴费量50~100万</p>
+                </li>
+                <li>
+                  <img src="../../../assets/images/legend4.png" alt="">
+                  <p>缴费量100万以上</p>
+                </li>
+              </ul>
             </div>
           </box-area>
         </div>
@@ -108,7 +124,7 @@ import progressBar from './components/progressBar'
 import pieChart from './components/PieChart'
 import barChart from './components/barChart'
 import mapChart from '../maintenance-data/components/mapChart'
-import { loadOfficeRegistrationTop, loadSignInTypeList, loadOfficeTransList, loadOfficeRegistrationRatio, loadOfficeTransTypeRatio } from '@/api/graphic.js'
+import { loadOfficeRegistrationTop, loadSignInTypeList, loadOfficeTransList, loadOfficeRegistrationRatio, loadOfficeTransTypeRatio, loadOfficeTotalTransInfo } from '@/api/graphic.js'
 
 export default {
   name: "GraphicStatistics",
@@ -162,6 +178,8 @@ export default {
       ],
       transTypeChartXData: [],
       redius: [100,250],
+      //  全部乡镇/街道缴费情况
+      officeInfos: []
 
     }
   },
@@ -175,6 +193,7 @@ export default {
       this.getOfficeTransList()
       this.getOfficeRegistrationRatio()
       this.getOfficeTransTypeRatio()
+      this.getOfficeTotalTransInfo()
     },
     getTop10List(){
       const params = {
@@ -299,6 +318,26 @@ export default {
             this.transAccountTypes.push(obj)
           })
           
+        }
+      })
+    },
+    getOfficeTotalTransInfo(){
+      const params = {
+        day: this.day
+      }
+      this.officeInfos = []
+      loadOfficeTotalTransInfo(params).then(res => {
+        if(res.code === 200){
+          const data = res.data.officeInfos || []
+          data.forEach(item => {
+            let obj = {
+              name: item.officeName,
+              value: item.paymentTotalAmt,
+              valueRegister: item.registrationCount,
+              amtArea: item.amtArea
+            }
+            this.officeInfos.push(obj)
+          })
         }
       })
     },
@@ -465,6 +504,31 @@ export default {
       color:rgba(104,132,160,1);
       left: 60px;
       bottom: 0;
+    }
+  }
+  .map-content{
+    position: relative;
+    &-tip{
+      position: absolute;
+      bottom: 40px;
+      left: 60px;
+      display: flex;
+      width: 720px;
+      flex-wrap: wrap;
+      li{
+        width: 360px;
+        display: flex;
+        align-items: center;
+        img{
+          padding-right: 15px;
+        }
+        p{
+          font-size: 28px;
+          font-family: Alibaba PuHuiTi;
+          font-weight: 400;
+          color: #B1D2E9;
+        }
+      }
     }
   }
   

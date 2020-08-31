@@ -1,0 +1,239 @@
+{
+  "code": 200,
+  "message": "操作成功",
+  "data": {
+    "officeInfos": [
+      {
+        "paymentTotalAmt": 100000,
+        "registrationCount": 500,
+        "officeCode": "100000036",
+        "officeName": "高埗镇",
+        "amtArea": "3"
+      },
+      {
+        "paymentTotalAmt": 2540,
+        "registrationCount": 100,
+        "officeCode": "100000036",
+        "officeName": "道滘镇",
+        "amtArea": "2"
+      },
+      {
+        "paymentTotalAmt": 52140,
+        "registrationCount": 1200,
+        "officeCode": "100000036",
+        "officeName": "桥头镇",
+        "amtArea": "1"
+      },
+      {
+        "paymentTotalAmt": 52056,
+        "registrationCount": 10200,
+        "officeCode": "100000036",
+        "officeName": "东城街道",
+        "amtArea": "3"
+      },
+      {
+        "paymentTotalAmt": 453200,
+        "registrationCount": 10250,
+        "officeCode": "100000036",
+        "officeName": "南城街道",
+        "amtArea": "3"
+      },
+      {
+        "paymentTotalAmt": 4250,
+        "registrationCount": 410,
+        "officeCode": "100000036",
+        "officeName": "万江街道",
+        "amtArea": "3"
+      },
+      {
+        "paymentTotalAmt": 425404,
+        "registrationCount": 15320,
+        "officeCode": "100000036",
+        "officeName": "莞城街道",
+        "amtArea": "3"
+      },
+      {
+        "paymentTotalAmt": 425802,
+        "registrationCount": 2540,
+        "officeCode": "100000036",
+        "officeName": "石碣镇",
+        "amtArea": "3"
+      },
+      {
+        "paymentTotalAmt": 45053,
+        "registrationCount": 1430,
+        "officeCode": "100000036",
+        "officeName": "石龙镇",
+        "amtArea": "3"
+      },
+      {
+        "paymentTotalAmt": 14500,
+        "registrationCount": 520,
+        "officeCode": "100000036",
+        "officeName": "茶山镇",
+        "amtArea": "3"
+      },
+      {
+        "paymentTotalAmt": 1530,
+        "registrationCount": 10,
+        "officeCode": "100000036",
+        "officeName": "石排镇",
+        "amtArea": "3"
+      },
+      {
+        "paymentTotalAmt": 14570,
+        "registrationCount": 100,
+        "officeCode": "100000036",
+        "officeName": "企石镇",
+        "amtArea": "4"
+      },
+      {
+        "paymentTotalAmt": 487210,
+        "registrationCount": 1370,
+        "officeCode": "100000036",
+        "officeName": "横沥镇",
+        "amtArea": "4"
+      },
+      {
+        "paymentTotalAmt": 4245380,
+        "registrationCount": 4505,
+        "officeCode": "100000036",
+        "officeName": "谢岗镇",
+        "amtArea": "3"
+      },
+      {
+        "paymentTotalAmt": 45501,
+        "registrationCount": 2510,
+        "officeCode": "100000036",
+        "officeName": "东坑镇",
+        "amtArea": "3"
+      },
+      {
+        "paymentTotalAmt": 450358,
+        "registrationCount": 3510,
+        "officeCode": "100000036",
+        "officeName": "常平镇",
+        "amtArea": "3"
+      },
+      {
+        "paymentTotalAmt": 2450132,
+        "registrationCount": 45740,
+        "officeCode": "100000036",
+        "officeName": "寮步镇",
+        "amtArea": "4"
+      },
+      {
+        "paymentTotalAmt": 4540.47,
+        "registrationCount": 120,
+        "officeCode": "100000036",
+        "officeName": "樟木头镇",
+        "amtArea": "3"
+      },
+      {
+        "paymentTotalAmt": 25402,
+        "registrationCount": 420,
+        "officeCode": "100000036",
+        "officeName": "大朗镇",
+        "amtArea": "3"
+      },
+      {
+        "paymentTotalAmt": 12540,
+        "registrationCount": 420,
+        "officeCode": "100000036",
+        "officeName": "清溪镇",
+        "amtArea": "1"
+      },
+      {
+        "paymentTotalAmt": 12520,
+        "registrationCount": 140,
+        "officeCode": "100000036",
+        "officeName": "黄江镇",
+        "amtArea": "3"
+      },
+      {
+        "paymentTotalAmt": 43500,
+        "registrationCount": 4250,
+        "officeCode": "100000036",
+        "officeName": "塘厦镇",
+        "amtArea": "1"
+      },
+      {
+        "paymentTotalAmt": 12460,
+        "registrationCount": 4320,
+        "officeCode": "100000036",
+        "officeName": "凤岗镇",
+        "amtArea": "3"
+      },
+      {
+        "paymentTotalAmt": 48077,
+        "registrationCount": 4501,
+        "officeCode": "100000036",
+        "officeName": "大岭山镇",
+        "amtArea": "3"
+      },
+      {
+        "paymentTotalAmt": 45450,
+        "registrationCount": 6560,
+        "officeCode": "100000036",
+        "officeName": "长安镇",
+        "amtArea": "1"
+      },
+      {
+        "paymentTotalAmt": 5460,
+        "registrationCount": 650,
+        "officeCode": "100000036",
+        "officeName": "虎门镇",
+        "amtArea": "3"
+      },
+      {
+        "paymentTotalAmt": 544604,
+        "registrationCount": 4570,
+        "officeCode": "100000036",
+        "officeName": "厚街镇",
+        "amtArea": "1"
+      },
+      {
+        "paymentTotalAmt": 532530,
+        "registrationCount": 1240,
+        "officeCode": "100000036",
+        "officeName": "沙田镇",
+        "amtArea": "3"
+      },
+      {
+        "paymentTotalAmt": 53650,
+        "registrationCount": 1300,
+        "officeCode": "100000036",
+        "officeName": "洪梅镇",
+        "amtArea": "3"
+      },
+      {
+        "paymentTotalAmt": 35410,
+        "registrationCount": 350,
+        "officeCode": "100000036",
+        "officeName": "麻涌镇",
+        "amtArea": "1"
+      },
+      {
+        "paymentTotalAmt": 35430,
+        "registrationCount": 370,
+        "officeCode": "100000036",
+        "officeName": "望牛墩镇",
+        "amtArea": "3"
+      },
+      {
+        "paymentTotalAmt": 4540,
+        "registrationCount": 400,
+        "officeCode": "100000036",
+        "officeName": "中堂镇",
+        "amtArea": "3"
+      },
+      {
+        "paymentTotalAmt": 65840,
+        "registrationCount": 4530,
+        "officeCode": "100000036",
+        "officeName": "松山湖",
+        "amtArea": "1"
+      }
+    ]
+  }
+}

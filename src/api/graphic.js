@@ -58,3 +58,14 @@ export function loadOfficeTransTypeRatio(data){
     data
   })
 }
+/**
+ * 4.1.1.查询全部乡镇/街道缴费分布情况(全市地图)
+ * @param {*} data 
+ */
+export function loadOfficeTotalTransInfo(data){
+  return request({
+    url: 'office/loadOfficeTotalTransInfo',
+    method: 'post',
+    data
+  })
+}
