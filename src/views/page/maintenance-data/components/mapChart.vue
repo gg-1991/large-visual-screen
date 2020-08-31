@@ -1,6 +1,6 @@
 <template>
   <div class="mapChart">
-    <div ref="main" style="width: 100%;height: 840px"></div>
+    <div ref="main" style="width: 100%;height: 860px"></div>
   </div>
 </template>
 <script>
@@ -24,8 +24,8 @@
       drawLine() {
      
      //引入市区json文件
-     var uploadedDataURL = require('../../../../mock/dongguan.json');
-
+     var uploadedDataURL = require('../../../../assets/map/dgMap.json');
+    console.log(uploadedDataURL)
     //  $.getJSON(uploadedDataURL, function(geoJson) {
          this.$echarts.registerMap('dongguan', uploadedDataURL);
          let myChart = this.$echarts.init(this.$refs.main);
