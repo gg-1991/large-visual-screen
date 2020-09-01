@@ -25,6 +25,17 @@ export default {
       size:2
     }
   },
+  watch:{
+    listData:{
+      handler:function(newValue,oldValue){
+        this.list = newValue
+        this.setData()
+      },
+      immediate:true,
+      deep:true
+
+   }
+  },
   created() {
     this.setData()
   },

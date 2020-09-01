@@ -2,7 +2,7 @@
   <div>
      <el-carousel trigger="click" height="720px" arrow="never" :interval='time' @change="((next, pre) => {setNewData(next, pre)})">
       <el-carousel-item v-for="(crad,index2 in size" :key="index2">
-        <div :class="[index==0?'item':'item',item.value==2?'active':'']" v-for="(item,index) in itemList">
+        <div :class="[index==0?'item':'item',item.deviceRunStatus!=='0' ? 'active' : '']" v-for="(item,index) in itemList">
           <span class="yuan"></span>
           <span class="text">{{item.name}}</span>
            <span class="unit">{{item.value}}</span>
@@ -25,6 +25,17 @@ export default {
       itemList:[],
       size:2
     }
+  },
+  watch:{
+    listData:{
+      handler:function(newValue,oldValue){
+        this.list = newValue
+        this.setData()
+      },
+      immediate:true,
+      deep:true
+
+   }
   },
   created() {
     this.setData()

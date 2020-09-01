@@ -50,10 +50,10 @@
                </div>
             </div>
             <div style="margin-top: 40px;margin-bottom: 28px;position: relative;font-size: 36px;">{{text1}}
-            <span class="back">返回全市情况</span>
+            <span class="back" @click="seeAllCity">返回全市情况</span>
             </div>
-            <all-city :listData="allCity" v-if="false"></all-city>
-            <some-city :listData="allCity"></some-city>
+            <all-city :listData="allCityList" v-if="isAll"></all-city>
+            <some-city :listData="someCityList" v-else></some-city>
           </div>
           <div class="left_two">
             <img :src="leftUp" class="leftUp" alt="">
@@ -171,7 +171,7 @@ import MapChart from './components/mapChart'
 import pieChart from '../graphic-statistics/components/PieChart'
 import LineChart from '../business-data/components/lineChart'
 import TablePop from './components/tablePop'
-import {RunStatus,DisposeInfo,OrderRatio,OrderCreateCollect} from '@/api/maintenance.js'
+import {RunStatus,DisposeInfo,OrderRatio,OrderCreateCollect,DeviceExceInfo,RunStatusInfoList} from '@/api/maintenance.js'
 export default {
   name: "MaintenanceData",
   components: {
@@ -206,30 +206,9 @@ export default {
       time3_3: 0,
       dialogTableVisible: false,
       type: 5,
-      allCity: [
-        {name:'东城街道社区卫生服务中心',value:'2',code:'HHH3333'},
-        {name:'东城街道社区卫生服务中心',value:'2',code:'HHH3333'},
-        {name:'东城街道社区卫生服务中心',value:'2',code:'HHH3333'},
-        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
-        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
-        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
-        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
-        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
-        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
-        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
-        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
-        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
-        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
-        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
-        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
-        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
-        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
-        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
-        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
-        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
-        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
-        {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'}
-      ],
+      isAll:true,
+      allCityList: [],
+      someCityList: [],
       repairTypeData: [],
       chartLineData: [],
       redius: [80,250],
@@ -263,6 +242,8 @@ export default {
       this.getDisposeInfoData(7,'')
       this.getOrderRatioData(7, '')
       this.getOrderCreateCollectData(7,'')
+      this.getDeviceExceInfoData('')
+      this.getRunStatusInfoListData('')
     },
     getRunStatusData (officeCode) {
       RunStatus({
@@ -270,6 +251,45 @@ export default {
       }).then( data => {
         this.zonglangV = data.data.deviceTotalRunCount
         this.kaijiV = data.data.deviceTotalRunRatio
+      })
+    },
+     getDeviceExceInfoData (officeCode) {
+      DeviceExceInfo({
+        officeCode: officeCode
+      }).then( data => {
+        this.allCityList = []
+        data.data.deviceExceList.forEach((item,index) => {
+          let list = {}
+          list.name = item.officeName
+          list.value = item.deviceExceCount
+          this.allCityList.push(list)
+        })
+      })
+    },
+    // 查询具体地区数据
+    getRunStatusInfoListData (officeCode) {
+      RunStatusInfoList({
+        officeCode: officeCode
+      }).then( data => {
+        this.someCityList = []
+        data.data.deviceRundataStatusList.forEach((item,index) => {
+          let list = {}
+          list.name = item.officeName
+          list.code = '终端号' + item.deviceNo
+          list.deviceRunStatus = item.deviceRunStatus
+          if (item.deviceRunStatus == '0') {
+            list.value = '正常'
+          } else if (item.deviceRunStatus == '2') {
+            list.value = '暂停'
+          } else if (item.deviceRunStatus == '3') {
+            list.value = '异常'
+          } else if (item.deviceRunStatus == '4') {
+            list.value = '关机'
+          } else{
+            list.value = '重启'
+          }
+          this.someCityList.push(list)
+        })
       })
     },
     getDisposeInfoData (day,officeCode) {
@@ -319,6 +339,10 @@ export default {
       }else{
         this.$router.replace('/businessData')
       }
+    },
+    // 返回全市
+    seeAllCity () {
+      this.isAll = true
     },
     seeTable (index) {
       this.dialogTableVisible = true
