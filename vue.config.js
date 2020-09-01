@@ -12,6 +12,9 @@ const path = require('path')
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 // 引入webpack
 const webpack = require('webpack');
+// gzip打包压缩
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const productionGzipExtensions = ['js', 'css']
 // 定义个数组来收集需要注入要node模块的插件
 const plugins = []
 // 常量
@@ -26,11 +29,13 @@ if (process.env.NODE_ENV === 'production') {
         network: ['*'],
         output: 'manifest.appcache'
     }))
-    plugins.push(new webpack.ProvidePlugin({
-            $:"jquery",
-            jQuery:"jquery",
-            "windows.jQuery":"jquery"
-          }))
+    // 下面是下载的插件的配置
+    plugins.push(new CompressionWebpackPlugin({
+        algorithm: 'gzip',
+        test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+        threshold: 10240,
+        minRatio: 0.8
+    }))
 }
 // 本地开发环境
 if (process.env.NODE_ENV === 'development') {
@@ -53,10 +58,12 @@ if (process.env.NODE_ENV === 'development') {
             reload: true
         }
     ))
-    plugins.push(new webpack.ProvidePlugin({
-            $:"jquery",
-            jQuery:"jquery",
-            "windows.jQuery":"jquery"
+      // 下面是下载的插件的配置
+    plugins.push(new CompressionWebpackPlugin({
+        algorithm: 'gzip',
+        test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+        threshold: 10240,
+        minRatio: 0.8
     }))
 }
 
