@@ -22,7 +22,8 @@ export const DeviceExceInfo = params => request.post('device/loadDeviceExceInfo'
  * url: /device/loadDeviceRunStatusInfoList
  * @param {}
  */
-export const RunStatusInfoList = params => request.post('device/loadDeviceRunStatusInfoList', params)
+// export const RunStatusInfoList = params => request.post('device/loadDeviceRunStatusInfoList', params)
+export const RunStatusInfoList = params => request.post('device/boadDeviceRunStatusInfoList', params)
 
 /****
  *查看保修单近期的处理情况

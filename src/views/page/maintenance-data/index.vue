@@ -121,7 +121,7 @@
                 <div class="map-content-title">
                   <p>当前各乡镇/街道终端运行情况</p>
                 </div>
-                <map-chart></map-chart>
+                <map-chart :type="'yunwei'" :chartData="deviceRunStatusList" @mapClick="mapClick"></map-chart>
                 <ul class="map-content-tip">
                   <li>
                     <img src="../../../assets/images/legend1.png" alt="">
@@ -192,7 +192,7 @@ import MapChart from './components/mapChart'
 import pieChart from '../graphic-statistics/components/PieChart'
 import LineChart from '../business-data/components/lineChart'
 import TablePop from './components/tablePop'
-import {RunStatus,DisposeInfo,OrderRatio,OrderCreateCollect,DeviceExceInfo,RunStatusInfoList} from '@/api/maintenance.js'
+import {RunStatus,DisposeInfo,OrderRatio,OrderCreateCollect,DeviceExceInfo,RunStatusInfoList } from '@/api/maintenance.js'
 import progressBar from './components/progressBar'
 import { loadOfficeDeviceFaultRatio } from '@/api/graphic.js'
 import boxArea from '@/components/box'
@@ -212,6 +212,7 @@ export default {
     return {
       day: 7,
       officeTroubleList: [],
+      deviceRunStatusList: [],
       leftUp:leftUp,
       leftDown:leftDown,
       rightDown:rightDown,
@@ -273,6 +274,7 @@ export default {
       this.getOrderCreateCollectData(7,'')
       this.getDeviceExceInfoData('')
       this.getRunStatusInfoListData('')
+      this.getDeviceRunStatus()
     },
     getRunStatusData (officeCode) {
       RunStatus({
@@ -377,6 +379,9 @@ export default {
       this.dialogTableVisible = true
       this.type = index
     },
+    /**
+     * 近7天乡镇/街道故障率TOP10
+     */
     getTroubleDevList(){
       const params = {
         "officeCode": "441900000000",
@@ -388,6 +393,40 @@ export default {
           this.officeTroubleList = res.data.officeDeviceFaultRatioList || []
         }
       })
+    },
+    /**
+     * 当前各乡镇/街道终端运行情况
+     */
+    getDeviceRunStatus(){
+      const params = {
+        officeCode: '441900000000' // 社保局机构编码
+      }
+      this.deviceRunStatusList = []
+      RunStatus(params).then(res => {
+        if(res.code === 200){
+          const data = res.data.deviceRunStatusList
+          data.forEach(item => {
+            let obj = {
+              name: item.officeName,
+              value: item.deviceCount,
+              subValue: item.deviceRunCount,
+              area: item.deviceRunArea,
+              officeCode: item.officeCode
+            }
+            this.deviceRunStatusList.push(obj)
+          })
+        }
+      })
+    },
+    /**
+     * 点击地图事件
+     */
+    mapClick(data){
+      console.log(data)
+      if(!data) return
+      //  officeCode : data.officeCode, 通过officeCode 联动左侧终端运行情况
+      this.getRunStatusInfoListData(data.officeCode)
+      this.isAll = false
     }
   }
 };

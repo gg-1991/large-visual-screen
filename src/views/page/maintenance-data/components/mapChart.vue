@@ -15,7 +15,8 @@ export default {
         default: () => {
             return []
         }
-    }
+    },
+    type: String
   },
   data() {
     return {};
@@ -52,9 +53,10 @@ export default {
             res.push({
               name: data[i].name,
               value: geoCoord.concat(data[i].value),
-              symbol: toolTipSymbol[data[i].amtArea],
+              symbol: toolTipSymbol[data[i].area],
               paymentTotalAmt: formatMoney(data[i].value),
-              registrationCount: formatMoney(data[i].valueRegister)
+              registrationCount: formatMoney(data[i].subValue),
+              officeCode: data[i].officeCode
             });
           }
         }
@@ -77,9 +79,13 @@ export default {
             if(!params.data) return ''
             let res = "";
             let name = params.data.name;
-            let paymentTotalAmt = formatMoney(params.data.value);
-            let registrationCount = formatMoney(params.data.valueRegister);
-            res = `<span>${name}</span> <br/> <span>挂号量:${registrationCount}</span><br/> <span>缴费量:${paymentTotalAmt}元</span>`;
+            let value = formatMoney(params.data.value);
+            let subValue = formatMoney(params.data.subValue);
+            if(this.type === 'yunwei'){
+              res = `<span>${name}</span> <br/> <span>运行数量: ${subValue}台</span><br/> <span>总数量: ${value}台</span>`;
+            } else {
+              res = `<span>${name}</span> <br/> <span>挂号量: ${subValue}</span><br/> <span>缴费量: ${value}元</span>`;
+            }
             return res;
           }
         },
@@ -192,8 +198,9 @@ export default {
         ]
       };
       myChart.setOption(option);
-      myChart.on('click', function (params) {
+      myChart.on('click', (params) => {
         console.log(params);
+        this.$emit('mapClick', params.data)
       });
     }
   },

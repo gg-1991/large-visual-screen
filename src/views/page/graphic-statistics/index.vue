@@ -333,8 +333,9 @@ export default {
             let obj = {
               name: item.officeName,
               value: item.paymentTotalAmt,
-              valueRegister: item.registrationCount,
-              amtArea: item.amtArea
+              subValue: item.registrationCount,
+              area: item.amtArea,
+              officeCode: item.officeCode
             }
             this.officeInfos.push(obj)
           })

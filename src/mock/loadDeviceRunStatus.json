@@ -2,24 +2,23 @@
   "code": 200,
   "message": "查询成功",
   "data": {
-    "deviceRunStatusList":[
-    {
-      "officeCode": "100000036",
-      "officeName": "高埗镇",
-      "deviceCount":10,
-      "deviceRunCount":7,
-      "deviceRunArea":"4"
-    },
-    {
-      "officeCode": "100000036",
-      "officeName": "东城",
-      "deviceCount":10,
-      "deviceRunCount":7,
-      "deviceRunArea":"4"
-    }
-  ],
-"deviceTotalRunCount":400,
-"deviceTotalRunRatio":90.00
+    "deviceRunStatusList": [
+      {
+        "officeCode": "100000036",
+        "officeName": "高埗镇",
+        "deviceCount": 10,
+        "deviceRunCount": 7,
+        "deviceRunArea": "4"
+      },
+      {
+        "officeCode": "100000036",
+        "officeName": "东城",
+        "deviceCount": 10,
+        "deviceRunCount": 7,
+        "deviceRunArea": "4"
+      }
+    ],
+    "deviceTotalRunCount": 400,
+    "deviceTotalRunRatio": 90.00
   }
-
 }
