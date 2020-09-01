@@ -54,8 +54,8 @@ export default {
               name: data[i].name,
               value: geoCoord.concat(data[i].value),
               symbol: toolTipSymbol[data[i].area],
-              paymentTotalAmt: formatMoney(data[i].value),
-              registrationCount: formatMoney(data[i].subValue),
+              total: formatMoney(data[i].value),
+              subValue: formatMoney(data[i].subValue),
               officeCode: data[i].officeCode
             });
           }
@@ -174,13 +174,19 @@ export default {
             label: {
               normal: {
                 show: true,
-                formatter: "{b}",
                 position: "bottom",
                 distance: 5,
                 color: "#fff",
                 fontSize: 20,
                 fontWeight: 400,
-                fontFamily: 'Alibaba PuHuiTi'
+                fontFamily: 'Alibaba PuHuiTi',
+                formatter: (params) => {
+                  const labelData = params.data
+                  if(this.type === 'yunwei'){
+                    return `${labelData.name}\n ${labelData.subValue}/${labelData.total}`
+                  }
+                  return labelData.name
+                }
               }
             },
             //  itemStyle: {
