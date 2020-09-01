@@ -116,37 +116,58 @@
        <div class="right_box">
          <div class="right_top">
            <div class="right_top_left">
-              <img :src="leftUp" class="leftUp" alt="">
-              <img :src="leftDown" class="leftDown" alt="">
-              <img :src="rightUp" class="rightUp" alt="">
-              <img :src="rightDown" class="rightDown" alt="">
-              <chart-title title="当前各乡镇/街道终端运行情况"></chart-title>
-              <map-chart></map-chart>
+            <box-area :height="'1000px'">
+              <div class="map-content">
+                <div class="map-content-title">
+                  <p>当前各乡镇/街道终端运行情况</p>
+                </div>
+                <map-chart></map-chart>
+                <ul class="map-content-tip">
+                  <li>
+                    <img src="../../../assets/images/legend1.png" alt="">
+                    <p>开机率90%以下</p>
+                  </li>
+                  <li>
+                    <img src="../../../assets/images/legend2.png" alt="">
+                    <p>开机率90-95%</p>
+                  </li>
+                  <li>
+                    <img src="../../../assets/images/legend3.png" alt="">
+                    <p>开机率95-99%</p>
+                  </li>
+                  <li>
+                    <img src="../../../assets/images/legend4.png" alt="">
+                    <p>开机率100%</p>
+                  </li>
+                </ul>
+              </div>
+            </box-area>
            </div>
             <div class="right_top_right">
-              <img :src="leftUp" class="leftUp" alt="">
-              <img :src="leftDown" class="leftDown" alt="">
-              <img :src="rightUp" class="rightUp" alt="">
-              <img :src="rightDown" class="rightDown" alt="">
-              <chart-title title="近7天乡镇/街道故障率TOP10"></chart-title>
+              <box-area :height="'1000px'">
+                <div class="map-content-title">
+                  <p>近7天乡镇/街道故障率TOP10</p>
+                </div>
+                <progress-bar v-if="officeTroubleList.length > 0" :officeTroubleList="officeTroubleList"></progress-bar>
+              </box-area>
             </div>
          </div>
          <div class="right_bottom">
-            <img :src="leftUp" class="leftUp" alt="">
-            <img :src="leftDown" class="leftDown" alt="">
-            <img :src="rightUp" class="rightUp" alt="">
-            <img :src="rightDown" class="rightDown" alt="">
-            <chart-title title="近7天报修单情况"></chart-title>
-            <div class="right_bottom_box">
-              <div class="pre_box">
-                <div style="margin-bottom: 40px; font-size: 36px">近7天报修单类型占比</div>
-                <pie-chart v-if="repairTypeData.length > 0" :chartData="repairTypeData" :colors="['#9218DC', '#8559FF', '#697EFF', '#4C97F7', '#50D4FF', '#67EBFF']" :redius='redius' name="" @up="seeTable"/>
+            <box-area :height="'900px'">
+              <div class="map-content-title">
+                <p>近7天报修单情况</p>
               </div>
-              <div class="line_box">
-                <div style="margin-bottom: 40px;font-size: 36px;">近7天报修单提交数量统计</div>
-                <line-chart unit="单位：个"  :isMouth="false"  :chartData="chartLineData" :valueColor="['#4492FF']" :colors="['#154871','#0B093C']"/>
+              <div class="right_bottom_box">
+                <div class="pre_box">
+                  <div style="margin-bottom: 40px; font-size: 36px">近7天报修单类型占比</div>
+                  <pie-chart v-if="repairTypeData.length > 0" :chartData="repairTypeData" :colors="['#9218DC', '#8559FF', '#697EFF', '#4C97F7', '#50D4FF', '#67EBFF']" :redius='redius' name="" @up="seeTable"/>
+                </div>
+                <div class="line_box">
+                  <div style="margin-bottom: 40px;font-size: 36px;">近7天报修单提交数量统计</div>
+                  <line-chart unit="单位：个"  :isMouth="false"  :chartData="chartLineData" :valueColor="['#4492FF']" :colors="['#154871','#0B093C']"/>
+                </div>
               </div>
-            </div>
+            </box-area>
          </div>
        </div>
      </div>
@@ -172,6 +193,9 @@ import pieChart from '../graphic-statistics/components/PieChart'
 import LineChart from '../business-data/components/lineChart'
 import TablePop from './components/tablePop'
 import {RunStatus,DisposeInfo,OrderRatio,OrderCreateCollect,DeviceExceInfo,RunStatusInfoList} from '@/api/maintenance.js'
+import progressBar from './components/progressBar'
+import { loadOfficeDeviceFaultRatio } from '@/api/graphic.js'
+import boxArea from '@/components/box'
 export default {
   name: "MaintenanceData",
   components: {
@@ -180,10 +204,14 @@ export default {
     MapChart,
     pieChart,
     LineChart,
-    TablePop
+    TablePop,
+    progressBar,
+    boxArea
   },
   data() {
     return {
+      day: 7,
+      officeTroubleList: [],
       leftUp:leftUp,
       leftDown:leftDown,
       rightDown:rightDown,
@@ -233,6 +261,7 @@ export default {
   },
   created() {
     this.getData(7,1111)
+    this.getTroubleDevList()
   },
   mounted () {
   },
@@ -258,7 +287,7 @@ export default {
         officeCode: officeCode
       }).then( data => {
         this.allCityList = []
-        data.data.deviceExceList.forEach((item,index) => {
+        data.data.deviceExceList.forEach((item) => {
           let list = {}
           list.name = item.officeName
           list.value = item.deviceExceCount
@@ -311,7 +340,7 @@ export default {
         day: day
       }).then( data => {
         this.repairTypeData = []
-        data.data.maintenanceOrderRatioList.forEach((item,index) =>{
+        data.data.maintenanceOrderRatioList.forEach((item) =>{
           let list = {}
           list.name = item.faultName
           list.value = item.faultCount
@@ -325,7 +354,7 @@ export default {
         day: day
       }).then( data => {
         this.chartLineData = []
-        data.data.maintenanceOrderCollectList.forEach((item,index) =>{
+        data.data.maintenanceOrderCollectList.forEach((item) =>{
           let list = {}
           list.name = item.dateDay
           list.value = item.count
@@ -347,11 +376,23 @@ export default {
     seeTable (index) {
       this.dialogTableVisible = true
       this.type = index
+    },
+    getTroubleDevList(){
+      const params = {
+        "officeCode": "441900000000",
+        "day": this.day,
+        "officeNumber": 10
+      }
+      loadOfficeDeviceFaultRatio(params).then(res => {
+        if(res.code === 200){
+          this.officeTroubleList = res.data.officeDeviceFaultRatioList || []
+        }
+      })
     }
   }
 };
 </script>
-<style scoped >
+<style scoped lang="scss">
   /deep/ .el-carousel__button{
     width: 30px;
     height: 30px;
@@ -605,22 +646,14 @@ export default {
           margin-bottom: 20px;
           .right_top_left{
              flex: 1;
-             padding:40px;
-             border:1px solid #387ADA;
-             margin-right:20px;
-             position: relative;
+             padding-right: 10px;
           }
           .right_top_right{
              flex: 1;
-             padding:40px;
-             border:1px solid #387ADA;
-             position: relative;
+             padding-left: 10px;
           }
         }
         .right_bottom{
-          height: 760px;
-          padding:40px;
-          border:1px solid #387ADA;
           position: relative;
           .right_bottom_box{
             display:flex;
@@ -636,6 +669,51 @@ export default {
           }
         }
 
+      }
+    }
+  }
+  .map-content{
+    position: relative;
+    &-tip{
+      position: absolute;
+      bottom: 40px;
+      left: 60px;
+      display: flex;
+      width: 720px;
+      flex-wrap: wrap;
+      li{
+        width: 360px;
+        display: flex;
+        align-items: center;
+        img{
+          padding-right: 15px;
+        }
+        p{
+          font-size: 28px;
+          font-family: Alibaba PuHuiTi;
+          font-weight: 400;
+          color: #B1D2E9;
+        }
+      }
+    }
+    &-title{
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #104470;
+      margin: 0 40px;
+      height: 95px;
+      align-items: center;
+      p:nth-child(1){
+        color: #B2D3EA;
+        font-size: 40px;
+        font-weight: 400;
+        font-family:Alibaba PuHuiTi;
+      }
+      p:nth-child(2){
+        font-size:24px;
+        font-family:Alibaba PuHuiTi;
+        font-weight:400;
+        color:rgba(104,132,160,1);
       }
     }
   }

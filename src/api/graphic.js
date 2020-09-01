@@ -69,3 +69,15 @@ export function loadOfficeTotalTransInfo(data){
     data
   })
 }
+/**
+ * 查看乡镇/街道故障率排名
+ * @param {*} data 
+ */
+export function loadOfficeDeviceFaultRatio(data){
+  return request({
+    url: 'device/loadOfficeDeviceFaultRatio',
+    method: 'post',
+    data
+  })
+}
+

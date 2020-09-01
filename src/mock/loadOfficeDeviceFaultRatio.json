@@ -1,0 +1,68 @@
+{
+  "code": 200,
+  "message": "查询成功",
+  "data": {
+    "officeDeviceFaultRatioList": [
+      {
+        "officeName": "东城社区",
+        "officeCode": "441900003000",
+        "faultCount": 100,
+        "faultRatio": 68.50
+      },
+      {
+        "officeName": "寮步镇",
+        "officeCode": "441900003000",
+        "faultCount": 100,
+        "faultRatio": 60.50
+      },
+      {
+        "officeName": "寮步镇",
+        "officeCode": "441900003000",
+        "faultCount": 100,
+        "faultRatio": 55
+      },
+      {
+        "officeName": "东城社区",
+        "officeCode": "441900003000",
+        "faultCount": 100,
+        "faultRatio": 53.5
+      },
+      {
+        "officeName": "寮步镇",
+        "officeCode": "441900003000",
+        "faultCount": 100,
+        "faultRatio": 48.2
+      },
+      {
+        "officeName": "寮步镇",
+        "officeCode": "441900003000",
+        "faultCount": 100,
+        "faultRatio": 40.2
+      },
+      {
+        "officeName": "东城社区",
+        "officeCode": "441900003000",
+        "faultCount": 100,
+        "faultRatio": 33
+      },
+      {
+        "officeName": "寮步镇",
+        "officeCode": "441900003000",
+        "faultCount": 100,
+        "faultRatio": 30
+      },
+      {
+        "officeName": "寮步镇",
+        "officeCode": "441900003000",
+        "faultCount": 100,
+        "faultRatio": 28
+      },
+      {
+        "officeName": "东城社区",
+        "officeCode": "441900003000",
+        "faultCount": 100,
+        "faultRatio": 19
+      }
+    ]
+  }
+}

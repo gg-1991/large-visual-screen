@@ -32,8 +32,6 @@ export default {
     drawLine() {
       if(this.chartData.length === 0) return
       const data = this.chartData
-      
-      console.log(data)
       let toolTipSymbol = {
         '1': "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAACeUlEQVRIia2X32pTQRDGfzk5am0lRDFWRWttva2hF1J6ry/hq/kkBW9LUS+KSq/EGI0oJWI11lAlf2TKd8pxmU22aT9YOOyZnW9mdnZ2tvL02YAEVICaxgJwEci1zBT8BX4DPY3xNJX5lP9VYBFoTJC9oGEG3ZAhXWAfGM5CfA24I6Wngem8BVwHPgPfU4ktrHfl5VlgBt8HrgCdMPyZQ7pyDqRlNKSzMsljC209osCMXNa4CcwDI+AQ+Aa0NUbO2rqi+Mkjvqrk8GAh21BWh8bUNR4oo18AHyKe/wIOKIXasncp4qURPnFIPdQku+FsI+KolokXI4n2CGgmEIZoam2IXFzHxJVIMq3MSFqgKR0hjKuSKzyht2bQZkThPWCtZKwVizflxClh00m4Y848snerqkQhLHzrwdxtjV3gVfBvQbreBfO1TMcixLIzt+SQlrGuaKTomjfiOeeHt+cPJ5AWWEvUNZcV6R3gcqKCFBkvolXvrBGpPueKLHJ19Z25bgKxJ+PpGhrxkfPDu8reJhB7Mp4xR1nEorYz91FHJoZdyaTo6mcq7CHeq5UJYed0C/iiTmOg7y3nDCMdLWe+l4t4EFQvS64d4HHEc88zDztODhlXL1Nn4O1DS6VwVryOeGtc4+I47cuSEC+BvRmI9yKhH4jr5FocRoq8hXwbeB7JhRA9yW5HakGnCH15Xw8UBq/6tJSdq6q9jVJF6mtdW0kZKz7d8jENr8OOukOv7xrplglvmhT8kO4ThCVzLO9SqlQqutL5X3vrtTtj7fehOsNpr40YBvIyuaEvYAt+JjxhQpz5CWOwhVaZvgaPtkul69Rk/pzq0Qb8Ayl9l73159jiAAAAAElFTkSuQmCC",
         '2': "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAACUUlEQVRIicWXX09TQRDFf71URTAEjQRjFCs+Y8ODGt7lQ/MJiPhA1PBkrPVPTEgJaIMNaqFmyLlkncy2ayXxJJvc7M7OmZmdnTvbuH0wogANYEFjHrgKNLVtCPwEvgN9jYlKJxHPAMvAUkI0CWZID9gHTqchvgXcA64UEnr8Aj4Dh9Fi5IWF9b68/BeYwQ+BG8AnH/4qIF29BNIUS9LZGOexhXYxo8CMbGncAeaAM+AYOAC6GmfB3kVF8eOFh8kZ35RlESxkz5TV42AZ/QJ4n5HpAEckobbsXcl4aYSbBaRIZlN7/DEijpmUeDmTaE+AdgGhR1t7PZriOiduZJJpdUrSGu3M0RlXo6nweG/NoI2MwgfAWmKsFYvXaeIk2AgS7pyzmTm7RyqNHha+dTd3V2MXeOnW5qXrrZtfqHQtPFrB3EpAmmJd0SjRNWfEs8FCdOaPx5DWWCvUNVvV6e1wvVBBiUwU0ZnorpGpPpeKKvPrGgRzvQLiSCbSdWrEJ8FC9Ct7U0AcyUTGnFQZi7rB3AddmRx2JVOia1CpsHu8UyvjYfd0C/iiTmOo763gDiMdnWC+3xTx0FUvS65t4HnG88izCNtBDhlXv1JnEJ1DR6VwWrzKeGtco/o67csSjx1gbwrivUzoh+IqbgRs/mlhI7CT8RQ1CIeeGNXjXIWqVPBbkqkr0kDh6yopc8Wnl2t9SJq9XN81Lb4qChdkvmSOJFBSpUrR86Rk2p2RQnKszrD0BeExVD9d3NDXsA3f/scT5g8592i7lvxOTfmPv3q0Ab8BMv2Xf8NWNGoAAAAASUVORK5CYII=",
@@ -54,7 +52,9 @@ export default {
             res.push({
               name: data[i].name,
               value: geoCoord.concat(data[i].value),
-              symbol: toolTipSymbol[data[i].amtArea]
+              symbol: toolTipSymbol[data[i].amtArea],
+              paymentTotalAmt: formatMoney(data[i].value),
+              registrationCount: formatMoney(data[i].valueRegister)
             });
           }
         }
@@ -74,6 +74,7 @@ export default {
           },
           extraCssText: "width: 300px;text-align: left;opacity: 0.9;",
           formatter: params => {
+            if(!params.data) return ''
             let res = "";
             let name = params.data.name;
             let paymentTotalAmt = formatMoney(params.data.value);
@@ -89,7 +90,7 @@ export default {
           bottom: 20,
           right: 10,
           show: true,
-          roam: true,
+          roam: false,
           center: [113.896808, 22.903386],
           zoom: 0, //当前视角缩放比例
           aspectScale: 1,
@@ -102,10 +103,7 @@ export default {
               show: false,
               color: "#fff",
               fontWeight: 400,
-              fontSize: 20,
-              formatter: params => {
-                console.log(params);
-              }
+              fontSize: 20
             },
             emphasis: {
               show: false
@@ -137,20 +135,20 @@ export default {
                 show: false
               },
               emphasis: {
-                show: false,
+                show: true,
                 textStyle: {
                   color: "#fff"
                 }
               }
             },
-            roam: true,
+            roam: false,
             itemStyle: {
               normal: {
                 areaColor: "#031525",
                 borderColor: "#FFFFFF"
               },
               emphasis: {
-                areaColor: "#2B91B7"
+                areaColor: "#3658B9"
               }
             },
             animation: false,
@@ -161,8 +159,7 @@ export default {
             type: "effectScatter",
             coordinateSystem: "geo",
             data: convertData(data),
-
-            symbolSize: 10,
+            symbolSize: 15,
             showEffectOn: "render",
             rippleEffect: {
               brushType: "stroke"
@@ -170,12 +167,14 @@ export default {
             hoverAnimation: true,
             label: {
               normal: {
+                show: true,
                 formatter: "{b}",
                 position: "bottom",
                 distance: 5,
                 color: "#fff",
-                show: true,
-                fontSize: 20
+                fontSize: 20,
+                fontWeight: 400,
+                fontFamily: 'Alibaba PuHuiTi'
               }
             },
             //  itemStyle: {
@@ -193,6 +192,9 @@ export default {
         ]
       };
       myChart.setOption(option);
+      myChart.on('click', function (params) {
+        console.log(params);
+      });
     }
   },
   watch: {
