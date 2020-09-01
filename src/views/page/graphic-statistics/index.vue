@@ -428,7 +428,7 @@ export default {
     }
   }
   .content{
-    padding: 40px;
+    padding: 24px 40px 40px 40px;
     &-top{
       display: flex;
       &-area{
@@ -443,7 +443,7 @@ export default {
       justify-content: space-between;
       border-bottom: 1px solid #104470;
       margin: 0 40px;
-      height: 98px;
+      height: 95px;
       align-items: center;
       p:nth-child(1){
         color: #B2D3EA;
