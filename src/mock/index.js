@@ -22,7 +22,7 @@ export function mockXHR(options) {
   if(jsonUrl.indexOf('?') >= 0){
     jsonUrl = jsonUrl.split('?')[0]
   }
-  jsonUrl = jsonUrl.split('deviceBusiness')[1] ? jsonUrl.split('deviceBusiness')[1].split('/').slice(1).join('.') : jsonUrl.split('office')[1].split('/').slice(1).join('.')
+  jsonUrl = jsonUrl.split('deviceBusiness')[1] ? jsonUrl.split('deviceBusiness')[1].split('/').slice(1).join('.') : jsonUrl.split('office')[1] ? jsonUrl.split('office')[1].split('/').slice(1).join('.') : jsonUrl.split('device')[1].split('/').slice(1).join('.')
   const dataJson = require(`./${jsonUrl}.json`)
   Mock.mock(new RegExp(jsonUrl), options.method || 'get', XHR2ExpressReqWrap(dataJson))
 }

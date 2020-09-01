@@ -21,14 +21,14 @@
             <img :src="rightUp" class="rightUp" alt="">
             <img :src="rightDown" class="rightDown" alt="">
             <chart-title title="当前所有终端运行情况"></chart-title>
-            <div style="margin-top: 20px;margin-bottom: 20px;">当前所有终端运行状态</div>
+            <div style="margin-top: 20px;margin-bottom: 20px; font-size: 36px;">当前所有终端运行状态</div>
             <div class="state">
                <div class="totle1">
                   <div class="img">
                      <img :src="zongliangImg" class="zongliang" alt="">
                   </div>
                   <div class="text">
-                    <p>当前正在运行终端总量</p>
+                    <p style="font-size: 32px">当前正在运行终端总量</p>
                     <p style="text-align: left;">
                       <span class="span1">{{zonglangV}}</span>
                       <span class="span2">台</span>
@@ -41,7 +41,7 @@
                      <img :src="kaijiImg" class="zongliang" alt="">
                   </div>
                   <div class="text">
-                    <p>当前所有终端开机率</p>
+                    <p style="font-size: 32px">当前所有终端开机率</p>
                     <p style="text-align: left;">
                       <span class="span1">{{kaijiV}}</span>
                       <span class="span2">%</span>
@@ -49,11 +49,11 @@
                   </div>
                </div>
             </div>
-            <div style="margin-top: 30px;margin-bottom: 20px;position: relative;">{{text1}}
+            <div style="margin-top: 40px;margin-bottom: 28px;position: relative;font-size: 36px;">{{text1}}
             <span class="back">返回全市情况</span>
             </div>
-            <all-city :listData="allCity" ></all-city>
-            <some-city :listData="allCity" v-if="false"></some-city>
+            <all-city :listData="allCity" v-if="false"></all-city>
+            <some-city :listData="allCity"></some-city>
           </div>
           <div class="left_two">
             <img :src="leftUp" class="leftUp" alt="">
@@ -70,8 +70,12 @@
                   平均分配耗时
                 </div>
                 <div class="time">
-                  <span>{{time1}}</span>
-                  小时/单
+                  <div class="info" v-if="time1 !== 0">
+                    <span>{{time1}}</span>天
+                  </div>
+                  <div class="info" v-if="time1_1 !== 0">
+                    <span>{{time1_1}}</span>小时
+                  </div>/单
                 </div>
               </div>
               <div class="table2"  @click="seeTable(9)">
@@ -82,7 +86,12 @@
                   平均维修耗时
                 </div>
                 <div class="time">
-                 <span>{{time2}}</span>天<span>{{time2}}</span>小时/单
+                   <div class="info" v-if="time2 !== 0">
+                    <span>{{time2}}</span>天
+                  </div>
+                  <div class="info" v-if="time2_2 !== 0">
+                    <span>{{time2_2}}</span>小时
+                  </div>/单
                 </div>
               </div>
               <div class="table3"  @click="seeTable(10)">
@@ -93,7 +102,12 @@
                   平均整体完成耗时
                 </div>
                 <div class="time">
-                  <span>{{time2}}</span>天<span>1</span>小时/单
+                   <div class="info" v-if="time3 !== 0">
+                    <span>{{time3}}</span>天
+                  </div>
+                  <div class="info" v-if="time3_3 !== 0">
+                    <span>{{time3_3}}</span>小时
+                  </div>/单
                 </div>
               </div>
             </div>
@@ -125,11 +139,11 @@
             <chart-title title="近7天报修单情况"></chart-title>
             <div class="right_bottom_box">
               <div class="pre_box">
-                <div style="margin-bottom: 40px;">近7天报修单类型占比</div>
+                <div style="margin-bottom: 40px; font-size: 36px">近7天报修单类型占比</div>
                 <pie-chart v-if="repairTypeData.length > 0" :chartData="repairTypeData" :colors="['#9218DC', '#8559FF', '#697EFF', '#4C97F7', '#50D4FF', '#67EBFF']" :redius='redius' name="" @up="seeTable"/>
               </div>
               <div class="line_box">
-                <div style="margin-bottom: 40px;">近7天报修单提交数量统计</div>
+                <div style="margin-bottom: 40px;font-size: 36px;">近7天报修单提交数量统计</div>
                 <line-chart unit="单位：个"  :isMouth="false"  :chartData="chartLineData" :valueColor="['#4492FF']" :colors="['#154871','#0B093C']"/>
               </div>
             </div>
@@ -157,7 +171,7 @@ import MapChart from './components/mapChart'
 import pieChart from '../graphic-statistics/components/PieChart'
 import LineChart from '../business-data/components/lineChart'
 import TablePop from './components/tablePop'
-import {Register,PaymentAmount,PaymentPay} from '@/api/business.js'
+import {RunStatus,DisposeInfo,OrderRatio,OrderCreateCollect} from '@/api/maintenance.js'
 export default {
   name: "MaintenanceData",
   components: {
@@ -182,11 +196,14 @@ export default {
       weixiuImg:weixiu,
       wanchengImg:wancheng,
       text1:'当前全市所有终端运行异常社区',
-      zonglangV: 3000,
-      kaijiV:98,
-      time1:'2',
-      time2:'1',
-      time3:'2',
+      zonglangV: 0,
+      kaijiV: 0,
+      time1: 0,
+      time1_1: 0,
+      time2: 0,
+      time2_2: 0,
+      time3: 0,
+      time3_3: 0,
       dialogTableVisible: false,
       type: 5,
       allCity: [
@@ -213,14 +230,7 @@ export default {
         {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'},
         {name:'东城街道社区卫生服务中心',value:'1',code:'HHH3333'}
       ],
-      repairTypeData: [
-        {name:'硬件故障',value:'2'},
-        {name:'自助软件异常',value:'4'},
-        {name:'耗材异常',value:'3'},
-        {name:'HIS异常',value:'1'},
-        {name:'社保平台异常',value:'5'},
-        {name:'其他',value:'4'}
-      ],
+      repairTypeData: [],
       chartLineData: [],
       redius: [80,250],
       gridData: [{
@@ -243,25 +253,65 @@ export default {
     }
   },
   created() {
-    this.getData(7,1111100011)
+    this.getData(7,1111)
   },
   mounted () {
   },
   methods: {
     getData (day,officeCode) {
-      Register({
-          officeCode: officeCode,
-          day: day,
-          buzyCode: 1
-        }).then( data => {
-            console.log(data)
-            data.data.buzyInfos.forEach((item,index) =>{
-              let list = {}
-              list.name = item.dateDay
-              list.value = item.count
-              this.chartLineData.push(list)
-            })
+      this.getRunStatusData('')
+      this.getDisposeInfoData(7,'')
+      this.getOrderRatioData(7, '')
+      this.getOrderCreateCollectData(7,'')
+    },
+    getRunStatusData (officeCode) {
+      RunStatus({
+        officeCode: officeCode,
+      }).then( data => {
+        this.zonglangV = data.data.deviceTotalRunCount
+        this.kaijiV = data.data.deviceTotalRunRatio
+      })
+    },
+    getDisposeInfoData (day,officeCode) {
+      DisposeInfo({
+        officeCode: officeCode,
+        day:day
+      }).then( data => {
+        this.time1 = data.data.allotTime > 24 ? Math.floor(data.data.allotTime / 24) : 0
+        this.time1_1 = this.time1 === 0 ? data.data.allotTime : data.data.allotTime % 24
+        this.time2 = data.data.maintenanceTime > 24 ? Math.floor(data.data.maintenanceTime / 24) : 0
+        this.time2_2 = this.time2 === 0 ? data.data.maintenanceTime : data.data.maintenanceTime % 24
+        this.time3 = data.data.completionTime > 24 ? Math.floor(data.data.completionTime / 24) : 0
+        this.time3_3 = this.time3 === 0 ? data.data.completionTime : data.data.completionTime % 24
+      })
+    },
+    getOrderRatioData (day, officeCode) {
+      OrderRatio({
+        officeCode: officeCode,
+        day: day
+      }).then( data => {
+        this.repairTypeData = []
+        data.data.maintenanceOrderRatioList.forEach((item,index) =>{
+          let list = {}
+          list.name = item.faultName
+          list.value = item.faultCount
+          this.repairTypeData.push(list)
         })
+      })
+    },
+    getOrderCreateCollectData (day, officeCode) {
+      OrderCreateCollect({
+        officeCode: officeCode,
+        day: day
+      }).then( data => {
+        this.chartLineData = []
+        data.data.maintenanceOrderCollectList.forEach((item,index) =>{
+          let list = {}
+          list.name = item.dateDay
+          list.value = item.count
+          this.chartLineData.push(list)
+        })
+      })
     },
     chengPage (index) {
      if (index==1){
@@ -338,6 +388,7 @@ export default {
           background-position: center;
           background-size: 100%;
           line-height: 80px;
+          color: #fff;
         }
         .list2_yw{
           display: inline-block;
@@ -362,7 +413,7 @@ export default {
       .left_box{
         display:flex;
         flex-direction:column;
-        width: 33%;
+        width: 30%;
         margin-right:20px;
         .left_one{
           flex: 1;
@@ -381,7 +432,7 @@ export default {
               padding:50px 20px;
               display:flex;
               .img{
-                margin-right: 10px;
+                margin-right: 20px;
                 position: relative;
                 top: 5px;
               }
@@ -432,12 +483,12 @@ export default {
             background-position: center;
             background-size: 100%;
             position: absolute;
-            top:0px;
+            top:-10px;
             right:0px;
           }
         }
         .left_two{
-          height: 540px;
+          height: 530px;
           padding:40px;
           border:1px solid #387ADA;
           position: relative;
@@ -447,15 +498,19 @@ export default {
             justify-content:space-between;
             margin-top: 20px;
             margin-bottom: 20px;
+            font-size: 32px;
             img{
               height: 190px
+            }
+            .info{
+               display:inline-block;
             }
             .table1{
               flex:1;
               margin-right: 20px;
               border:1px solid #1E3B6F;
               width: 340px;
-              height: 420px;
+              height: 410px;
               padding-bottom: 20px;
               .img{
                 margin-bottom: 20px;
@@ -539,7 +594,7 @@ export default {
           }
         }
         .right_bottom{
-          height: 820px;
+          height: 760px;
           padding:40px;
           border:1px solid #387ADA;
           position: relative;

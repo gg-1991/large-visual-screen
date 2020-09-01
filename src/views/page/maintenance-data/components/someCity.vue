@@ -59,15 +59,15 @@ export default {
       margin-right: 10px;
     }
     .text{
-      font-size: 36px;
+      font-size: 28px;
     }
     .code{
-      font-size: 36px;
+      font-size: 28px;
       float: right;
       margin-right: 200px;
     }
     .unit{
-      font-size: 36px;
+      font-size: 28px;
       float: right;
       margin-right: 20px;
     }

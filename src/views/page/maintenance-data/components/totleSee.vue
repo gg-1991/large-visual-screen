@@ -114,6 +114,7 @@ export default {
     .title{
       color: #F5F8FA;
       margin-right: 100px;
+      font-size: 28px;
     }
     .text{
       font-size: 70px;
@@ -139,6 +140,7 @@ export default {
     .title{
       color: #F5F8FA;
       margin-right: 100px;
+      font-size: 28px;
     }
     .text{
       font-size: 70px;

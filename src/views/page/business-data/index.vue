@@ -23,7 +23,7 @@
            <img :src="rightDown" class="rightDown" alt="">
            <chart-title title="自助挂号情况"></chart-title>
            <totle-see unit="人次数" :title="title1" :text="text1" :imgType=1 :type=1></totle-see>
-           <div>{{title1}}统计</div>
+           <div class="chartTitle_font">{{title1}}统计</div>
            <line-chart unit="人次数" :isMouth="isMouth" title="挂号量"  :chartData="chartRightOneData" :valueColor="['#4492FF']" :colors="['#4492FF','#0D0A39']"/>
          </div>
          <div class="one_center">
@@ -33,7 +33,7 @@
             <img :src="rightDown" class="rightDown" alt="">
             <chart-title title="自助登录情况"></chart-title>
             <totle-see unit="次" :title="title2" :text="text2" :imgType=2 :type=1></totle-see>
-             <div>{{title2}}统计</div>
+             <div class="chartTitle_font">{{title2}}统计</div>
              <line-chart unit="次" :isMouth="isMouth" title="登录次数"  :chartData="chartRightTwoData" :valueColor="['#2CDFFF']" :colors="['#2CDFFF','#0D0A39']"/>
          </div>
          <div class="one_right">
@@ -43,7 +43,7 @@
             <img :src="rightDown" class="rightDown" alt="">
             <chart-title title="自助签到情况"></chart-title>
             <totle-see unit="次" :title="title3" :text="text3" :imgType=3 :type=1></totle-see>
-             <div>{{title3}}统计</div>
+             <div class="chartTitle_font">{{title3}}统计</div>
              <line-chart unit="次" :isMouth="isMouth" title="签到次数" :chartData="chartRightThereData" :valueColor="['#BA46FF']" :colors="['#BA46FF','#0D0A39']"/>
          </div>
        </div>
@@ -59,11 +59,11 @@
                 <totle-see unit="人次" :title="title4" :text="text4" :imgType=4 :type=2 style="width: 50%;display: inline-block;"></totle-see>
                 <totle-see unit="元" :title="title5" :text="text5" :imgType=5 :type=2 style="width: 50%;display: inline-block;"></totle-see>
               </div>
-               <div>{{title6}}统计</div>
+               <div class="chartTitle_font">{{title6}}统计</div>
                <line-chartnew unit="元" :isMouth="isMouth" :chartData="patientLineData"/>
              </div>
              <div class="right">
-              <div style="margin-top: 60px;margin-bottom: 100px;">{{title7}}统计</div>
+              <div style="margin-top: 60px;margin-bottom: 100px;" class="chartTitle_font">{{title7}}统计</div>
                <bar-chart :chartData="patientbarData"/>
              </div>
            </div>
@@ -130,14 +130,7 @@ export default {
       chartRightTwoData: [],
       chartRightThereData: [],
       patientLineData:[],
-      patientbarData:[
-      /*  {'name': '社保卡','valueL': [11,22,33,44,66,77],'valueE': [55,63,85,4,96,86]},
-        {'name': '电子社保卡','valueL': [11,22,33,44,66,77],'valueE': [55,63,85,4,96,86]},
-        {'name': '刷脸支付','valueL': [11,22,33,44,66,77],'valueE': [55,63,85,4,96,86]},
-        {'name': '莞银通','valueL': [11,22,33,44,66,77],'valueE': [55,63,85,4,96,86]},
-        {'name': '银联卡','valueL': [11,22,33,44,66,77],'valueE': [55,63,85,4,96,86]},
-        {'name': '其他','valueL': [11,22,33,44,66,77],'valueE': [55,63,85,4,96,86]}*/
-      ]
+      patientbarData:[]
     }
   },
   created() {
@@ -276,6 +269,9 @@ export default {
     right: 0;
     bottom: 0;
   }
+ .chartTitle_font{
+    font-size: 36px;
+  }
   .container{
     div.title{
       height: 100px;
@@ -334,6 +330,7 @@ export default {
           background-position: center;
           background-size: 100%;
           line-height: 80px;
+          color: #fff;
         }
       }
       .list3{

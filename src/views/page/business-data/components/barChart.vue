@@ -72,7 +72,7 @@
                 axisLine:{
                   lineStyle:{
                       color:'#314A61',
-                      width:1,
+                      width:2,
                   }
               },
               axisTick: {
@@ -84,6 +84,7 @@
             {
               type: 'value',
               name : '单位：人次',
+              nameGap: 25,
               axisLabel:{
                   //y轴刻度标签字体颜色大小
                   textStyle:{
@@ -100,14 +101,14 @@
                 axisLine:{
                   lineStyle:{
                       color:'#314A61',
-                      width:1,//这里是为了突出显示加上的
+                      width:2,//这里是为了突出显示加上的
                   }
                 },
                splitLine: {
                   lineStyle: {
                     color:['#67849F'],
                     lineStyle:'dashed',
-                    opacity: 0.2
+                    opacity: 0.3
                   }
                 },
                 axisTick: {
@@ -118,6 +119,7 @@
            {
               type: 'value',
               name : '单位：元',
+              nameGap: 25,
                axisLabel:{
                   //y轴刻度标签字体颜色大小
                   textStyle:{
@@ -137,7 +139,7 @@
                 axisLine:{
                   lineStyle:{
                       color:'#314A61',
-                      width:1,//这里是为了突出显示加上的
+                      width:2,//这里是为了突出显示加上的
                   }
                 },
                 axisTick: {
@@ -151,6 +153,7 @@
                   name: '总交易量',
                   type: 'bar',
                   color:'#4492FF',
+                  barGap:'90%',
                   barWidth : 30,
                    // 点标注
                   label : {

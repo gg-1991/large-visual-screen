@@ -1,0 +1,26 @@
+{
+  "code": 200,
+  "message": "查询成功",
+  "data": {
+    "maintenanceOrderCollectList": [
+      {
+        "count": 1000,
+       "dateDay":"2020-08-20"
+
+      },
+      {
+       "count": 2000,
+        "dateDay":"2020-08-21"
+      },
+      {
+       "count": 3000,
+        "dateDay":"2020-08-22"
+      },
+       {
+       "count": 4000,
+        "dateDay":"2020-08-23"
+      }
+    ],
+    "totalCount":10000
+  }
+}

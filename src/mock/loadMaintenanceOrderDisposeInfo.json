@@ -1,0 +1,10 @@
+{
+  "code": 200,
+  "message": "查询成功",
+  "data": {
+   "allotTime":2 ,
+   "maintenanceTime":10,
+   "completionTime":24
+  }
+
+}

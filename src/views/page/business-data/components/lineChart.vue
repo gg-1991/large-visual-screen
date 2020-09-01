@@ -71,15 +71,15 @@
                   show:true,
                   lineStyle: {
                     color:this.valueColor,
-                    lineStyle:'dashed',
-                    opacity: 0.1
+                    /*lineStyle:'dashed',*/
+                    opacity: 0.3
                   }
                 },
                 // X轴主线
                 axisLine:{
                   lineStyle:{
                       color:'#314A61',
-                      width:1,
+                      width:2,
                   }
                 },
                 // 刻度
@@ -92,6 +92,7 @@
             yAxis: {
                 type: 'value',
                 name : this.unit,
+                nameGap: 25,
                 axisLabel:{
                   //y轴刻度标签字体颜色大小
                   textStyle:{
@@ -111,7 +112,7 @@
                 axisLine:{
                   lineStyle:{
                       color:'#314A61',
-                      width:1,//这里是为了突出显示加上的
+                      width:2,//这里是为了突出显示加上的
                   }
                 },
                 axisTick: {

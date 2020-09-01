@@ -1,0 +1,27 @@
+{
+  "code": 200,
+  "message": "查询成功",
+  "data": {
+    "maintenanceOrderRatioList": [
+      {
+        "faultCount": 30,
+        "faultType": "1",
+        "faultName":"硬件故障",
+        "faultRatio":30.00
+      },
+       {
+        "faultCount": 30,
+        "faultType": "2",
+        "faultName":"HIS异常",
+        "faultRatio":30.00
+      },
+     {
+        "faultCount": 40,
+        "faultType": "199",
+        "faultName":"其他",
+        "faultRatio":40.00
+      }
+  ]
+  }
+
+}

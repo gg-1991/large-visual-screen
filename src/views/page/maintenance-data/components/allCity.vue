@@ -58,12 +58,12 @@ export default {
       margin-right: 10px;
     }
     .text{
-      font-size: 36px;
+      font-size: 28px;
     }
     .unit{
-      font-size: 36px;
+      font-size: 28px;
       float: right;
-      margin-right: 20px;
+      margin-right: 50px;
     }
   }
 </style>
