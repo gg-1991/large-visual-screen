@@ -303,7 +303,7 @@ export default {
         officeCode: officeCode
       }).then( data => {
         this.someCityList = []
-        data.data.deviceRundataStatusList.forEach((item,index) => {
+        data.data.deviceRundataStatusList.forEach((item) => {
           let list = {}
           list.name = item.officeName
           list.code = '终端号' + item.deviceNo
@@ -433,9 +433,9 @@ export default {
 </script>
 <style scoped lang="scss">
   /deep/ .el-carousel__button{
-    width: 30px;
-    height: 30px;
-    border-radius: 30px;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
   }
   .leftUp{
     position: absolute;

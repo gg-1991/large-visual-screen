@@ -146,7 +146,7 @@ export default {
           day: day,
           buzyCode: i
         }).then( data => {
-            data.data.buzyInfos.forEach((item,index) =>{
+            data.data.buzyInfos.forEach((item) =>{
               let list = {}
               list.name = item.dateDay
               list.value = item.count
@@ -167,7 +167,7 @@ export default {
         officeCode: officeCode,
         day: day
       }).then( data => {
-        data.data.transInfos.forEach((item,index) =>{
+        data.data.transInfos.forEach((item) =>{
           let list = {}
           list.time = item.dateDay
           list.valueL = item.transCount
@@ -182,7 +182,7 @@ export default {
         day: day,
         transTypeNumber: 6
       }).then( data => {
-        data.data.transTypeRatioList.forEach((item,index) =>{
+        data.data.transTypeRatioList.forEach((item) =>{
           let list = {}
           list.name = item.transName
           list.valueL = item.transCount
