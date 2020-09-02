@@ -1,5 +1,5 @@
 <template>
-   <el-dialog title="近7天所有报障单详情" :visible.sync="visible" height="1200px" :before-close="hide" :close-on-click-modal="false" :close-on-press-escape="false" width="60%">
+   <el-dialog title="近7天所有报障单详情" :visible.sync="visible" height="1200px" :before-close="hide" :close-on-click-modal="false" :close-on-press-escape="false" width="2600px">
        <el-table :data="gridData" :cell-class-name="tableCellClassName" height="1200px" border stripe @close="hide">
          <el-table-column property="maintenanceOrderNo" label="报障单ID"></el-table-column>
          <el-table-column property="officeName" label="报障社区名称"></el-table-column>
@@ -141,5 +141,8 @@ export default {
   }
   /deep/ .el-table .warnimg-row-4 {
     color:#FF9F2E;
+  }
+  /deep/ .el-dialog__body{
+    padding: 30px;
   }
 </style>

@@ -241,43 +241,7 @@ export default {
       repairTypeData: [],
       chartLineData: [],
       redius: [80,250],
-      gridData: [{
-          id:'011',
-          date: '2016-05-02',
-          code:'00011100101',
-          type: '硬件故障',
-          address: '东城社区卫生服务站',
-          time: '2020-09-01 08:00',
-          useTime:'2小时',
-          statue:'完整'
-        }, {
-           id:'011',
-          date: '2016-05-02',
-          code:'00011100101',
-          type: '硬件故障',
-          address: '东城社区卫生服务站',
-          time: '2020-09-01 08:00',
-          useTime:'2小时',
-          statue:'完整'
-        }, {
-          id:'011',
-          date: '2016-05-02',
-          code:'00011100101',
-          type: '硬件故障',
-          address: '东城社区卫生服务站',
-          time: '2020-09-01 08:00',
-          useTime:'2小时',
-          statue:'完整'
-        }, {
-          id:'011',
-          date: '2016-05-02',
-          code:'00011100101',
-          type: '硬件故障',
-          address: '东城社区卫生服务站',
-          time: '2020-09-01 08:00',
-          useTime:'2小时',
-          statue:'完整'
-        }],
+      gridData: [],
     }
   },
   created() {
