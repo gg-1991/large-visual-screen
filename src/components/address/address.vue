@@ -9,13 +9,14 @@
   </div>
 </template>
 <script>
+import {  loadOfficeTotalTransInfo } from '@/api/graphic.js'
 export default {
   name: "Address",
   props: {
     item: {
-      type: String,
+      type: Number,
       default () {
-        return '0'
+        return 0
       }
     }
   },
@@ -24,8 +25,9 @@ export default {
       allSelect: true,
       itemSelect: 0,
       activeClass: -1,
+      day:1,
       List:[
-        {name:'社保局',officeCode:'441900000000'},
+        /*{name:'社保局',officeCode:'441900000000'},
         {name:'东城街道',officeCode:'441900003000'},
         {name:'南城街道',officeCode:'441900004000'},
         {name:'万江街道',officeCode:'441900005000'},
@@ -58,21 +60,40 @@ export default {
         {name:'望牛墩镇',officeCode:'441900127000'},
         {name:'中堂镇',officeCode:'441900128000'},
         {name:'高埗镇',officeCode:'441900129000'},
-        {name:'松山湖',officeCode:'441900401000'}
+        {name:'松山湖',officeCode:'441900401000'}*/
       ],
       addressList: [],
     }
   },
   created() {
-    this.setAddressList()
+    this.getOfficeTotalTransInfo()
   },
   mounted() {
   },
   beforeDestroy() {
   },
   methods: {
+    getOfficeTotalTransInfo(){
+      const params = {
+        day: this.day
+      }
+      this.List = []
+      loadOfficeTotalTransInfo(params).then(res => {
+        if(res.code === 200){
+          const data = res.data.officeInfos || []
+          data.forEach(item => {
+            let obj = {
+              name: item.officeName,
+              officeCode: item.officeCode
+            }
+            this.List.push(obj)
+          })
+          this.setAddressList()
+        }
+      })
+    },
     setAddressList () {
-      if (this.item == '-1') {
+      if (this.item == -1) {
          this.allSelect =true
          this.activeClass = -1
       } else {
@@ -118,6 +139,7 @@ export default {
     left: 0px;
     top: 50%;
     z-index: 10;
+    color: #fff;
    .all{
       width: 360px;
       line-height: 70px;

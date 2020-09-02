@@ -106,7 +106,7 @@ export default {
       officeCode: '',
       isMouth: false,
       selectAddress:'展开',
-      selectAddressNum:'-1',
+      selectAddressNum:-1,
       isShow: false,
       title1:'近7天总挂号量',
       title2:'近7天总登录数',
@@ -393,6 +393,7 @@ export default {
       background-size: 100% 100%;
       top:45%;
       left:0px;
+      color: #fff;
     }
   }
 </style>

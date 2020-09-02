@@ -192,7 +192,7 @@ import MapChart from './components/mapChart'
 import pieChart from '../graphic-statistics/components/PieChart'
 import LineChart from '../business-data/components/lineChart'
 import TablePop from './components/tablePop'
-import {RunStatus,DisposeInfo,OrderRatio,OrderCreateCollect,DeviceExceInfo,RunStatusInfoList } from '@/api/maintenance.js'
+import {RunStatus,DisposeInfo,OrderRatio,OrderCreateCollect,DeviceExceInfo,RunStatusInfoList, OrderInfoList } from '@/api/maintenance.js'
 import progressBar from './components/progressBar'
 import { loadOfficeDeviceFaultRatio } from '@/api/graphic.js'
 import boxArea from '@/components/box'
@@ -242,21 +242,41 @@ export default {
       chartLineData: [],
       redius: [80,250],
       gridData: [{
+          id:'011',
           date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          code:'00011100101',
+          type: '硬件故障',
+          address: '东城社区卫生服务站',
+          time: '2020-09-01 08:00',
+          useTime:'2小时',
+          statue:'完整'
         }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+           id:'011',
+          date: '2016-05-02',
+          code:'00011100101',
+          type: '硬件故障',
+          address: '东城社区卫生服务站',
+          time: '2020-09-01 08:00',
+          useTime:'2小时',
+          statue:'完整'
         }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          id:'011',
+          date: '2016-05-02',
+          code:'00011100101',
+          type: '硬件故障',
+          address: '东城社区卫生服务站',
+          time: '2020-09-01 08:00',
+          useTime:'2小时',
+          statue:'完整'
         }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          id:'011',
+          date: '2016-05-02',
+          code:'00011100101',
+          type: '硬件故障',
+          address: '东城社区卫生服务站',
+          time: '2020-09-01 08:00',
+          useTime:'2小时',
+          statue:'完整'
         }],
     }
   },
@@ -275,6 +295,7 @@ export default {
       this.getDeviceExceInfoData('')
       this.getRunStatusInfoListData('')
       this.getDeviceRunStatus()
+      this.getOrderInfoListData(7)
     },
     getRunStatusData (officeCode) {
       RunStatus({
@@ -362,6 +383,14 @@ export default {
           list.value = item.count
           this.chartLineData.push(list)
         })
+      })
+    },
+
+    getOrderInfoListData (day) {
+      OrderInfoList({
+        day: day
+      }).then( data => {
+        this.gridData = data.data.maintenanceOrderList || []
       })
     },
     chengPage (index) {

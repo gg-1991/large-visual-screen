@@ -45,3 +45,10 @@ export const OrderRatio = params => request.post('device/loadMaintenanceOrderRat
  * @param {}
  */
 export const OrderCreateCollect = params => request.post('device/loadMaintenanceOrderCreateCollect', params)
+
+/****
+ *报障单详情
+ * url: device/loadMaintenanceOrderCreateCollect
+ * @param {}
+ */
+export const OrderInfoList = params => request.post('device/loadMaintenanceOrderInfoList', params)
