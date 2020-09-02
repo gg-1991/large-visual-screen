@@ -128,12 +128,9 @@
         myChart.setOption(option);
       }
     },
-    watch:{
-      chartData:{
-        handler:() => {
-          this.drawLine()
-        },
-        deep:true
+    watch: {
+      chartData(){
+        this.drawLine()
       }
     }
   }

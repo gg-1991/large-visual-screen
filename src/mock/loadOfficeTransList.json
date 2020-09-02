@@ -42,6 +42,30 @@
         "parentOfficeName": "东城社区",
         "count": 215,
         "totalAmt": 20154.68
+      },
+      {
+        "officeCode": "100000005005",
+        "officeName": "东城街道牛山社区卫生服务站",
+        "parentOfficeCode": "441900003000",
+        "parentOfficeName": "东城社区",
+        "count": 88,
+        "totalAmt": 4230.00
+      },
+      {
+        "officeCode": "100000001",
+        "officeName": "堑头社区卫生服务站",
+        "parentOfficeCode": "441900003000",
+        "parentOfficeName": "东城社区",
+        "count": 412,
+        "totalAmt": 18542.00
+      },
+      {
+        "officeCode": "100000005011",
+        "officeName": "东城街道石井社区卫生服务站",
+        "parentOfficeCode": "441900003000",
+        "parentOfficeName": "东城社区",
+        "count": 215,
+        "totalAmt": 20154.68
       }
     ]
   }

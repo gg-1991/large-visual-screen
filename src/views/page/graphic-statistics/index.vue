@@ -110,7 +110,9 @@
          </box-area>
       </div>
      </div>
-     
+     <div class="show-addr">
+       <add-ress :day="this.day" @update="chooseAddress"></add-ress>
+     </div>
      
   </div>
 </template>
@@ -124,6 +126,7 @@ import progressBar from './components/progressBar'
 import pieChart from './components/PieChart'
 import barChart from './components/barChart'
 import mapChart from '../maintenance-data/components/mapChart'
+import addRess from '@/components/address/addressPanel'
 import { loadOfficeRegistrationTop, loadSignInTypeList, loadOfficeTransList, loadOfficeRegistrationRatio, loadOfficeTransTypeRatio, loadOfficeTotalTransInfo } from '@/api/graphic.js'
 
 export default {
@@ -135,12 +138,15 @@ export default {
     progressBar,
     pieChart,
     barChart,
-    mapChart
+    mapChart,
+    addRess
   },
   data() {
     return {
+      showAddress: false,
       activeIndex: 0,
       day: 1,
+      officeCode: '441900000000', //  默认社保局编码
       btnText:[
         {label:'当天', value: 1},
         {label:'近7天', value: 7 },
@@ -180,7 +186,6 @@ export default {
       redius: [100,250],
       //  全部乡镇/街道缴费情况
       officeInfos: []
-
     }
   },
   created() {
@@ -197,8 +202,8 @@ export default {
     },
     getTop10List(){
       const params = {
-        officeCode: '',
-        day: 1,
+        officeCode: this.officeCode,
+        day: this.day,
         officeNumber: 10
       }
       this.categoryData = []
@@ -219,8 +224,8 @@ export default {
     },
     getSignTypeList(){
       const params = {
-        officeCode: '',
-        day: 1,
+        officeCode: this.officeCode,
+        day: this.day,
         signInTypeNumber: 10
       }
       this.signTypeList.datax = []
@@ -237,8 +242,8 @@ export default {
     },
     getOfficeTransList(){
       const params = {
-        officeCode: '',
-        day: 1,
+        officeCode: this.officeCode,
+        day: this.day,
         officeNumber: 8
       }
       this.officeTransList = []
@@ -266,7 +271,7 @@ export default {
     },
     getOfficeRegistrationRatio(){
       const params = {
-        officeCode: '',
+        officeCode: this.officeCode,
         day: this.day
       }
       this.registrationTypeRatios = []
@@ -293,18 +298,18 @@ export default {
     },
     getOfficeTransTypeRatio(){
       const params = {
-        "officeCode": "441900003000",
+        "officeCode": this.officeCode,
         "day": this.day,
         "transTypeNumber": 2
       }
+      this.transAccountTypes = []
+      this.transTypeChartXData = []
+      this.transTypeRatioList[0].data = []
+      this.transTypeRatioList[1].data = []
       loadOfficeTransTypeRatio(params).then(res => {
         if(res.code === 200){
           const transTypeArr = res.data.transTypeRatioList
           const transAccountArr = res.data.transAccountTypes
-          this.transAccountTypes = []
-          this.transTypeChartXData = []
-          this.transTypeRatioList[0].data = []
-          this.transTypeRatioList[1].data = []
           transTypeArr.forEach(item => {
             this.transTypeChartXData.push(item.transName)
             this.transTypeRatioList[1].data.push(item.transAmtRatio)
@@ -349,12 +354,20 @@ export default {
       this.activeIndex = index
       this.day = value
       this.init()
+    },
+    /**
+     * 选择不同地址后的事件
+     */
+    chooseAddress(data){
+      this.officeCode = data.officeCode
+      this.init()
     }
   }
 };
 </script>
 <style scoped lang="scss">
   .container{
+    position: relative;
     .header-title{
       height: 100px;
       display:flex;
@@ -531,6 +544,11 @@ export default {
         }
       }
     }
+  }
+  .show-addr{
+    position: absolute;
+    top: 49%;
+    left: 0;
   }
   
 </style>

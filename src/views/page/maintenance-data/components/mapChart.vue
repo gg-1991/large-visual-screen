@@ -92,12 +92,12 @@ export default {
         geo: {
           map: "dongguan",
           top: 20,
-          left: 70,
-          bottom: 20,
-          right: 10,
-          show: true,
+          left: 80,
+          bottom: 30,
+          right: 50,
+          // show: true,
           roam: false,
-          center: [113.896808, 22.903386],
+          // center: [113.896808, 22.903386],
           zoom: 0, //当前视角缩放比例
           aspectScale: 1,
           scaleLimit: {
@@ -118,11 +118,11 @@ export default {
           itemStyle: {
             normal: {
                 areaColor: "transparent",
-            //   areaColor: "#1C2E6C",
+              // areaColor: "#1C2E6C",
               borderColor: "#4895FE", //线
-              borderWidth: 0,
+              borderWidth: 6,
               shadowColor: "#092f8f", //外发光
-              shadowBlur: 20
+              shadowBlur: 0
             },
             emphasis: {
               areaColor: "#3658B9" //悬浮区背景
@@ -133,15 +133,19 @@ export default {
           {
             type: "map",
             map: "dongguan",
-            geoIndex: 0,
-            aspectScale: 0.9, //长宽比
+            geoIndex: 10,
+            top: 20,
+            left: 80,
+            bottom: 30,
+            right: 50,
+            aspectScale: 1, //长宽比
             showLegendSymbol: false, // 存在legend时显示
             label: {
               normal: {
                 show: false
               },
               emphasis: {
-                show: true,
+                show: false,
                 textStyle: {
                   color: "#fff"
                 }
@@ -150,8 +154,9 @@ export default {
             roam: false,
             itemStyle: {
               normal: {
-                areaColor: "#031525",
-                borderColor: "#FFFFFF"
+                areaColor: "#1C2E6C",
+                borderColor: "#4895FE",
+                borderWidth: 1
               },
               emphasis: {
                 areaColor: "#3658B9"
@@ -189,23 +194,12 @@ export default {
                 }
               }
             },
-            //  itemStyle: {
-            //      normal: {
-            //          color: function(val) {
-            //              console.log(val)
-            //              return val.data.color;
-            //          },
-            //          shadowBlur: 10,
-            //          shadowColor: '#333'
-            //      }
-            //  },
             zlevel: 1
           }
         ]
       };
       myChart.setOption(option);
       myChart.on('click', (params) => {
-        console.log(params);
         this.$emit('mapClick', params.data)
       });
     }
@@ -219,7 +213,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.mapChart{
-    background: url(../../../../assets/images/map_bg.png) no-repeat center;
-}
+// .mapChart{
+//     background: url(../../../../assets/images/map_bg.png) no-repeat center;
+// }
 </style>
