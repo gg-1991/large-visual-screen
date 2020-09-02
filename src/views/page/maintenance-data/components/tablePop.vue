@@ -76,18 +76,30 @@ export default {
       if (row.maintenanceType == 1) {
         return '硬件故障'
       } else if (row.maintenanceType == 2) {
-        return 'HIS故障'
+        return '自助软件故障'
+      } else if (row.maintenanceType == 3) {
+        return '耗材异常'
+      } else if (row.maintenanceType == 4) {
+        return 'HIS异常'
+      } else if (row.maintenanceType == 5) {
+        return '社保平台异常'
       } else {
         return '其他'
       }
     },
     maintenanceOrderStatus (row) {
-       if (row.maintenanceOrderStatus == 1) {
-        return '完成'
-      } else if (row.maintenanceOrderStatus == 2) {
-        return '进行中'
+       if (row.maintenanceOrderStatus == 1001) {
+        return '待分配'
+      } else if (row.maintenanceOrderStatus == 1002) {
+        return '待接收'
+      }  else if (row.maintenanceOrderStatus == 1003) {
+        return '处理中'
+      }  else if (row.maintenanceOrderStatus == 1004) {
+        return '已完成'
+      }  else if (row.maintenanceOrderStatus == 1005) {
+        return '已确认'
       } else {
-        return '未开始'
+        return '其他'
       }
     },
     hide() {
