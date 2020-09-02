@@ -49,7 +49,7 @@
                   </div>
                </div>
             </div>
-            <div style="margin-top: 40px;margin-bottom: 28px;position: relative;font-size: 36px;">{{text1}}
+            <div style="margin-top: 40px;margin-bottom: 28px;position: relative;font-size: 36px;">当前 <span :class="{activeColor: text1 !=='全市'}">{{text1}}</span> 所有终端运行异常社区
             <span class="back" @click="seeAllCity">返回全市情况</span>
             </div>
             <all-city :listData="allCityList" v-if="isAll"></all-city>
@@ -224,7 +224,7 @@ export default {
       fenpeiImg:fenpei,
       weixiuImg:weixiu,
       wanchengImg:wancheng,
-      text1:'当前全市所有终端运行异常社区',
+      text1:'全市',
       zonglangV: 0,
       kaijiV: 0,
       time1: 0,
@@ -367,6 +367,7 @@ export default {
     // 返回全市
     seeAllCity () {
       this.isAll = true
+      this.text1 = '全市'
     },
     seeTable (index) {
       this.dialogTableVisible = true
@@ -420,6 +421,7 @@ export default {
       //  officeCode : data.officeCode, 通过officeCode 联动左侧终端运行情况
       this.getRunStatusInfoListData(data.officeCode)
       this.isAll = false
+      this.text1 = data.name
     }
   }
 };
@@ -749,4 +751,8 @@ export default {
       }
     }
   }
+  .activeColor{
+    color: #4694FF;
+  }
+  
 </style>
