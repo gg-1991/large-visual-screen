@@ -6,8 +6,8 @@
       {
         "transType": "14",
         "transName": "莞银通",
-        "transAmtRatio": "30.0",
-        "transCountRatio": "30.0",
+        "transAmtRatio": "40.0",
+        "transCountRatio": "60.0",
         "transAmt":3000.00,
         "transCount":3000
 
@@ -17,7 +17,7 @@
       "transType": "26",
         "transName": "刷脸支付",
         "transAmtRatio": "25.0",
-        "transCountRatio": "25.0",
+        "transCountRatio": "55.0",
         "transAmt":2500.00,
         "transCount":2500
 
@@ -27,7 +27,7 @@
        "transType": "9",
         "transName": "社保卡",
         "transAmtRatio": "20.0",
-        "transCountRatio": "20.0",
+        "transCountRatio": "60.0",
         "transAmt":2000.00,
         "transCount":2000
 
@@ -36,8 +36,8 @@
        {
      "transType": "2",
         "transName": "银行卡",
-        "transAmtRatio": "20.0",
-        "transCountRatio": "20.0",
+        "transAmtRatio": "40.0",
+        "transCountRatio": "10.0",
         "transAmt":2000.00,
         "transCount":2000
 
@@ -46,7 +46,7 @@
       {
         "transType": "99",
         "transName": "其他",
-        "transAmtRatio": "5.0",
+        "transAmtRatio": "15.0",
         "transCountRatio": "5.0",
         "transAmt":500.00,
         "transCount":500

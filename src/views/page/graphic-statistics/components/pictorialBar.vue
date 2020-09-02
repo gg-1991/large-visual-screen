@@ -101,7 +101,6 @@ import { formatMoney } from '@/utils'
           grid: {
               containLabel: true,
               left: 55,
-              // right: 100,
               bottom: 55
           },
           yAxis: {
