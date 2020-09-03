@@ -28,7 +28,7 @@ export default {
   methods: {
     nowTime () {
       const now= new Date();
-      return '上次刷新时间' +  parseTime(now, '{h}:{i}')
+      return '上次刷新时间' +  parseTime(now, '{h}:{i}:{s}')
     }
   }
 };
@@ -36,7 +36,7 @@ export default {
 <style scoped lang="scss">
   .containerTime{
     position: absolute;
-    right: 0px;
+    right: 30px;
     bottom: 20px;
     width: 300px;
     height: 27px;
