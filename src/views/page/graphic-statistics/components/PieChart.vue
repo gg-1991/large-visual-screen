@@ -42,9 +42,9 @@
         myChart.off('click')
         // 指定图表的配置项和数据
         let option = {
-          grid: {
-            top: 50
-          },
+          // grid: {
+          //   top: 50
+          // },
           series: [
             {
               name: this.name,
@@ -105,6 +105,6 @@
   font-size: 36px;
   font-family: Alibaba PuHuiTi;
   font-weight: 400;
-  padding-top: 30px;
+  padding-top: 25px;
 }
 </style>

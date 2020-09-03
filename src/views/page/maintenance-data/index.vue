@@ -393,6 +393,12 @@ export default {
         officeCode: officeCode // 社保局机构编码
       }
       this.deviceRunStatusList = []
+      const areaStatus = {
+        '1': '4',
+        '2': '3',
+        '3': '2',
+        '4': '1'
+      }
       RunStatus(params).then(res => {
         if(res.code === 200){
           const data = res.data.deviceRunStatusList
@@ -403,7 +409,7 @@ export default {
               name: item.officeName,
               value: item.deviceCount,
               subValue: item.deviceRunCount,
-              area: item.deviceRunArea,
+              area: areaStatus[item.deviceRunArea],
               officeCode: item.officeCode
             }
             this.deviceRunStatusList.push(obj)

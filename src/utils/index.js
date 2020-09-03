@@ -44,6 +44,5 @@ export function parseTime(time, cFormat) {
  * 金额千分位
  */
 export function formatMoney(num){
-  if(!num) return ''
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
