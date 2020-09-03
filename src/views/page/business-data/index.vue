@@ -12,6 +12,7 @@
         </div>
         <div class="list3">
           <img :src="titleRightImg" alt="">
+          <reload-time @load="reloadData"></reload-time>
         </div>
      </div>
      <div class="box">
@@ -85,7 +86,9 @@ import LineChart from './components/lineChart'
 import LineChartnew from './components/lineNew'
 import BarChart from './components/barChart'
 import AddRess from '@/components/address/address'
+import ReloadTime from '@/components/reloadTime/reloadTime'
 import { Register,PaymentAmount,PaymentPay } from '@/api/business.js'
+import { parseTime } from '@/utils'
 export default {
   name: "BusinessData",
   components: {
@@ -93,7 +96,8 @@ export default {
     LineChart,
     LineChartnew,
     BarChart,
-    AddRess
+    AddRess,
+    ReloadTime
   },
   data() {
     return {
@@ -136,9 +140,13 @@ export default {
   created() {
     this.getData(this.day,this.officeCode)
   },
-  mounted () {
+  mounted() {
   },
   methods: {
+    reloadData(){
+      this.clear()
+      this.getData(this.day,this.officeCode)
+    },
     getData (day,officeCode) {
       for(let i = 1;i < 4; i++) {
         Register({
@@ -334,6 +342,7 @@ export default {
         }
       }
       .list3{
+        position: relative;
         img{
           height: 80px;
         }

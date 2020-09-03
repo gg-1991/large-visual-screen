@@ -12,8 +12,9 @@
           <span class="list2_yw" @click="chengPage('businessData')">自助业务数据</span>
           <span class="list2_sj" @click="chengPage('maintennaceData')">运维数据</span>
         </div>
-        <div class="list3">
+        <div class="list3" style="position: relative;">
           <img :src="titleRightImg" alt="">
+          <reload-time @load="reloadData"></reload-time>
         </div>
      </div>
 
@@ -128,7 +129,7 @@ import barChart from './components/barChart'
 import mapChart from '../maintenance-data/components/mapChart'
 import addRess from '@/components/address/addressPanel'
 import { loadOfficeRegistrationTop, loadSignInTypeList, loadOfficeTransList, loadOfficeRegistrationRatio, loadOfficeTransTypeRatio, loadOfficeTotalTransInfo } from '@/api/graphic.js'
-
+import ReloadTime from '@/components/reloadTime/reloadTime'
 export default {
   name: "GraphicStatistics",
   components: {
@@ -139,7 +140,8 @@ export default {
     pieChart,
     barChart,
     mapChart,
-    addRess
+    addRess,
+    ReloadTime
   },
   data() {
     return {
@@ -192,6 +194,9 @@ export default {
     this.init()
   },
   methods: {
+     reloadData(){
+      this.init()
+    },
     init(){
       this.getTop10List()
       this.getSignTypeList()

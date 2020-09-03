@@ -9,8 +9,9 @@
           <span class="list2_yw" @click="chengPage(2)">自助业务数据</span>
           <span class="list2_sj">运维数据</span>
         </div>
-        <div class="list3">
+        <div class="list3" style="position: relative;">
           <img :src="titleRightImg" alt="">
+          <reload-time @load="reloadData"></reload-time>
         </div>
      </div>
      <div class="box">
@@ -196,6 +197,7 @@ import {RunStatus,DisposeInfo,OrderRatio,OrderCreateCollect,DeviceExceInfo,RunSt
 import progressBar from './components/progressBar'
 import { loadOfficeDeviceFaultRatio } from '@/api/graphic.js'
 import boxArea from '@/components/box'
+import ReloadTime from '@/components/reloadTime/reloadTime'
 export default {
   name: "MaintenanceData",
   components: {
@@ -206,7 +208,8 @@ export default {
     LineChart,
     TablePop,
     progressBar,
-    boxArea
+    boxArea,
+    ReloadTime
   },
   data() {
     return {
@@ -252,6 +255,17 @@ export default {
   mounted () {
   },
   methods: {
+    reloadData(){
+      this.clear()
+      this.getData(this.day,this.officeCode)
+    },
+    clear () {
+      this.allCityList = []
+      this.someCityList = []
+      this.repairTypeData = []
+      this.gridData = []
+      this.chartLineData = []
+    },
     getData (day,officeCode) {
       this.getDisposeInfoData(day,officeCode)
       this.getOrderRatioData(day, officeCode)
