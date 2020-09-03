@@ -31,12 +31,13 @@
     },
     methods:{
       getChartData () {
-        this.$nextTick(function () {
+        this.$nextTick( () => {
           this.drawLine()
         });
       },
       drawLine () {
            // 基于准备好的dom，初始化echarts实例
+        if(this.chartData.length === 0) return
         let myChart = this.$echarts.init(this.$refs.main);
         const colors = this.$props.colors ? param => this.$props.colors[param.dataIndex] : '自适应'
         myChart.off('click')
