@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-carousel trigger="click" height="740px" arrow="never" :interval='time' @change="((next, pre) => {setNewData(next, pre)})">
+    <el-carousel trigger="click" height="720px" arrow="never" :interval='time' @change="((next, pre) => {setNewData(next, pre)})">
       <el-carousel-item v-for="(crad,index2 in size" :key="index2">
         <div :class="[index == 0 ? 'item' : 'item',index % 2 == 0 ? 'left' : 'right']"  v-for="(item,index) in itemList">
           <span class="yuan"></span>
