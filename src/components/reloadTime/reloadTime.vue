@@ -28,7 +28,7 @@ export default {
   methods: {
     nowTime () {
       const now= new Date();
-      return '上次刷新时间' +  parseTime(now, '{h}:{i}:{s}')
+      return '上次刷新时间:' +  parseTime(now, '{h}:{i}:{s}')
     }
   }
 };
