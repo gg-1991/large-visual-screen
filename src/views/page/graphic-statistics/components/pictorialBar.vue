@@ -93,6 +93,7 @@ import { formatMoney } from '@/utils'
       var myChart = this.$echarts.init(document.getElementById(this.chartId));
       const option = {
           tooltip: {
+              show: false,
               trigger: 'axis',
               axisPointer: {
                 type: 'shadow'

@@ -66,8 +66,8 @@
               </div>
               <div class="register-info">
                 <div class="register-info-top">
-                  <pie-chart v-if="registrationTypeRatios.length > 0" :height="'400px'" :id="'registrationTypeRatios'" :chartData="registrationTypeRatios" :colors="['#9218DC', '#8559FF', '#697EFF', '#4C97F7']" name="挂号类型占比" />
-                  <pie-chart v-if="insuredRatio.length > 0" :id="'insuredRatio'" :height="'400px'" :chartData="insuredRatio" :colors="['#67EBFF', '#52BBF9']"  name="参保人挂号占比"/>
+                  <pie-chart :height="'400px'" :id="'registrationTypeRatios'" :chartData="registrationTypeRatios" :colors="['#9218DC', '#8559FF', '#697EFF', '#4C97F7']" name="挂号类型占比" />
+                  <pie-chart :id="'insuredRatio'" :height="'400px'" :chartData="insuredRatio" :colors="['#67EBFF', '#52BBF9']"  name="参保人挂号占比"/>
                 </div>
                 <div class="register-info-bottom">
                   <pictorial-line v-if="signTypeList.datax.length> 0" :categoryData="signTypeList" :height="'410px'" :chartId="'chartMap'"></pictorial-line>
@@ -110,7 +110,7 @@
       </div>
      </div>
      <div class="show-addr">
-       <add-ress :day="this.day" @update="chooseAddress"></add-ress>
+       <add-ress @update="chooseAddress"></add-ress>
      </div>
 
   </div>
@@ -278,15 +278,17 @@ export default {
         if(res.code === 200){
           const data = res.data
           this.insuredRatio = [
-            {"name": '参保人', "value": data.insuredRatio.insuredRatio},
-            {"name": '非参保人', "value": data.insuredRatio.nonInsuredRatio},
+            {"name": '参保人', "value": data.insuredPersonsRatio.insuredRatio},
+            {"name": '非参保人', "value": data.insuredPersonsRatio.nonInsuredRatio},
           ]
           data.registrationTypeRatios.forEach(item => {
-            let tempObj = {
-              "name": item.registrationName,
-              "value": item.registrationRatio
+            if(item.registrationRatio > 0) {
+              let tempObj = {
+                "name": item.registrationName,
+                "value": item.registrationRatio
+              }
+              this.registrationTypeRatios.push(tempObj)
             }
-            this.registrationTypeRatios.push(tempObj)
           })
           //  按照value大小进行排序
           this.registrationTypeRatios.sort((a,b) => {
@@ -480,6 +482,7 @@ export default {
       &-top{
         flex: 1;
         display: flex;
+        align-items: center;
       }
 
     }

@@ -1,7 +1,11 @@
 <template>
   <div style="width: 100%">
-    <div class="pie-title">{{title}}</div>
-    <div ref="main" :style="{ height: height }"></div>
+    <div v-if="chartData.length === 0">暂无数据</div>
+    <div v-else>
+      <div class="pie-title">{{title}}</div>
+      <div ref="main" :style="{ height: height }"></div>
+    </div>
+    
   </div>
 </template>
 <script>
@@ -38,6 +42,9 @@
         myChart.off('click')
         // 指定图表的配置项和数据
         let option = {
+          grid: {
+            top: 50
+          },
           series: [
             {
               name: this.name,

@@ -6,8 +6,8 @@ import request from './index'
  */
 export function loadOfficeRegistrationRatio(data){
   return request({
-    // url: 'office/loadOfficeRegistrationRatio',
-    url: 'office/loadRegistrationRatio',
+    url: 'office/loadOfficeRegistrationRatio',
+    // url: 'office/loadRegistrationRatio',
     method: 'post',
     data
   })
@@ -19,7 +19,7 @@ export function loadOfficeRegistrationRatio(data){
  */
 export function loadOfficeRegistrationTop(data){
   return request({
-    url: 'office/loadOfficeRegistration',
+    url: 'office/loadOfficeRegistrationList',
     method: 'post',
     data
   })

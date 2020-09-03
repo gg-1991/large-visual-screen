@@ -89,6 +89,7 @@
             containLabel: true
           },
           tooltip: {
+            show: false,
             trigger: 'axis',
             axisPointer: {
               type: 'shadow'

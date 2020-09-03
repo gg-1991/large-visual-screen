@@ -29,7 +29,7 @@
               type: 'bar',
               color: item.color,
               barWidth : 30,
-              barGap: '90%',
+              barGap: '120%',
                 // 点标注
               label : {
                 normal : {
@@ -52,7 +52,7 @@
           legend: {
             data: legendData || [],
             itemGap:30,
-            itemWidth: 55,
+            itemWidth: 30,
             itemHeight:20,
             textStyle:{
               color:'#B2D2EA',

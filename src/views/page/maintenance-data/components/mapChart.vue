@@ -170,8 +170,8 @@ export default {
             type: "effectScatter",
             coordinateSystem: "geo",
             data: convertData(data),
-            symbolSize: 15,
-            showEffectOn: "render",
+            symbolSize: 20,
+            showEffectOn: 'none',
             rippleEffect: {
               brushType: "stroke"
             },
