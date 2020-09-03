@@ -3,7 +3,7 @@ module.exports = {
     // 端口号
     SERVER_PORT: 8080,
     // API请求地 址
-    PROXY_TARGET: 'http://192.168.161.31:4000',
+    PROXY_TARGET: 'http://139.9.251.155:8248',
     // PROXY_TARGET: 'https://192.168.35.112:4085/',
     // PROXY_TARGET: 'http://139.9.236.16:9011/ward/',
 

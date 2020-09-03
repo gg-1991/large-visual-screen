@@ -44,7 +44,7 @@
             <chart-title title="自助签到情况"></chart-title>
             <totle-see unit="次" :title="title3" :text="text3" :imgType=3 :type=1></totle-see>
              <div class="chartTitle_font">{{title3}}统计</div>
-             <line-chart unit="次" :isMouth="isMouth" title="签到次数" :chartData="chartRightThereData" :valueColor="['#BA46FF']" :colors="['#BA46FF','#0D0A39']"/>
+             <line-chart unit="次" :isMouth="isMouth" title="签到次数"  :chartData="chartRightThereData" :valueColor="['#BA46FF']" :colors="['#BA46FF','#0D0A39']"/>
          </div>
        </div>
        <div class="twoBox">
@@ -60,11 +60,11 @@
                 <totle-see unit="元" :title="title5" :text="text5" :imgType=5 :type=2 style="width: 50%;display: inline-block;"></totle-see>
               </div>
                <div class="chartTitle_font">{{title6}}统计</div>
-               <line-chartnew unit="元" :isMouth="isMouth" :chartData="patientLineData"/>
+               <line-chartnew unit="元"  :isMouth="isMouth" :chartData="patientLineData"/>
              </div>
              <div class="right">
               <div style="margin-top: 60px;margin-bottom: 100px;" class="chartTitle_font">{{title7}}统计</div>
-               <bar-chart :chartData="patientbarData"/>
+               <bar-chart  :chartData="patientbarData"/>
              </div>
            </div>
        </div>
@@ -85,7 +85,7 @@ import LineChart from './components/lineChart'
 import LineChartnew from './components/lineNew'
 import BarChart from './components/barChart'
 import AddRess from '@/components/address/address'
-import {Register,PaymentAmount,PaymentPay} from '@/api/business.js'
+import { Register,PaymentAmount,PaymentPay } from '@/api/business.js'
 export default {
   name: "BusinessData",
   components: {
@@ -103,7 +103,7 @@ export default {
        {'text': '近30天'}
       ],
       day: 7,
-      officeCode: '',
+      officeCode: '441900000000',
       isMouth: false,
       selectAddress:'展开',
       selectAddressNum:-1,
@@ -385,8 +385,8 @@ export default {
     }
     .more{
       padding-right: 15px;
-      width: 125px;
-      height: 80px;
+      width: 100px;
+      height: 70px;
       line-height: 80px;
       background-image: url('../../../assets/images/button2.png');
       position: absolute;
@@ -394,6 +394,7 @@ export default {
       top:45%;
       left:0px;
       color: #fff;
+      font-size: 32px;
     }
   }
 </style>

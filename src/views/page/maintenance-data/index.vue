@@ -211,6 +211,7 @@ export default {
   data() {
     return {
       day: 7,
+      officeCode: '441900000000',
       officeTroubleList: [],
       deviceRunStatusList: [],
       leftUp:leftUp,
@@ -246,29 +247,20 @@ export default {
     }
   },
   created() {
-    this.getData(7,1111)
-    this.getTroubleDevList()
+    this.getData(this.day,this.officeCode)
   },
   mounted () {
   },
   methods: {
     getData (day,officeCode) {
-      this.getRunStatusData('')
-      this.getDisposeInfoData(7,'')
-      this.getOrderRatioData(7, '')
-      this.getOrderCreateCollectData(7,'')
-      this.getDeviceExceInfoData('')
-      this.getRunStatusInfoListData('')
-      this.getDeviceRunStatus()
-      this.getOrderInfoListData(7)
-    },
-    getRunStatusData (officeCode) {
-      RunStatus({
-        officeCode: officeCode,
-      }).then( data => {
-        this.zonglangV = data.data.deviceTotalRunCount
-        this.kaijiV = data.data.deviceTotalRunRatio
-      })
+      this.getDisposeInfoData(day,officeCode)
+      this.getOrderRatioData(day, officeCode)
+      this.getOrderCreateCollectData(day,officeCode)
+      this.getDeviceExceInfoData(officeCode)
+      this.getRunStatusInfoListData(officeCode)
+      this.getDeviceRunStatus(officeCode)
+      this.getOrderInfoListData(day)
+      this.getTroubleDevList()
     },
      getDeviceExceInfoData (officeCode) {
       DeviceExceInfo({
@@ -277,7 +269,8 @@ export default {
         this.allCityList = []
         data.data.deviceExceList.forEach((item) => {
           let list = {}
-          list.name = item.officeName
+          list.name = item.officeName.length > 15 ? item.officeName.slice(0,12) + '...' : item.officeName
+          list.allName = item.officeName
           list.value = item.deviceExceCount
           this.allCityList.push(list)
         })
@@ -291,7 +284,9 @@ export default {
         this.someCityList = []
         data.data.deviceRundataStatusList.forEach((item) => {
           let list = {}
-          list.name = item.officeName
+          list.name = item.officeName.length > 18 ? item.officeName.slice(0,15) + '...' : item.officeName
+          list.allName = item.officeName
+          list.value = item.deviceExceCount
           list.code = item.deviceNo
           list.deviceRunStatus = item.deviceRunStatus
           if (item.deviceRunStatus == '0') {
@@ -393,14 +388,16 @@ export default {
     /**
      * 当前各乡镇/街道终端运行情况
      */
-    getDeviceRunStatus(){
+    getDeviceRunStatus(officeCode){
       const params = {
-        officeCode: '441900000000' // 社保局机构编码
+        officeCode: officeCode // 社保局机构编码
       }
       this.deviceRunStatusList = []
       RunStatus(params).then(res => {
         if(res.code === 200){
           const data = res.data.deviceRunStatusList
+          this.zonglangV = res.data.deviceTotalRunCount
+          this.kaijiV = res.data.deviceTotalRunRatio
           data.forEach(item => {
             let obj = {
               name: item.officeName,

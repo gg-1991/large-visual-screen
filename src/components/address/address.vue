@@ -126,7 +126,7 @@ export default {
       this.activeClass = -1
        let msg = {
         index: -1,
-        officeCode:''
+        officeCode:'441900000000'
       }
       this.$emit('update', msg)
     }
@@ -140,15 +140,16 @@ export default {
     top: 50%;
     z-index: 10;
     color: #fff;
+    font-size: 32px;
    .all{
       width: 360px;
+      margin-bottom:30px;
       line-height: 70px;
       height: 70px;
       background-image: url('../../assets/images/button3_n.png');
       background-repeat: no-repeat;
       background-position: center;
       background-size: 100%;
-      margin-bottom: 12px;
    }
    .active{
       background-image: url('../../assets/images/button3_h.png');
@@ -162,6 +163,7 @@ export default {
      li{
       float: left;
       margin-bottom: 12px;
+      margin-bottom: 30px;
      }
      .item1{
       width: 360px;

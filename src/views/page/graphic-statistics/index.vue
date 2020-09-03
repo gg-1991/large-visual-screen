@@ -76,7 +76,6 @@
             </div>
           </box-area>
         </div>
-        
       </div>
       <div class="content-bottom">
          <box-area :height="'900px'">
@@ -105,7 +104,7 @@
                   <bar-chart v-if="transTypeChartXData.length > 0" :transTypeChartXData="transTypeChartXData" :chartId="'transTypeChart'" :chartData="transTypeRatioList" :height="'650px'"></bar-chart>
                 </div>
               </div>
-              
+
             </div>
          </box-area>
       </div>
@@ -113,7 +112,7 @@
      <div class="show-addr">
        <add-ress :day="this.day" @update="chooseAddress"></add-ress>
      </div>
-     
+
   </div>
 </template>
 <script>
@@ -322,7 +321,6 @@ export default {
             }
             this.transAccountTypes.push(obj)
           })
-          
         }
       })
     },
@@ -550,5 +548,5 @@ export default {
     top: 49%;
     left: 0;
   }
-  
+
 </style>

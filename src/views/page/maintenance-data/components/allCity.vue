@@ -4,7 +4,7 @@
       <el-carousel-item v-for="(crad,index2 in size" :key="index2">
         <div :class="[index == 0 ? 'item' : 'item',index % 2 == 0 ? 'left' : 'right']"  v-for="(item,index) in itemList">
           <span class="yuan"></span>
-          <span class="text">{{item.name}}</span>
+          <span class="text" :title="item.allName">{{item.name}}</span>
           <span class="unit">{{item.value}}台</span>
         </div>
       </el-carousel-item>
@@ -53,6 +53,9 @@ export default {
 </script>
 
 <style scoped>
+  .item{
+    flex: left
+  }
   .left{
     display: inline-block;
     width: 50%;
@@ -73,7 +76,7 @@ export default {
     .unit{
       font-size: 28px;
       float: right;
-      margin-right: 50px;
+      margin-right: 40px;
     }
   }
   .right{
@@ -89,7 +92,7 @@ export default {
       border-radius: 20px;
       background-color: #0BB3F1;
       margin-right: 10px;
-      margin-left: 50px;
+      margin-left: 40px;
     }
     .text{
       font-size: 28px;
@@ -98,5 +101,8 @@ export default {
       font-size: 28px;
       float: right;
     }
+  }
+  /deep/ .el-carousel__item{
+    text-align: left;
   }
 </style>

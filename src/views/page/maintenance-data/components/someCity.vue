@@ -4,7 +4,7 @@
       <el-carousel-item v-for="(crad,index2 in size" :key="index2">
         <div :class="[index==0?'item':'item',item.deviceRunStatus!=='0' ? 'active' : '']" v-for="(item,index) in itemList">
           <span class="yuan"></span>
-          <span class="text">{{item.name}}</span>
+          <span class="text" :title="item.allName">{{item.name}}</span>
            <span class="unit">{{item.value}}</span>
           <span class="code">终端号{{item.code}}</span>
         </div>
