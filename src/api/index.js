@@ -6,7 +6,7 @@ import { Message } from 'element-ui'
 // const { mockXHR } = process.env.NODE_ENV === 'development' ? require('../mock') : { mockXHR: null }
 const request = axios.create({
   // url = base url + request url
-  baseURL: config['PROXY_TARGET'],
+  baseURL: config['BASE_API'],
   // baseURL: '',
   withCredentials: true, // send cookies when cross-domain requests
   timeout: 50000 // request timeout

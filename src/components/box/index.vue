@@ -1,5 +1,5 @@
 <template>
-  <div class="box-content" :style="{height: height, width: width}">
+  <div class="box-content" :style="{height: height}">
       <img :src="leftUp" class="leftUp" alt="">
       <img :src="leftDown" class="leftDown" alt="">
       <img :src="rightUp" class="rightUp" alt="">

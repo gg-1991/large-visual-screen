@@ -65,9 +65,10 @@
                 <p>挂号情况</p>
               </div>
               <div class="register-info">
+                <!-- <div v-if="chartData.length === 0">暂无数据</div> -->
                 <div class="register-info-top">
-                  <pie-chart :height="'400px'" :id="'registrationTypeRatios'" :chartData="registrationTypeRatios" :colors="['#9218DC', '#8559FF', '#697EFF', '#4C97F7']" name="挂号类型占比" />
-                  <pie-chart :id="'insuredRatio'" :height="'400px'" :chartData="insuredRatio" :colors="['#67EBFF', '#52BBF9']"  name="参保人挂号占比"/>
+                  <pie-chart  :height="'380px'" :id="'registrationTypeRatios'" :chartData="registrationTypeRatios" :colors="['#9218DC', '#8559FF', '#697EFF', '#4C97F7']" name="挂号类型占比" />
+                  <pie-chart  :id="'insuredRatio'" :height="'380px'" :chartData="insuredRatio" :colors="['#67EBFF', '#52BBF9']"  name="参保人挂号占比"/>
                 </div>
                 <div class="register-info-bottom">
                   <pictorial-line v-if="signTypeList.datax.length> 0" :categoryData="signTypeList" :height="'410px'" :chartId="'chartMap'"></pictorial-line>
@@ -442,7 +443,7 @@ export default {
     }
   }
   .content{
-    padding: 24px 40px 40px 40px;
+    margin:17px 37px 17px 37px;
     &-top{
       display: flex;
       &-area{

@@ -34,7 +34,7 @@
         "registrationRatio": 10.0
       }
     ],
-    "insuredRatio": {
+    "insuredPersonsRatio": {
       "insuredRatio": 51.0,
       "nonInsuredRatio": 49.0
     }
