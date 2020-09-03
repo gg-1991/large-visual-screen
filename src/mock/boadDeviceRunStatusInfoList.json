@@ -3,6 +3,36 @@
   "message": "查询成功",
   "data": {
     "deviceRundataStatusList": [
+       {
+        "deviceNo": "516K013",
+        "officeName": "茶山镇社区卫生服务中心11",
+        "officeCode": "100000008",
+        "deviceRunStatus": "3"
+      },
+       {
+        "deviceNo": "516K013",
+        "officeName": "茶山镇社区卫生服务中心11",
+        "officeCode": "100000008",
+        "deviceRunStatus": "3"
+      },
+       {
+        "deviceNo": "516K013",
+        "officeName": "茶山镇社区卫生服务中心11",
+        "officeCode": "100000008",
+        "deviceRunStatus": "3"
+      },
+       {
+        "deviceNo": "516K013",
+        "officeName": "茶山镇社区卫生服务中心11",
+        "officeCode": "100000008",
+        "deviceRunStatus": "3"
+      },
+       {
+        "deviceNo": "516K013",
+        "officeName": "茶山镇社区卫生服务中心11",
+        "officeCode": "100000008",
+        "deviceRunStatus": "3"
+      },
      {
         "deviceNo": "516K014",
         "officeName": "茶山镇社区卫生服务中心",

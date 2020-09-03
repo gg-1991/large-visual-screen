@@ -49,9 +49,9 @@
                   </div>
                </div>
             </div>
-            <div style="margin-top: 40px;margin-bottom: 28px;position: relative;font-size: 36px;">当前 <span :class="{activeColor: text1 !=='全市'}">{{text1}}</span> 所有终端运行异常社区
-            <span class="back" @click="seeAllCity">返回全市情况</span>
+            <div style="margin-top: 40px;margin-bottom: 28px;font-size: 36px;">当前 <span :class="{activeColor: text1 !=='全市'}">{{text1}}</span> 所有终端运行异常社区
             </div>
+            <span class="back" v-if="showBackBtn" @click="seeAllCity">返回全市情况</span>
             <all-city :listData="allCityList" v-if="isAll"></all-city>
             <some-city :listData="someCityList" v-else></some-city>
           </div>
@@ -225,6 +225,7 @@ export default {
       weixiuImg:weixiu,
       wanchengImg:wancheng,
       text1:'全市',
+      showBackBtn: false,
       zonglangV: 0,
       kaijiV: 0,
       time1: 0,
@@ -291,7 +292,7 @@ export default {
         data.data.deviceRundataStatusList.forEach((item) => {
           let list = {}
           list.name = item.officeName
-          list.code = '终端号' + item.deviceNo
+          list.code = item.deviceNo
           list.deviceRunStatus = item.deviceRunStatus
           if (item.deviceRunStatus == '0') {
             list.value = '正常'
@@ -366,6 +367,7 @@ export default {
     },
     // 返回全市
     seeAllCity () {
+      this.showBackBtn = false
       this.isAll = true
       this.text1 = '全市'
     },
@@ -420,6 +422,7 @@ export default {
       if(!data) return
       //  officeCode : data.officeCode, 通过officeCode 联动左侧终端运行情况
       this.getRunStatusInfoListData(data.officeCode)
+      this.showBackBtn = true
       this.isAll = false
       this.text1 = data.name
     }
@@ -582,7 +585,7 @@ export default {
             background-position: center;
             background-size: 100%;
             position: absolute;
-            top:-10px;
+            top:445px;
             right:0px;
           }
         }

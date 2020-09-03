@@ -1,8 +1,8 @@
 <template>
   <div>
-    <el-carousel trigger="click" height="720px" arrow="never" :interval='time' @change="((next, pre) => {setNewData(next, pre)})">
+    <el-carousel trigger="click" height="740px" arrow="never" :interval='time' @change="((next, pre) => {setNewData(next, pre)})">
       <el-carousel-item v-for="(crad,index2 in size" :key="index2">
-        <div class="item" v-for="(item,index) in itemList">
+        <div :class="[index == 0 ? 'item' : 'item',index % 2 == 0 ? 'left' : 'right']"  v-for="(item,index) in itemList">
           <span class="yuan"></span>
           <span class="text">{{item.name}}</span>
           <span class="unit">{{item.value}}台</span>
@@ -53,12 +53,11 @@ export default {
 </script>
 
 <style scoped>
-  .item{
+  .left{
     display: inline-block;
     width: 50%;
     text-align: left;
-    margin-top: 5px;
-    margin-bottom:20px;
+    margin-bottom:27px;
     color: #fff;
     .yuan{
       display: inline-block;
@@ -75,6 +74,29 @@ export default {
       font-size: 28px;
       float: right;
       margin-right: 50px;
+    }
+  }
+  .right{
+    display: inline-block;
+    width: 50%;
+    text-align: left;
+    margin-bottom:27px;
+    color: #fff;
+    .yuan{
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border-radius: 20px;
+      background-color: #0BB3F1;
+      margin-right: 10px;
+      margin-left: 50px;
+    }
+    .text{
+      font-size: 28px;
+    }
+    .unit{
+      font-size: 28px;
+      float: right;
     }
   }
 </style>
