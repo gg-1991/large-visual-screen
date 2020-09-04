@@ -5,7 +5,7 @@
       <div class="all-city" :class="{'active': itemSelect === -1}" @click="select(-1, '441900000000')">全市整体情况</div>
       <div class="box">
         <ul>
-          <li v-for="(item,index) in addressList" :key="index" :class="{active: itemSelect === index}"  @click="select(index, item.officeCode)">{{item.name}}</li>
+          <li v-for="(item,index) in addressList" :key="index" :class="{active: itemSelect === index}"  @click="select(index, item.officeCode, item.name)">{{item.name}}</li>
         </ul>
       </div>
     </div>
@@ -52,12 +52,13 @@ export default {
         }
       })
     },
-    select (index, officeCode) {
+    select (index, officeCode, name) {
       this.isShowAddress = false
       this.itemSelect = index
       let msg = {
         index: index,
-        officeCode: officeCode
+        officeCode: officeCode,
+        name: name
       }
       this.$emit('update', msg)
     },

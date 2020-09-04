@@ -37,7 +37,7 @@
               <div class="title">
                 <p>各乡镇/街道缴费量分布情况</p>
               </div>
-              <map-chart :chartData="officeInfos"></map-chart>
+              <map-chart ref="mapChart" :chartData="officeInfos"></map-chart>
               <ul class="map-content-tip">
                 <li>
                   <img src="../../../assets/images/legend1.png" alt="">
@@ -192,6 +192,7 @@ export default {
   },
   created() {
     this.init()
+    this.getOfficeTotalTransInfo()
   },
   methods: {
      reloadData(){
@@ -203,7 +204,6 @@ export default {
       this.getOfficeTransList()
       this.getOfficeRegistrationRatio()
       this.getOfficeTransTypeRatio()
-      this.getOfficeTotalTransInfo()
     },
     getTop10List(){
       const params = {
@@ -360,6 +360,7 @@ export default {
       this.activeIndex = index
       this.day = value
       this.init()
+      this.getOfficeTotalTransInfo()
     },
     /**
      * 选择不同地址后的事件
@@ -367,6 +368,7 @@ export default {
     chooseAddress(data){
       this.officeCode = data.officeCode
       this.init()
+      this.$refs.mapChart.showTipByAddress(data)
     }
   }
 };

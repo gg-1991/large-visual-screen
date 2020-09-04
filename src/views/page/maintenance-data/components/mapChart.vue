@@ -19,7 +19,10 @@ export default {
     type: String
   },
   data() {
-    return {};
+    return {
+      myChart: null,
+      curActive: -1
+    };
   },
   mounted() {
       this.drawLine()
@@ -29,6 +32,30 @@ export default {
       this.$nextTick(function() {
         this.drawLine();
       });
+    },
+    showTipByAddress(value){
+      if(this.curActive !== -1) {
+        this.myChart.dispatchAction({
+          type: 'mapUnSelect',
+          dataIndex: this.curActive
+        })
+        this.myChart.dispatchAction({
+          type: 'hideTip',
+          dataIndex: this.curActive
+        })
+      }
+      this.myChart.dispatchAction({
+        type: 'mapSelect',
+        dataIndex: value.index,
+        name: value.name
+      })
+      this.myChart.dispatchAction({
+          type: 'showTip',
+          name: value.name,
+          dataIndex: value.index,
+          seriesIndex: 0
+      })
+      this.curActive = value.index
     },
     drawLine() {
       if(this.chartData.length === 0) return
@@ -42,7 +69,7 @@ export default {
       //引入市区json文件
       var dgMapJson = require("../../../../assets/map/dgMap.json");
       this.$echarts.registerMap("dongguan", dgMapJson);
-      let myChart = this.$echarts.init(this.$refs.main);
+      this.myChart = this.$echarts.init(this.$refs.main);
       //地理位置信息
       const geoCoordMap = dgTownList
       let convertData = (data) => {
@@ -79,7 +106,12 @@ export default {
             if(!params.data) return ''
             let res = "";
             let name = params.data.name;
-            let value = formatMoney(params.data.value);
+            let value = ''
+            if(Array.isArray(params.data.value) && params.data.value.length === 3){
+              value = formatMoney(params.data.value[2])
+            } else {
+              value = formatMoney(params.data.value);
+            }
             let subValue = formatMoney(params.data.subValue);
             if(this.type === 'yunwei'){
               res = `<span>${name}</span> <br/> <span>运行数量: ${subValue}台</span><br/> <span>总数量: ${value}台</span>`;
@@ -198,8 +230,8 @@ export default {
           }
         ]
       };
-      myChart.setOption(option);
-      myChart.on('click', (params) => {
+      this.myChart.setOption(option);
+      this.myChart.on('click', (params) => {
         this.$emit('mapClick', params.data)
       });
     }
