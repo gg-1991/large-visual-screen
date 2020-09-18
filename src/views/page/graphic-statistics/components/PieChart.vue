@@ -23,6 +23,8 @@
     data () {
       return {
         pieData: [],
+        totalVal: 0,
+        maxVal: 0,
         title:this.name
       }
     },
@@ -36,8 +38,26 @@
         });
       },
       drawLine () {
-           // 基于准备好的dom，初始化echarts实例
-        if(this.chartData.length === 0) return
+        // 基于准备好的dom，初始化echarts实例
+        let totalVal = 0
+        let maxVal = 0
+        let showMore = 0
+        if(this.chartData.length === 0) {
+          return
+        } else {
+          this.chartData.forEach(function (a) {
+              totalVal += a.value
+              if(a.value >= maxVal) maxVal = a.value
+          })
+          this.pieData = []
+          showMore = Math.round(maxVal * 0.9)
+          this.pieData = this.chartData.map(si => {
+            return {
+                value : showMore + si.value,
+                name:si.name
+            }
+          })
+        }
         let myChart = this.$echarts.init(this.$refs.main);
         const colors = this.$props.colors ? param => this.$props.colors[param.dataIndex] : '自适应'
         myChart.off('click')
@@ -54,10 +74,15 @@
               center: ['50%', '50%'],
               roseType: 'radius',
               top: 20,
-              data:this.chartData,
+              data:this.pieData,
               label:{
                 normal:{
-                  formatter: '{b}\n {d}%',//\n实现换行
+                  // formatter: '{b}\n {d}%',//\n实现换行
+                  formatter:function (param) {
+                    let str = param.name + "\n"
+                    str += (((param.value - showMore)/totalVal)*100).toFixed(0)+'%'
+                    return str
+                  },
                   textStyle: {
                     color: '#fff',
                     fontSize: 24,  // 改变标示文字的颜色
