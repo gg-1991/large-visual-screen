@@ -5,13 +5,13 @@
       <div class="pie-title">{{title}}</div>
       <div ref="main" :style="{ height: height }"></div>
     </div>
-    
   </div>
 </template>
 <script>
   export default {
     props: {
         chartData: Array,
+        ruleData: Array,
         colors: Array,
         redius:Array,
         name: String,
@@ -22,9 +22,6 @@
     },
     data () {
       return {
-        pieData: [],
-        totalVal: 0,
-        maxVal: 0,
         title:this.name
       }
     },
@@ -40,22 +37,12 @@
       drawLine () {
         // 基于准备好的dom，初始化echarts实例
         let totalVal = 0
-        let maxVal = 0
-        let showMore = 0
+        let this_t = this
         if(this.chartData.length === 0) {
           return
         } else {
           this.chartData.forEach(function (a) {
               totalVal += a.value
-              if(a.value >= maxVal) maxVal = a.value
-          })
-          this.pieData = []
-          showMore = Math.round(maxVal * 0.9)
-          this.pieData = this.chartData.map(si => {
-            return {
-                value : showMore + si.value,
-                name:si.name
-            }
           })
         }
         let myChart = this.$echarts.init(this.$refs.main);
@@ -74,13 +61,13 @@
               center: ['50%', '50%'],
               roseType: 'radius',
               top: 20,
-              data:this.pieData,
+              data:this.ruleData,
               label:{
                 normal:{
-                  // formatter: '{b}\n {d}%',//\n实现换行
+                  //  formatter: '{b}\n {d}%',//\n实现换行
                   formatter:function (param) {
                     let str = param.name + "\n"
-                    str += (((param.value - showMore)/totalVal)*100).toFixed(0)+'%'
+                    str += ((this_t.chartData[param.dataIndex].value / totalVal) * 100).toFixed(1) + '%'
                     return str
                   },
                   textStyle: {

@@ -161,7 +161,7 @@
               <div class="right_bottom_box">
                 <div class="pre_box">
                   <div style="margin-bottom: 40px; font-size: 36px">近7天报修单类型占比</div>
-                  <pie-chart v-if="repairTypeData.length > 0" :chartData="repairTypeData" :colors="['#9218DC', '#8559FF', '#697EFF', '#4C97F7', '#50D4FF', '#67EBFF']" :redius='redius' name="" @up="seeTable"/>
+                  <pie-hchart v-if="repairTypeData.length > 0" :chartData="repairTypeData" :colors="['#9218DC', '#8559FF', '#697EFF', '#4C97F7', '#50D4FF', '#67EBFF']" :redius='redius' name=""  @up="seeTable"/>
                 </div>
                 <div class="line_box">
                   <div style="margin-bottom: 40px;font-size: 36px;">近7天报修单提交数量统计</div>
@@ -190,7 +190,7 @@ import wancheng from '@/assets/images/icon9_wancheng.png'
 import AllCity from './components/allCity'
 import SomeCity from './components/someCity'
 import MapChart from './components/mapChart'
-import pieChart from '../graphic-statistics/components/PieChart'
+import pieHchart from '../graphic-statistics/components/PieHchart'
 import LineChart from '../business-data/components/lineChart'
 import TablePop from './components/tablePop'
 import {RunStatus,DisposeInfo,OrderRatio,OrderCreateCollect,DeviceExceInfo,RunStatusInfoList, OrderInfoList } from '@/api/maintenance.js'
@@ -204,7 +204,7 @@ export default {
     AllCity,
     SomeCity,
     MapChart,
-    pieChart,
+    pieHchart,
     LineChart,
     TablePop,
     progressBar,
@@ -244,6 +244,7 @@ export default {
       allCityList: [],
       someCityList: [],
       repairTypeData: [],
+      ruleData: [100,80,60,40,20,10],
       chartLineData: [],
       redius: [80,250],
       gridData: [],
@@ -337,10 +338,12 @@ export default {
         day: day
       }).then( data => {
         this.repairTypeData = []
-        data.data.maintenanceOrderRatioList.forEach((item) =>{
+        data.data.maintenanceOrderRatioList.sort((a,b)=>{ return b.faultCount - a.faultCount})
+        data.data.maintenanceOrderRatioList.forEach((item,index) =>{
           let list = {}
           list.name = item.faultName
-          list.value = item.faultCount
+          list.y = item.faultCount
+          list.z = this.ruleData[index]
           this.repairTypeData.push(list)
         })
       })

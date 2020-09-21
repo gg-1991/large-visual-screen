@@ -7,6 +7,15 @@ import '@/utils/element-components-plugin'
 import echarts from 'echarts'
 import ChartTile from './utils/chartTitle'
 import filters from './filters'
+
+// 前端监控fundbug
+import * as fundebug from "fundebug-javascript";
+import fundebugVue from "fundebug-vue";
+fundebug.apikey = "9aa97556326108bb66c41d59c6d91138cf917c29583d17214b38a3a918bcd30e"
+fundebugVue(fundebug, Vue);
+
+
+
  //将echarts引入到vue的原型中
  Vue.prototype.$echarts = echarts
 

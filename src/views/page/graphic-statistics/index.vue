@@ -68,8 +68,8 @@
               <div class="register-info">
                 <!-- <div v-if="chartData.length === 0">暂无数据</div> -->
                 <div class="register-info-top">
-                  <pie-chart  :height="'380px'" :id="'registrationTypeRatios'" :chartData="registrationTypeRatios" :colors="['#9218DC', '#8559FF', '#697EFF', '#4C97F7']" name="挂号类型占比" />
-                  <pie-chart  :id="'insuredRatio'" :height="'380px'" :chartData="insuredRatio" :colors="['#67EBFF', '#52BBF9']"  name="参保人挂号占比"/>
+                  <pie-hchart :height="'380px'" :id="'registrationTypeRatios'" :chartData="registrationTypeRatios" :colors="['#9218DC', '#8559FF', '#697EFF', '#4C97F7']"  name="挂号类型占比" />
+                   <pie-hchart :id="'insuredRatio'" :height="'380px'" :chartData="insuredRatio" :colors="['#67EBFF', '#52BBF9']"  name="参保人挂号占比" />
                 </div>
                 <div class="register-info-bottom">
                   <pictorial-line v-if="signTypeList.datax.length> 0" :categoryData="signTypeList" :height="'410px'" :chartId="'chartMap'"></pictorial-line>
@@ -97,7 +97,7 @@
               <div class="pay-pie">
                 <div class="progress-bar-title">
                   <p>缴费账户类型占比</p>
-                  <pie-chart v-if="transAccountTypes.length > 0" :chartData="transAccountTypes" :colors="['#8559FF', '#4C97F7']" :redius='redius' name=""/>
+                  <pie-hchart v-if="transAccountTypes.length > 0" :chartData="transAccountTypes" :colors="['#8559FF', '#4C97F7']" :redius='redius' name="" />
                 </div>
               </div>
               <div class="pay-bar">
@@ -124,7 +124,7 @@ import boxArea from '@/components/box'
 import pictorialBar from './components/pictorialBar'
 import pictorialLine from './components/pictorialLine'
 import progressBar from './components/progressBar'
-import pieChart from './components/PieChart'
+import pieHchart from './components/PieHchart'
 import barChart from './components/barChart'
 import mapChart from '../maintenance-data/components/mapChart'
 import addRess from '@/components/address/addressPanel'
@@ -137,7 +137,7 @@ export default {
     pictorialBar,
     pictorialLine,
     progressBar,
-    pieChart,
+    pieHchart,
     barChart,
     mapChart,
     addRess,
@@ -171,6 +171,7 @@ export default {
       insuredRatio: [],
       //  缴费类型占比
       transAccountTypes: [],
+      ruleData: [100,70,45,30,20,10],
       //  各个缴费方式交易量、交易额占比
       transTypeRatioList: [
         {
@@ -281,24 +282,26 @@ export default {
       }
       this.registrationTypeRatios = []
       loadOfficeRegistrationRatio(params).then(res => {
+        console.log(res)
         if(res.code === 200){
           const data = res.data
           this.insuredRatio = [
-            {"name": '参保人', "value": data.insuredPersonsRatio.insuredRatio},
-            {"name": '非参保人', "value": data.insuredPersonsRatio.nonInsuredRatio},
+            {"name": '参保人', "y": data.insuredPersonsRatio.insuredRatio, 'z': 100},
+            {"name": '非参保人', "y": data.insuredPersonsRatio.nonInsuredRatio, 'z': 80},
           ]
-          data.registrationTypeRatios.forEach(item => {
+          //  按照value大小进行排序
+          data.registrationTypeRatios.sort((a,b) => {
+            return b.registrationRatio - a.registrationRatio
+          })
+          data.registrationTypeRatios.forEach((item,index) => {
             if(item.registrationRatio > 0) {
               let tempObj = {
                 "name": item.registrationName,
-                "value": item.registrationRatio
+                "y": item.registrationRatio,
+                "z": this.ruleData[index]
               }
               this.registrationTypeRatios.push(tempObj)
             }
-          })
-          //  按照value大小进行排序
-          this.registrationTypeRatios.sort((a,b) => {
-            return a.value - b.value
           })
         }
       })
@@ -322,10 +325,12 @@ export default {
             this.transTypeRatioList[1].data.push(item.transAmtRatio)
             this.transTypeRatioList[0].data.push(item.transCountRatio)
           })
-          transAccountArr.forEach(item => {
+          transAccountArr.sort((a,b)=>{ return b.accountRatio - a.accountRatio})
+          transAccountArr.forEach((item,index) => {
             let obj = {
               name: item.accountName,
-              value: item.accountRatio
+              y: item.accountRatio,
+              z: this.ruleData[index]
             }
             this.transAccountTypes.push(obj)
           })

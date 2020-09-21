@@ -244,6 +244,8 @@ export default {
     changeAddress () {
       this.isShow ? this.selectAddress = '展开' : this.selectAddress = '收起';
       this.isShow = !this.isShow
+      // 测试
+      return xxx;
     },
     upDateNew (val) {
       this.isShow = !this.isShow

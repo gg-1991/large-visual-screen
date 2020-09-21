@@ -3,7 +3,7 @@ import store from '@/store'
 const config = require('../../config')
 import router from '@/router'
 import { Message } from 'element-ui'
-// const { mockXHR } = process.env.NODE_ENV === 'development' ? require('../mock') : { mockXHR: null }
+/*const { mockXHR } = process.env.NODE_ENV === 'development' ? require('../mock') : { mockXHR: null }*/
 const request = axios.create({
   // url = base url + request url
   baseURL: config['BASE_API'],
